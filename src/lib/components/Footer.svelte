@@ -6,10 +6,12 @@
 	export let days: Weekdays;
 </script>
 
-<div class="bg-primary flex flex-row flex-wrap px-10 py-10 gap-2 justify-around text-base-100">
+<div
+	class="bg-primary flex flex-row flex-wrap px-10 py-10 gap-2 justify-around text-base-100 text-xs lg:text-base"
+>
 	<div class="flex flex-col justify-center text-center w-full lg:w-2/5">
-		<h2 class="text-accent text-3xl font-semibold">Notre Adresse</h2>
-		<p class=" text-lg py-3">4 Chem. de Nicol, 31200 Toulouse</p>
+		<h2 class="text-accent text-xl md:text-3xl font-semibold">Notre Adresse</h2>
+		<p class=" md:text-lg py-3">4 Chem. de Nicol, 31200 Toulouse</p>
 
 		<iframe
 			class="w-full"
@@ -25,8 +27,8 @@
 	</div>
 
 	<div class="flex flex-col justify-center text-center w-full lg:w-2/5 max-w-fit">
-		<h2 class="text-accent text-3xl font-semibold py-3">Horaires d'ouverture</h2>
-		<table class="text-sm sm:text-base">
+		<h2 class="text-accent text-xl md:text-3xl font-semibold py-3">Horaires d'ouverture</h2>
+		<table class="text-xs sm:text-base">
 			<tbody>
 				{#each Object.keys(days) as day}
 					<tr>
