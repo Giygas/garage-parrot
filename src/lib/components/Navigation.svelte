@@ -6,7 +6,7 @@
 	];
 </script>
 
-<nav>
+<nav class="w-full pe-16 text-primary text-base">
 	<ul>
 		{#each nav as item}
 			<li>
@@ -24,9 +24,7 @@
 		display: flex;
 		flex-direction: row;
 		gap: 5vw;
-		margin: 0 8vw;
 		font-family: 'Montserrat';
-		font-size: large;
 	}
 
 	a:hover {

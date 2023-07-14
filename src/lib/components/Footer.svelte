@@ -24,7 +24,7 @@
 		/>
 	</div>
 
-	<div class="flex flex-col justify-center text-center w-full lg:w-2/5 overflox-x-auto max-w-fit">
+	<div class="flex flex-col justify-center text-center w-full lg:w-2/5 max-w-fit">
 		<h2 class="text-accent text-3xl font-semibold py-3">Horaires d'ouverture</h2>
 		<table class="text-sm sm:text-base">
 			<tbody>
