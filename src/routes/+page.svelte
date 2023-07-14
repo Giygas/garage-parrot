@@ -2,7 +2,20 @@
 	import '../app.postcss';
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<form method="POST">
+	<div>
+		<label>
+			Email
+			<input type="email" name="email" required />
+		</label>
+	</div>
 
-<button class="btn btn-accent">Testing</button>
+	<div>
+		<label>
+			Password
+			<input type="password" name="password" required />
+		</label>
+	</div>
+
+	<button>Sign Up</button>
+</form>

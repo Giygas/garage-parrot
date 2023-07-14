@@ -13,5 +13,7 @@
 
 <slot />
 
-<ContactForm />
+<div class="w-full p-0 m-0">
+	<ContactForm />
+</div>
 <Footer {days} />
