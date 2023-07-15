@@ -1,9 +1,6 @@
 <script lang="ts">
-	import ContactForm from '$components/ContactForm.svelte';
 	import '../app.postcss';
-
-	import Footer from '$components/Footer.svelte';
-	import Navigation from '$components/Navigation.svelte';
+	import { ContactForm, Footer, Navigation } from '$components';
 
 	export let data;
 	let days = data;
@@ -14,6 +11,7 @@
 <slot />
 
 <div class="w-full p-0 m-0">
+	<h2>Testing this sheet</h2>
 	<ContactForm />
 </div>
 <Footer {days} />

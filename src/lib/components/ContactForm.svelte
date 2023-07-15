@@ -1,7 +1,17 @@
 <script lang="ts">
+	async function sendData(event: Event) {
+		const form = event.target as HTMLFormElement;
+		const data = new FormData(form);
+
+		await fetch('/formSubmit', {
+			method: 'POST',
+			body: data
+		});
+	}
+
 	const fields = [
-		{ name: 'nom', label: 'NOM:', type: 'text' },
 		{ name: 'prenom', label: 'PRENOM:', type: 'text' },
+		{ name: 'nom', label: 'NOM:', type: 'text' },
 		{ name: 'email', label: 'EMAIL:', type: 'email' },
 		{ name: 'telephone', label: 'NUMERO DE TELEPHONE:', type: 'tel' }
 	];
@@ -10,7 +20,7 @@
 <div
 	class="contact-background m-4 p-4 sm:m-10 md:m-20 md:p-20 xl:w-[1000px] xl:mx-auto text-secondary text-sm md:text-lg"
 >
-	<form action="">
+	<form method="POST" action="/formSubmit">
 		<div class="flex flex-col gap-4 mx-auto justify-center w-full lg:w-[600px]">
 			{#each fields as field}
 				<div class="flex flex-col lg:flex-row lg:items-center">
