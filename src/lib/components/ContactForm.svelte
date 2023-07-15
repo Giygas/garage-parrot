@@ -7,16 +7,18 @@
 	];
 </script>
 
-<div class="contact-background m-4 p-4 md:m-20 md:p-20 text-secondary shadow-xl text-sm md:text-lg">
+<div
+	class="contact-background m-4 p-4 sm:m-10 md:m-20 md:p-20 xl:w-[1000px] xl:mx-auto text-secondary text-sm md:text-lg"
+>
 	<form action="">
 		<div class="flex flex-col gap-4 mx-auto justify-center w-full lg:w-[600px]">
 			{#each fields as field}
 				<div class="flex flex-col lg:flex-row lg:items-center">
-					<label for={field.name} class="pe-2 w-32">{field.label}</label>
+					<label for={field.name} class="pe-4 w-full lg:w-40">{field.label}</label>
 					<input
 						type={field.type}
 						name={field.name}
-						class="input input-bordered input-primary input-md grow w-full"
+						class="input input-bordered input-sm md:input-md input-primary input-md grow w-full"
 					/>
 				</div>
 			{/each}
@@ -38,5 +40,6 @@
 	.contact-background {
 		background: #6a655c10;
 		border-radius: 20px;
+		box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	}
 </style>
