@@ -1,43 +1,25 @@
 <script lang="ts">
+	const fields = [
+		{ name: 'nom', label: 'NOM:', type: 'text' },
+		{ name: 'prenom', label: 'PRENOM:', type: 'text' },
+		{ name: 'email', label: 'EMAIL:', type: 'email' },
+		{ name: 'telephone', label: 'NUMERO DE TELEPHONE:', type: 'tel' }
+	];
 </script>
 
-<div
-	class="contact-background m-4 p-4 md:m-20 md:p-20 md:text-sm text-secondary shadow-xl text-sm md:text-base"
->
+<div class="contact-background m-4 p-4 md:m-20 md:p-20 text-secondary shadow-xl text-sm md:text-lg">
 	<form action="">
 		<div class="flex flex-col gap-4 mx-auto justify-center w-full lg:w-[600px]">
-			<div class="flex flex-col lg:flex-row lg:items-center">
-				<label for="nom" class="pe-2 w-32">NOM:</label>
-				<input
-					type="text"
-					name="nom"
-					class="input input-bordered input-primary input-md grow w-full"
-				/>
-			</div>
-			<div class="flex flex-col lg:flex-row lg:items-center">
-				<label for="prenom" class="pe-2 w-32">PRENOM:</label>
-				<input
-					type="text"
-					name="prenom"
-					class="input input-bordered input-primary input-md grow w-full"
-				/>
-			</div>
-			<div class="flex flex-col lg:flex-row lg:items-center">
-				<label for="email" class="pe-2 w-32">EMAIL:</label>
-				<input
-					type="email"
-					name="email"
-					class="input input-bordered input-primary input-md grow w-full"
-				/>
-			</div>
-			<div class="flex flex-col lg:flex-row lg:items-center">
-				<label for="telephone" class="pe-2 lg:w-32">NUMERO DE TELEPHONE:</label>
-				<input
-					type="tel"
-					name="telephone"
-					class="input input-bordered input-primary input-md grow w-full"
-				/>
-			</div>
+			{#each fields as field}
+				<div class="flex flex-col lg:flex-row lg:items-center">
+					<label for={field.name} class="pe-2 w-32">{field.label}</label>
+					<input
+						type={field.type}
+						name={field.name}
+						class="input input-bordered input-primary input-md grow w-full"
+					/>
+				</div>
+			{/each}
 			<div class="flex flex-col gap-2 justify-start mt-4">
 				<label for="message" class="pe-2 w-32">MESSAGE:</label>
 				<textarea name="message" class="textarea textarea-primary grow w-full h-40" />
