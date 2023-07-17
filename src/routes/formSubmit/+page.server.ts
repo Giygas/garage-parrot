@@ -5,6 +5,7 @@ export const actions: Actions = {
 	default: async ({ request, url }) => {
 		const data = await request.formData();
 		console.log([...data]);
-		throw redirect(303, url.origin);
+		const origin = url.searchParams.get('url') || '/';
+		throw redirect(303, origin);
 	}
 };

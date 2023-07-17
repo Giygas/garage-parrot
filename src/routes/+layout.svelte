@@ -7,11 +7,9 @@
 </script>
 
 <Navigation />
-
 <slot />
 
 <div class="w-full p-0 m-0">
-	<h2>Testing this sheet</h2>
 	<ContactForm />
 </div>
 <Footer {days} />

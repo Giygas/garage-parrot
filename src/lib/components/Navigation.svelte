@@ -4,9 +4,11 @@
 		{ title: 'Services', path: '/services' },
 		{ title: "Vehicles d'ocassion", path: '/vehicles' }
 	];
+
+	import logo from '$lib/assets/logo.png';
 </script>
 
-<nav class="w-full pe-16 text-primary text-base">
+<nav class="w-full md:pe-16 text-primary text-lg">
 	<ul>
 		{#each nav as item}
 			<li>
@@ -14,16 +16,18 @@
 			</li>
 		{/each}
 	</ul>
+	<img src={logo} alt="Garage logo" />
 </nav>
 
 <style>
 	ul {
-		height: 12vh;
+		height: 8vh;
 		align-items: center;
 		justify-content: flex-end;
 		display: flex;
 		flex-direction: row;
 		gap: 5vw;
+		margin-top: 2vh;
 		font-family: 'Montserrat';
 	}
 

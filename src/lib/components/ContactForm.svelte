@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	async function sendData(event: Event) {
 		const form = event.target as HTMLFormElement;
 		const data = new FormData(form);
@@ -13,18 +15,18 @@
 		{ name: 'prenom', label: 'PRENOM:', type: 'text' },
 		{ name: 'nom', label: 'NOM:', type: 'text' },
 		{ name: 'email', label: 'EMAIL:', type: 'email' },
-		{ name: 'telephone', label: 'NUMERO DE TELEPHONE:', type: 'tel' }
+		{ name: 'telephone', label: 'TEL:', type: 'tel' }
 	];
 </script>
 
 <div
 	class="contact-background m-4 p-4 sm:m-10 md:m-20 md:p-20 xl:w-[1000px] xl:mx-auto text-secondary text-sm md:text-lg"
 >
-	<form method="POST" action="/formSubmit">
+	<form method="POST" action="/formSubmit?url={$page.url.pathname}">
 		<div class="flex flex-col gap-4 mx-auto justify-center w-full lg:w-[600px]">
 			{#each fields as field}
 				<div class="flex flex-col lg:flex-row lg:items-center">
-					<label for={field.name} class="pe-4 w-full lg:w-40">{field.label}</label>
+					<label for={field.name} class="pe-4 w-full lg:w-40 lg:text-right">{field.label}</label>
 					<input
 						type={field.type}
 						name={field.name}
