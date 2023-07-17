@@ -9,6 +9,7 @@
 	];
 
 	let isScrolled = false;
+	let timeoutId: number | null = null; //Need a debouncing function here
 
 	onMount(() => {
 		// Add a scroll event listener to track when the user scrolls
@@ -21,25 +22,31 @@
 	});
 
 	function handleScroll() {
-		// Check if the user has scrolled beyond a certain threshold (100 pixels)
-		isScrolled = window.scrollY > 100;
+		if (timeoutId) {
+			clearTimeout(timeoutId);
+		}
+		timeoutId = setTimeout(() => {
+			// Check if the user has scrolled beyond a certain threshold (100 pixels)
+			isScrolled = window.scrollY > 10;
+		}, 10); // Debounce time
 	}
 </script>
 
-<div class="navbar bg-base-100 sticky top-0 {isScrolled ? 'bottom-shadow' : ''}">
+<div class="min-h-screen" />
+<div class="navbar bg-base-100 fixed top-0 py-4 justify-center {isScrolled ? 'bottom-shadow' : ''}">
 	<div class="flex-1">
 		<a href="/">
 			<img class="logo {isScrolled ? 'shrink' : ''}" src={logo} alt="Garage logo" />
 		</a>
 	</div>
 
-	<div class="navbar-center hidden md:flex justify pt-4">
+	<div class="navbar-center hidden md:flex justify">
 		<ul class="menu menu-horizontal px-1 lg:pe-12 text-primary text-base">
 			{#each nav as item}
 				<li>
 					<a
 						href={item.path}
-						class="{$page.url.pathname === item.path ? 'bg-accent text-base-100' : ''} delete"
+						class="{$page.url.pathname === item.path ? 'bg-accent text-base-100' : ''} cleanbg"
 						>{item.title}
 					</a>
 				</li>
@@ -66,7 +73,7 @@
 </div>
 
 <style>
-	.delete:active {
+	.cleanbg:active {
 		background-color: #a51d2d50;
 	}
 
@@ -86,20 +93,25 @@
 
 	.navbar {
 		align-items: start;
-		padding: 0;
-		margin: 0;
+		transition: height 0.3s ease;
 	}
 
 	.logo {
-		height: 12rem;
+		position: absolute;
+		top: 12rem;
+		left: 12rem;
+		height: 15rem;
 		transition: all 0.3s ease;
-		margin: 8rem auto 0 6rem;
-		max-width: none;
+		/* margin: 4rem 0 0 4rem; */
 	}
 
 	.logo.shrink {
+		top: 0.2rem;
+		left: 0;
 		height: 6rem;
+
 		margin: 0 0 0 4rem;
+		transition: all 0.3s ease;
 	}
 
 	.bottom-shadow {
@@ -110,9 +122,18 @@
 	@media (max-width: 768) {
 		.logo {
 			height: 8rem;
+			margin: 2rem 0 0 2rem;
 		}
 		.logo.shrink {
 			margin: 0 0 0 1rem;
+		}
+	}
+
+	@media (max-width: 1024) {
+		.logo {
+			position: static;
+			margin-left: 4rem;
+			height: 8rem;
 		}
 	}
 </style>
