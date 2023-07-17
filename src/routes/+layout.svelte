@@ -7,9 +7,11 @@
 </script>
 
 <Navigation />
-<slot />
+<div id="contents" class="container mx-auto">
+	<slot />
 
-<div class="w-full p-0 m-0">
-	<ContactForm />
+	<div class="w-full p-0 m-0">
+		<ContactForm />
+	</div>
 </div>
 <Footer {days} />

@@ -32,43 +32,50 @@
 	}
 </script>
 
-<div class="min-h-screen" />
-<div class="navbar bg-base-100 fixed top-0 py-4 justify-center {isScrolled ? 'bottom-shadow' : ''}">
-	<div class="flex-1">
-		<a href="/">
-			<img class="logo {isScrolled ? 'shrink' : ''}" src={logo} alt="Garage logo" />
-		</a>
-	</div>
+<div class="md:min-h-screen -z-100" />
+<div class="md:hidden h-[200px] -z-100" />
+<div
+	class="navbar bg-base-100 fixed top-0 py-4 align-center justify-center {isScrolled
+		? 'bottom-shadow'
+		: ''}"
+>
+	<div class="container bg-black relative">
+		<div class="flex-1 justify-center">
+			<a href="/">
+				<img class="logo {isScrolled ? 'shrink' : ''}" src={logo} alt="Garage logo" />
+			</a>
+		</div>
 
-	<div class="navbar-center hidden md:flex justify">
-		<ul class="menu menu-horizontal px-1 lg:pe-12 text-primary text-base">
-			{#each nav as item}
-				<li>
-					<a
-						href={item.path}
-						class="{$page.url.pathname === item.path ? 'bg-accent text-base-100' : ''} cleanbg"
-						>{item.title}
-					</a>
-				</li>
-			{/each}
-		</ul>
-	</div>
+		<div class="navbar-center hidden md:flex justify">
+			<ul class="menu menu-horizontal px-1 lg:pe-12 text-primary text-base">
+				{#each nav as item}
+					<li>
+						<a
+							href={item.path}
+							class="{$page.url.pathname === item.path ? 'bg-accent text-base-100' : ''} cleanbg"
+							>{item.title}
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</div>
 
-	<div class="flex-none md:hidden">
-		<button class="btn btn-square btn-ghost">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				fill="none"
-				viewBox="0 0 24 24"
-				class="inline-block w-5 h-5 stroke-current"
-				><path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M4 6h16M4 12h16M4 18h16"
-				/></svg
-			>
-		</button>
+		<div class="flex-none md:hidden">
+			<button class="btn btn-square btn-ghost">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					class="inline-block w-10 h-10 stroke-current"
+					><path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M4 6h16M4 12h16M4 18h16"
+					/></svg
+				>
+			</button>
+		</div>
 	</div>
 </div>
 
@@ -99,8 +106,8 @@
 	.logo {
 		position: absolute;
 		top: 12rem;
-		left: 12rem;
-		height: 15rem;
+		left: 4rem;
+		height: 12rem;
 		transition: all 0.3s ease;
 		/* margin: 4rem 0 0 4rem; */
 	}
@@ -110,7 +117,7 @@
 		left: 0;
 		height: 6rem;
 
-		margin: 0 0 0 4rem;
+		margin: 0 0 0 6rem;
 		transition: all 0.3s ease;
 	}
 
@@ -119,21 +126,41 @@
 		transition: box-shadow 0.3s ease-in;
 	}
 
-	@media (max-width: 768) {
+	@media (max-width: 768px) {
 		.logo {
-			height: 8rem;
-			margin: 2rem 0 0 2rem;
+			position: static;
+			align-content: center;
+			justify-self: center;
+			align-items: center;
+			height: 6rem;
+			margin: auto;
 		}
+
 		.logo.shrink {
-			margin: 0 0 0 1rem;
+			margin: auto;
+		}
+
+		.navbar {
+			align-items: center;
 		}
 	}
 
-	@media (max-width: 1024) {
+	@media only screen and (max-width: 1280px) and (min-width: 768px) {
 		.logo {
-			position: static;
-			margin-left: 4rem;
-			height: 8rem;
+			position: absolute;
+			top: 8rem;
+			left: 2rem;
+			height: 10rem;
+			transition: all 0.3s ease;
+		}
+
+		.logo.shrink {
+			top: 0.2rem;
+			left: 0;
+			height: 5rem;
+
+			margin: 0 0 0 2rem;
+			transition: all 0.3s ease;
 		}
 	}
 </style>
