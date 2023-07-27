@@ -36,7 +36,11 @@
 			{/each}
 			<div class="flex flex-col gap-2 justify-start mt-4">
 				<label for="message" class="pe-2 w-32">MESSAGE:</label>
-				<textarea name="message" class="textarea textarea-primary grow w-full h-40" />
+				<textarea
+					name="message"
+					class="textarea textarea-primary grow w-full h-40"
+					maxlength="255"
+				/>
 			</div>
 			<button class="btn btn-accent mt-5 w-full lg:w-40 self-end">ENVOYER</button>
 		</div>

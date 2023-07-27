@@ -32,22 +32,16 @@
 	}
 </script>
 
-<div class="md:min-h-screen -z-100" />
-<div class="md:hidden h-[200px] -z-100" />
-<div
-	class="navbar bg-base-100 fixed top-0 py-4 align-center justify-center {isScrolled
-		? 'bottom-shadow'
-		: ''}"
->
-	<div class="container bg-black relative">
-		<div class="flex-1 justify-center">
+<div class="navbar backdrop-blur-xl fixed top-0 p-1 md:py-4 align-center justify-center">
+	<div class="container relative">
+		<div class="flex-1 justify-start align-top">
 			<a href="/">
-				<img class="logo {isScrolled ? 'shrink' : ''}" src={logo} alt="Garage logo" />
+				<img class="logo {isScrolled ? 'shrinked' : ''}" src={logo} alt="Garage logo" />
 			</a>
 		</div>
 
 		<div class="navbar-center hidden md:flex justify">
-			<ul class="menu menu-horizontal px-1 lg:pe-12 text-primary text-base">
+			<ul class="menu menu-horizontal px-1 lg:pe-12 text-primary text-sm lg:text-base">
 				{#each nav as item}
 					<li>
 						<a
@@ -60,7 +54,7 @@
 			</ul>
 		</div>
 
-		<div class="flex-none md:hidden">
+		<div class="flex-none md:hidden max-h-fit">
 			<button class="btn btn-square btn-ghost">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -112,18 +106,13 @@
 		/* margin: 4rem 0 0 4rem; */
 	}
 
-	.logo.shrink {
-		top: 0.2rem;
+	.logo.shrinked {
+		top: -0.8rem;
 		left: 0;
 		height: 6rem;
 
 		margin: 0 0 0 6rem;
 		transition: all 0.3s ease;
-	}
-
-	.bottom-shadow {
-		box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-		transition: box-shadow 0.3s ease-in;
 	}
 
 	@media (max-width: 768px) {
@@ -136,7 +125,7 @@
 			margin: auto;
 		}
 
-		.logo.shrink {
+		.logo.shrinked {
 			margin: auto;
 		}
 
@@ -154,8 +143,8 @@
 			transition: all 0.3s ease;
 		}
 
-		.logo.shrink {
-			top: 0.2rem;
+		.logo.shrinked {
+			top: 0;
 			left: 0;
 			height: 5rem;
 

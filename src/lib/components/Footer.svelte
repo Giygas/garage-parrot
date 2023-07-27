@@ -11,7 +11,7 @@
 >
 	<div class="flex flex-col justify-center text-center w-full lg:w-2/5">
 		<h2 class="text-accent text-xl md:text-3xl font-semibold">Notre Adresse</h2>
-		<p class=" md:text-lg py-3">4 Chem. de Nicol, 31200 Toulouse</p>
+		<p class="text-lg py-3">4 Chem. de Nicol, 31200 Toulouse</p>
 
 		<iframe
 			class="w-full"
