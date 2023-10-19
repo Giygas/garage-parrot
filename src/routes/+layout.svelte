@@ -6,6 +6,10 @@
 	let days = data;
 </script>
 
+<head>
+	<link rel="stylesheet" href="fonts.css" />
+</head>
+
 <Navigation />
 <div id="contents" class="container mx-auto">
 	<slot />
