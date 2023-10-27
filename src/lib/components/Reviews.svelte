@@ -11,7 +11,10 @@
 	// Mock end
 </script>
 
-<div class=" flex flex-row shrink-0 overflow-x-auto justify-evenly gap-8 p-5">
+<div
+	class="container review-container flex flex-row shrink-0 overflow-x-auto snap-x snap-mandatory justify-start gap-8 p-5"
+>
+	<Review {...revi} />
 	<Review {...revi} />
 	<Review {...revi} />
 	<Review {...revi} />
