@@ -1,17 +1,17 @@
 <script lang="ts">
-	// Needs to connect to the database
-	// Normally I'll get name, rating and message
+	// Individual component will reveive the name, rating and message
+	// as a prop
+	export let name: String;
+	export let rating: Number;
+	export let message: String;
 </script>
 
-<div class="p-4 w-64 bg-yellow-500">
-	<div class="flex flex-row bg-slate-500 justify-between">
-		<div class="">Name</div>
-		<div class="justify-self-end">Ratinggg</div>
+<div class="p-6 bg-primary/80 rounded-lg min-w-[340px]">
+	<div class="flex flex-row shrink-0 justify-between">
+		<div class="uppercase text-xl font-medium">{name}</div>
+		<div class="justify-self-end">{rating}</div>
 	</div>
 	<div class="flex text-justify p-2">
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum ipsum sequi error saepe
-		doloribus natus omnis iusto. Omnis, voluptatibus nihil et ut laboriosam tenetur! Quos, labore
-		sit voluptates unde tempore molestiae dolore soluta quaerat est iure libero alias rerum. Quia
-		architecto voluptates cupiditate aut autem sint tempora ad labore.
+		{message}
 	</div>
 </div>

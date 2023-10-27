@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Review } from '$components';
+	import { Reviews } from '$components';
 	import '../app.postcss';
 </script>
 
@@ -18,4 +18,4 @@
 	</div>
 </div>
 
-<Review />
+<Reviews />
