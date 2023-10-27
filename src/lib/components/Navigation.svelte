@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import logo from '$lib/assets/logo.png';
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
 	const nav = [
 		{ title: 'Accueil', path: '/' },
 		{ title: 'Services', path: '/services' },

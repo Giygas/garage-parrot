@@ -1,4 +1,10 @@
 <script lang="ts">
+	import type { PageData } from './$types';
+	import type { ReviewType } from '$lib/types';
+	export let data: PageData;
+
+	let reviews = data.revi satisfies ReviewType;
+
 	import { Reviews } from '$components';
 	import '../app.postcss';
 </script>
@@ -18,4 +24,4 @@
 	</div>
 </div>
 
-<Reviews />
+<Reviews {reviews} />

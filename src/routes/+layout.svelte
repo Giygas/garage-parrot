@@ -1,9 +1,9 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { ContactForm, Footer, Navigation } from '$components';
-
+	import type { Weekdays } from '$lib/types';
 	export let data;
-	let days = data;
+	let days: Weekdays = data.days;
 </script>
 
 <head>

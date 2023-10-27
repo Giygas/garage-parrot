@@ -8,3 +8,9 @@ export interface Weekdays {
 	dimanche: string;
 	[key: string]: string;
 }
+
+export interface ReviewType {
+	name: string;
+	rating: number;
+	message: string;
+}
