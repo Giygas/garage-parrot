@@ -32,7 +32,9 @@
 	}
 </script>
 
-<div class="navbar backdrop-blur-xl fixed top-0 p-1 md:py-4 align-center justify-center">
+<div
+	class="navbar isolate z-50 backdrop-blur-xl fixed top-0 p-1 md:py-4 align-center justify-center"
+>
 	<div class="container relative">
 		<div class="flex-1 justify-start align-top">
 			<a href="/">

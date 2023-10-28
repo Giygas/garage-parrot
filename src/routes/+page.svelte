@@ -23,8 +23,10 @@
 		</div>
 	</div>
 
+	<h2 class="text-small-caps text-accent text-center p-2">Temoignages</h2>
 	<Reviews {reviews} />
 </section>
+
 <section>
 	<div class="flex flex-wrap bg-primary/10 md:rounded-lg p-8 mt-10 md:mt-36 lg:mx-20">
 		<div class="text-primary md:text-lg lg:text-2xl">
@@ -35,8 +37,8 @@
 		</div>
 	</div>
 
-	<div class="flex flex-wrap md:rounded-lg p-0 mt-5 md:mt-36 lg:mx-20">
-		<div class="text-black md:text-lg p-8 lg:text-2xl text-content reparation">
+	<div class="flex flex-wrap md:rounded-lg p-0 pt-5 md:mt-36 lg:mx-20">
+		<div class="text-black md:text-lg p-8 lg:text-2xl text-content reparation text-right">
 			Notre équipe de professionnels qualifiés est dévouée à fournir un travail de haute qualité, en
 			utilisant les dernières technologies et équipements pour diagnostiquer et résoudre
 			efficacement les problèmes de votre véhicule. Que ce soit pour des réparations mineures ou
@@ -44,12 +46,13 @@
 		</div>
 	</div>
 
-	<div class="flex flex-wrap md:rounded-lg p-0 mt-5 md:mt-36 lg:mx-20">
+	<div class="flex flex-wrap md:rounded-lg p-0 pt-5 md:mt-36 lg:mx-20">
 		<div class="text-black md:text-lg p-8 lg:text-2xl text-content vehicule">
-			Notre équipe de professionnels qualifiés est dévouée à fournir un travail de haute qualité, en
-			utilisant les dernières technologies et équipements pour diagnostiquer et résoudre
-			efficacement les problèmes de votre véhicule. Que ce soit pour des réparations mineures ou
-			majeures, nous mettons tout en œuvre pour vous offrir des résultats exceptionnels.
+			En plus de nos services de réparation, nous proposons également une sélection de véhicules
+			d'occasion soigneusement inspectés et entretenus. Nous comprenons l'importance d'avoir un
+			moyen de transport fiable, c'est pourquoi nous offrons des véhicules de qualité à des prix
+			compétitifs. Vous pouvez compter sur nous pour vous aider à trouver la voiture d'occasion qui
+			correspond à vos besoins et à votre budget.
 		</div>
 	</div>
 </section>
@@ -71,6 +74,7 @@
 	.text-content::after {
 		content: '';
 		position: absolute;
+		background-size: cover;
 		inset: 0;
 		background-image: var(--background-image);
 		mix-blend-mode: overlay;

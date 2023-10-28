@@ -12,10 +12,10 @@
 		.map((star: string, index: number) => ({ star, key: index }));
 </script>
 
-<div class="review p-6 bg-primary/80 rounded-lg min-w-[340px] snap-center">
-	<div class="flex flex-row shrink-0 justify-between text-xl">
-		<div class="uppercase text-xl text-base-100 font-semibold">{name}</div>
-		<div class="text-accent flex flex-row self-center gap-0">
+<div class="review p-6 bg-primary/80 rounded-lg snap-center text-mont min-w-[20em]">
+	<div class="flex flex-row justify-between text-xl">
+		<div class="uppercase text-lg text-base-100 font-semibold">{name}</div>
+		<div class="text-accent flex flex-row self-baseline gap-0">
 			{#each stars as star (star)}
 				{#if star.star === 'filled'}
 					<svg
@@ -73,7 +73,7 @@
 			{/each}
 		</div>
 	</div>
-	<div class="uppercase flex text-justify p-2 pt-4 font-light text-base-100 text-sm">
+	<div class="uppercase flex text-justify p-2 pt-4 font-light text-base-100 text-xs md:text-sm">
 		{message}
 	</div>
 </div>

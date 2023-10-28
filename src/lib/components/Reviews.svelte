@@ -7,7 +7,7 @@
 </script>
 
 <div
-	class="container review-container flex flex-row shrink-0 overflow-x-auto no-scrollbar snap-x snap-mandatory justify-start gap-8 p-5"
+	class="container min-w-full flex flex-row overflow-x-auto no-scrollbar snap-x snap-mandatory justify-start gap-8 p-5"
 >
 	<Review {...reviews} />
 	<Review {...reviews} />
