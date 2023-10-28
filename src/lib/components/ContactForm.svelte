@@ -47,7 +47,7 @@
 	</form>
 </div>
 
-<style>
+<style lang="postcss">
 	input,
 	textarea {
 		background-color: #d9d9d9;

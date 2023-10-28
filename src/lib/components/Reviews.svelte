@@ -18,7 +18,7 @@
 	<Review {...reviews} />
 </div>
 
-<style>
+<style lang="postcss">
 	.no-scrollbar::-webkit-scrollbar {
 		display: none;
 	}

@@ -73,13 +73,13 @@
 	</div>
 </div>
 
-<style>
+<style lang="postcss">
 	.cleanbg:active {
 		background-color: #a51d2d50;
 	}
 
 	ul {
-		height: 8vh;
+		height: 4.5rem;
 		align-items: center;
 		justify-content: flex-end;
 		display: flex;
