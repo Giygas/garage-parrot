@@ -14,7 +14,7 @@
 <section>
 	<div class="flex flex-wrap justify-end md:mt-72 xl:my-32">
 		<div
-			class="text-base text-justify md:text-xl md:bg-primary/10 rounded-xl p-2 md:p-10 m-8 xl:max-w-[40vw]"
+			class="text-base text-justify md:text-xl md:bg-primary/10 rounded-xl md:p-10 m-8 xl:max-w-[40vw]"
 		>
 			Chez Garage V. Parrot, nous sommes fiers de vous offrir une large gamme de services pour
 			prendre soin de votre voiture. Avec une expérience de deux ans dans le domaine, nous sommes
