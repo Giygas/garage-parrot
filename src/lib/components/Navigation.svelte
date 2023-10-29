@@ -2,12 +2,18 @@
 	import { onMount } from 'svelte';
 	import logo from '$lib/assets/logo.png';
 	import { page } from '$app/stores';
+
 	const nav = [
 		{ title: 'Accueil', path: '/' },
 		{ title: 'Services', path: '/services' },
 		{ title: "Vehicles d'ocassion", path: '/vehicles' }
 	];
 
+	//Menu logic
+	import { slide } from 'svelte/transition';
+	let showMenu: boolean = true;
+
+	// Logo animation
 	let isScrolled = false;
 	let timeoutId: number | null = null; //Need a debouncing function here
 
@@ -32,14 +38,18 @@
 	}
 </script>
 
-<div class="navbar isolate z-50 backdrop-blur-xl fixed top-0 p-1 md:py-4 justify-center px-5">
+<div
+	class="navbar z-30 {showMenu
+		? ''
+		: 'backdrop-blur-xl'} fixed top-0 p-1 md:py-4 justify-center px-5"
+>
 	<div class="container relative flex justify-between">
 		<a href="/">
 			<img class="logo {isScrolled ? 'shrinked' : ''}" src={logo} alt="Garage logo" />
 		</a>
 
-		<div class="navbar-center hidden md:flex justify">
-			<ul class="menu menu-horizontal px-1 lg:pe-12 text-primary text-sm lg:text-base">
+		<nav class="navbar-center hidden md:flex justify">
+			<ul class="desktop menu menu-horizontal px-1 lg:pe-12 text-primary text-sm lg:text-base">
 				{#each nav as item}
 					<li>
 						<a
@@ -50,45 +60,64 @@
 					</li>
 				{/each}
 			</ul>
-		</div>
+		</nav>
+	</div>
+	<div class="md:hidden z-30">
+		<label class="btn btn-circle swap swap-rotate">
+			<!-- this hidden checkbox controls the state -->
+			<input class="z-50" type="checkbox" bind:checked={showMenu} />
 
-		<div class="md:hidden">
-			<label class="btn btn-circle swap swap-rotate">
-				<!-- this hidden checkbox controls the state -->
-				<input type="checkbox" />
+			<!-- hamburger icon -->
+			<svg
+				class="swap-off fill-current"
+				xmlns="http://www.w3.org/2000/svg"
+				width="32"
+				height="32"
+				viewBox="0 0 512 512"
+				><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /></svg
+			>
 
-				<!-- hamburger icon -->
-				<svg
-					class="swap-off fill-current"
-					xmlns="http://www.w3.org/2000/svg"
-					width="32"
-					height="32"
-					viewBox="0 0 512 512"
-					><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z" /></svg
-				>
-
-				<!-- close icon -->
-				<svg
-					class="swap-on fill-current"
-					xmlns="http://www.w3.org/2000/svg"
-					width="32"
-					height="32"
-					viewBox="0 0 512 512"
-					><polygon
-						points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"
-					/></svg
-				>
-			</label>
-		</div>
+			<!-- close icon -->
+			<svg
+				class="swap-on fill-current"
+				xmlns="http://www.w3.org/2000/svg"
+				width="32"
+				height="32"
+				viewBox="0 0 512 512"
+				><polygon
+					points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"
+				/></svg
+			>
+		</label>
 	</div>
 </div>
+{#if showMenu}
+	<div
+		class="mobile z-20 fixed inset-0 p-8 h-full w-full bg-primary/30 backdrop-blur-xl"
+		transition:slide={{ delay: 0, duration: 300 }}
+	>
+		<ul class="menu menu-vertical space-y-16 text-2xl pt-32 h-full text-mont">
+			{#each nav as item}
+				<li class="text-center">
+					<a
+						href={item.path}
+						class="py-4 justify-center cleanbg {$page.url.pathname === item.path
+							? 'bg-accent text-base-100'
+							: ''} "
+						>{item.title}
+					</a>
+				</li>
+			{/each}
+		</ul>
+	</div>
+{/if}
 
 <style lang="postcss">
 	.cleanbg:active {
 		background-color: #a51d2d50;
 	}
 
-	ul {
+	ul.desktop {
 		height: 4.5rem;
 		align-items: center;
 		justify-content: flex-end;
