@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Review } from '$components';
-	import type { ReviewType } from '../types';
+	import type { ReviewType } from '$lib/types';
 	// Mock element for Review
 	export let reviews: ReviewType;
 	// Mock end

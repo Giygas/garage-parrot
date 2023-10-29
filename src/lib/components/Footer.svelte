@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Weekdays } from '$lib/types.ts';
+	import type { Weekdays } from '$lib/types';
 
 	import { capitalizeFirstLetter } from '$lib/helper';
 
