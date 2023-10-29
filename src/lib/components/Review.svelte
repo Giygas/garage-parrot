@@ -12,7 +12,7 @@
 		.map((star: string, index: number) => ({ star, key: index }));
 </script>
 
-<div class="review p-6 bg-primary/80 rounded-lg snap-center text-mont min-w-[20em] md:min-w-[30em]">
+<div class=" p-6 bg-primary/80 rounded-lg snap-center text-mont min-w-[20em] md:min-w-[23rem]">
 	<div class="flex flex-row justify-between text-xl">
 		<div class="uppercase text-lg text-base-100 font-semibold">{name}</div>
 		<div class="text-accent flex flex-row self-baseline gap-0">
