@@ -10,8 +10,8 @@
 	];
 
 	//Menu logic
-	import { slide } from 'svelte/transition';
-	let showMenu: boolean = true;
+	import { fade } from 'svelte/transition';
+	let showMenu: boolean = false;
 
 	// Logo animation
 	let isScrolled = false;
@@ -39,13 +39,11 @@
 </script>
 
 <div
-	class="navbar z-30 {showMenu
-		? ''
-		: 'backdrop-blur-xl'} fixed top-0 p-1 md:py-4 justify-center px-5"
+	class="navbar z-30 backdrop-blur-lg fixed top-0 p-1 md:py-4 justify-center px-8 sm:px-10 md:px-6"
 >
 	<div class="container relative flex justify-between">
 		<a href="/">
-			<img class="logo {isScrolled ? 'shrinked' : ''}" src={logo} alt="Garage logo" />
+			<img class="logo {isScrolled ? 'shrinked' : ''} h-auto" src={logo} alt="Garage logo" />
 		</a>
 
 		<nav class="navbar-center hidden md:flex justify">
@@ -93,8 +91,8 @@
 </div>
 {#if showMenu}
 	<div
-		class="mobile z-20 fixed inset-0 p-8 h-full w-full bg-primary/30 backdrop-blur-xl"
-		transition:slide={{ delay: 0, duration: 300 }}
+		class="mobile z-20 fixed inset-0 p-8 h-full w-full bg-primary/30 backdrop-blur-2xl"
+		transition:fade={{ delay: 0, duration: 200 }}
 	>
 		<ul class="menu menu-vertical space-y-16 text-2xl pt-32 h-full text-mont">
 			{#each nav as item}
@@ -133,7 +131,7 @@
 
 	.navbar {
 		align-items: start;
-		transition: height 0.3s ease;
+		transition: all 0.3s ease;
 	}
 
 	.logo {
@@ -161,6 +159,7 @@
 			justify-self: center;
 			align-items: center;
 			height: 6rem;
+			width: 15rem;
 			margin: auto;
 		}
 
