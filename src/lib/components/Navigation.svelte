@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import logo from '$lib/assets/logo.png';
 	import { page } from '$app/stores';
 
@@ -20,11 +20,11 @@
 	onMount(() => {
 		// Add a scroll event listener to track when the user scrolls
 		window.addEventListener('scroll', handleScroll);
+	});
 
-		return () => {
-			// Clean up the event listener when the component is unmounted
-			window.removeEventListener('scroll', handleScroll);
-		};
+	onDestroy(() => {
+		// Clean up the event listener when the component is unmounted
+		window.removeEventListener('scroll', handleScroll);
 	});
 
 	function handleScroll() {
