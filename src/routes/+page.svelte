@@ -39,7 +39,7 @@
 	<title>Accueil - Garage Parrot</title>
 </svelte:head>
 <div class="md:hidden h-[120px]" />
-<section>
+<section class="md:h-full">
 	<div class="flex flex-wrap justify-end md:mt-72 xl:my-32">
 		<div
 			class="text-base text-justify md:text-xl md:bg-primary/10 rounded-xl md:p-10 m-8 xl:max-w-[40vw]"
@@ -51,7 +51,7 @@
 		</div>
 	</div>
 
-	<h2 class="text-small-caps text-accent text-center p-2 md:text-2xl">Temoignages</h2>
+	<h2 class="text-small-caps text-accent p-2 px-10 md:text-2xl rounded-full">Temoignages</h2>
 	<Reviews {reviews} />
 </section>
 

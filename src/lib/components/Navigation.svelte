@@ -19,12 +19,16 @@
 
 	onMount(() => {
 		// Add a scroll event listener to track when the user scrolls
-		window.addEventListener('scroll', handleScroll);
+		if (typeof window !== 'undefined') {
+			window.addEventListener('scroll', handleScroll);
+		}
 	});
 
 	onDestroy(() => {
 		// Clean up the event listener when the component is unmounted
-		window.removeEventListener('scroll', handleScroll);
+		if (typeof window !== 'undefined') {
+			window.removeEventListener('scroll', handleScroll);
+		}
 	});
 
 	function handleScroll() {
