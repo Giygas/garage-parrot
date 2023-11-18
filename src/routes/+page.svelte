@@ -40,7 +40,7 @@
 </svelte:head>
 <div class="md:hidden h-[120px]" />
 <section class="md:h-full">
-	<div class="flex flex-wrap justify-end md:mt-72 xl:my-32">
+	<div class="flex flex-wrap justify-end md:mt-72 xl:mt-32 xl:mb-12">
 		<div
 			class="text-base text-justify md:text-xl md:bg-primary/10 rounded-xl md:p-10 m-8 xl:max-w-[40vw]"
 		>
@@ -56,7 +56,7 @@
 </section>
 
 <section class="container">
-	<div class="flex flex-wrap bg-primary/10 sm:rounded-lg p-8 md:pe-0 mt-10 md:mt-24 lg:mx-20">
+	<div class="flex flex-wrap bg-primary/10 sm:rounded-lg p-8 mt-10 md:mt-24 lg:mx-20">
 		<div class="text-primary md:text-lg lg:text-2xl">
 			La confiance est notre priorité. Nous considérons notre atelier comme un lieu de confiance
 			pour nos clients, où ils peuvent être assurés que leurs voitures seront entre de bonnes mains.
@@ -66,10 +66,10 @@
 	</div>
 
 	<div
-		class="grid md:grid-cols-3 xl:grid-cols-4 p-0 mt-10 md:mt-20 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
+		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
 	>
 		<div
-			class="col-span-3 md:col-span-2 xl:col-span-3 text-black md:text-lg p-8 lg:text-2xl {isSmallScreen
+			class="col-span-3 md:col-span-2 xl:col-span-3 text-black md:text-lg p-8 md:pe-0 lg:text-2xl {isSmallScreen
 				? 'text-content reparation'
 				: ''} text-right"
 		>
@@ -79,10 +79,10 @@
 			majeures, nous mettons tout en œuvre pour vous offrir des résultats exceptionnels.
 		</div>
 		{#if !isSmallScreen}
-			<div class="p-8 relative h-full w-full">
+			<div class=" relative h-full w-full">
 				<img
 					src={reparation_small}
-					class="absolute h-3/4 2xl:h-[120%] object-cover -right-5 lg:-right-10 top-0 bottom-0 my-auto rounded-2xl"
+					class="absolute h-3/4 2xl:h-[120%] object-cover -right-10 lg:-right-20 top-0 2xl:-top-20 bottom-0 left-0 m-auto rounded-2xl"
 					alt="A group of mechanics working in the vehicle"
 				/>
 			</div>
@@ -93,10 +93,10 @@
 		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
 	>
 		{#if !isSmallScreen}
-			<div class="ps-8 relative h-full w-full">
+			<div class=" relative h-full w-full">
 				<img
 					src={vehicle_small}
-					class="absolute h-3/4 2xl:h-[120%] object-cover -left-5 lg:-left-10 top-0 bottom-0 my-auto rounded-2xl"
+					class="absolute h-3/4 2xl:h-[120%] object-cover -left-10 lg:-left-20 top-0 2xl:-top-20 bottom-0 right-0 m-auto rounded-2xl"
 					alt="A vehicle door"
 				/>
 			</div>
