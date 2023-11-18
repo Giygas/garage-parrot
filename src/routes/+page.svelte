@@ -51,12 +51,12 @@
 		</div>
 	</div>
 
-	<h2 class="text-small-caps text-accent p-2 px-10 md:text-2xl rounded-full">Temoignages</h2>
+	<h2 class="text-small-caps text-accent p-2 px-10 md:text-2xl">Temoignages</h2>
 	<Reviews {reviews} />
 </section>
 
 <section class="container">
-	<div class="flex flex-wrap bg-primary/10 sm:rounded-lg p-8 mt-10 md:mt-24 lg:mx-20">
+	<div class="flex flex-wrap bg-primary/10 sm:rounded-lg p-8 md:pe-0 mt-10 md:mt-24 lg:mx-20">
 		<div class="text-primary md:text-lg lg:text-2xl">
 			La confiance est notre priorité. Nous considérons notre atelier comme un lieu de confiance
 			pour nos clients, où ils peuvent être assurés que leurs voitures seront entre de bonnes mains.
@@ -66,10 +66,10 @@
 	</div>
 
 	<div
-		class="flex flex-row items-center p-0 mt-10 md:mt-20 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
+		class="grid md:grid-cols-3 xl:grid-cols-4 p-0 mt-10 md:mt-20 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
 	>
 		<div
-			class="text-black md:text-lg p-8 lg:text-2xl {isSmallScreen
+			class="col-span-3 md:col-span-2 xl:col-span-3 text-black md:text-lg p-8 lg:text-2xl {isSmallScreen
 				? 'text-content reparation'
 				: ''} text-right"
 		>
@@ -79,22 +79,32 @@
 			majeures, nous mettons tout en œuvre pour vous offrir des résultats exceptionnels.
 		</div>
 		{#if !isSmallScreen}
-			<div class="p-8">
-				<img src={reparation_small} alt="A vehicle" />
+			<div class="p-8 relative h-full w-full">
+				<img
+					src={reparation_small}
+					class="absolute h-3/4 2xl:h-[120%] object-cover -right-5 lg:-right-10 top-0 bottom-0 my-auto rounded-2xl"
+					alt="A group of mechanics working in the vehicle"
+				/>
 			</div>
 		{/if}
 	</div>
 
 	<div
-		class="flex flex-row items-center p-0 mt-10 md:mt-20 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
+		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
 	>
 		{#if !isSmallScreen}
-			<div class="p-8">
-				<img src={vehicle_small} alt="A vehicle" />
+			<div class="ps-8 relative h-full w-full">
+				<img
+					src={vehicle_small}
+					class="absolute h-3/4 2xl:h-[120%] object-cover -left-5 lg:-left-10 top-0 bottom-0 my-auto rounded-2xl"
+					alt="A vehicle door"
+				/>
 			</div>
 		{/if}
 		<div
-			class="text-black md:text-lg p-8 lg:text-2xl {isSmallScreen ? 'text-content vehicule' : ''}"
+			class="col-span-3 md:col-span-2 xl:col-span-3 text-black md:text-lg p-8 md:ps-0 lg:text-2xl {isSmallScreen
+				? 'text-content vehicule'
+				: ''}"
 		>
 			En plus de nos services de réparation, nous proposons également une sélection de véhicules
 			d'occasion soigneusement inspectés et entretenus. Nous comprenons l'importance d'avoir un
@@ -123,6 +133,7 @@
 		content: '';
 		position: absolute;
 		background-size: cover;
+		background-position: center;
 		inset: 0;
 		background-image: var(--background-image);
 		mix-blend-mode: overlay;
