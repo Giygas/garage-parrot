@@ -56,7 +56,7 @@
 </section>
 
 <section class="container">
-	<div class="flex flex-wrap bg-primary/10 sm:rounded-lg p-8 mt-10 md:mt-24 lg:mx-20">
+	<div class="flex flex-wrap bg-primary/10 sm:rounded-lg p-8 mt-10 md:mt-24 2xl:mt-40 lg:mx-20">
 		<div class="text-primary md:text-lg lg:text-2xl">
 			La confiance est notre priorité. Nous considérons notre atelier comme un lieu de confiance
 			pour nos clients, où ils peuvent être assurés que leurs voitures seront entre de bonnes mains.
@@ -66,7 +66,7 @@
 	</div>
 
 	<div
-		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
+		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 2xl:mt-40 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
 	>
 		<div
 			class="col-span-3 md:col-span-2 xl:col-span-3 text-black md:text-lg p-8 md:pe-0 lg:text-2xl {isSmallScreen
@@ -90,7 +90,7 @@
 	</div>
 
 	<div
-		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
+		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 2xl:mt-40 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
 	>
 		{#if !isSmallScreen}
 			<div class=" relative h-full w-full">
