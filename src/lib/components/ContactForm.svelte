@@ -28,7 +28,8 @@
 <div
 	class="contact-background m-8 p-4 sm:m-10 md:m-20 md:p-20 xl:w-[1000px] xl:mx-auto text-secondary text-sm md:text-lg"
 >
-	<form method="POST" action="/formSubmit?url={$page.url.pathname}">
+	<form method="POST" action="/formSubmit?/contact">
+		<input type="hidden" id="url" name="url" value={$page.url.pathname} />
 		<div class="flex flex-col gap-4 mx-auto justify-center w-full lg:w-[600px]">
 			{#each fields as field}
 				<div class="flex flex-col lg:flex-row lg:items-center">
