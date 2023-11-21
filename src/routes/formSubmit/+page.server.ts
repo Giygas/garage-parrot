@@ -12,5 +12,31 @@ export const actions: Actions = {
 		console.log(url);
 		console.log(origin);
 		throw redirect(303, origin);
+	},
+	sendRating: async ({ cookies, request }) => {
+		const data = await request.formData();
+		const name = data.get('name');
+		const rating = data.get('rating');
+		const message = data.get('message');
+
+		if (cookies.get('ratingSent') == 'true') {
+			console.log('Message already sent');
+			cookies.delete('ratingSent');
+			console.log('cookie destroyed');
+			return { success: false };
+		} else {
+			console.log(name);
+			console.log(rating);
+			console.log(message);
+			// Set the cookie sent to prevent spamming
+			// cookies.set('ratingSent', 'true', {
+			// 	path: '/',
+			// 	httpOnly: true,
+			// 	sameSite: 'strict',
+			// 	maxAge: 60 * 60 * 24
+			// });
+			console.log('returning');
+			return { success: true };
+		}
 	}
-};
+} satisfies Actions;

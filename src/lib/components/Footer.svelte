@@ -34,7 +34,6 @@
 			width="648"
 			height="310"
 			style="border:0;"
-			allow="false"
 			loading="lazy"
 			referrerpolicy="no-referrer-when-downgrade"
 		/>

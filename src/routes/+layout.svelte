@@ -3,11 +3,9 @@
 	import '../app.postcss';
 	import { ContactForm, Footer, Navigation } from '$components';
 	import type { Weekdays } from '$lib/types';
-	import type { ActionData, PageData } from './$types';
-	export let data: PageData;
-	export let form: ActionData;
 
-	$: console.log($page);
+	import type { PageData } from './$types';
+	export let data: PageData;
 	let days: Weekdays = data.days;
 
 	// Preload fonts
@@ -63,8 +61,7 @@
 </head>
 
 <Navigation />
-{console.log($page.form)}
-{#if form?.success}
+{#if $page.data.succes}
 	<div class="toast toast-bottom toast-center" transition:fade|global={{ duration: 3000 }}>
 		<div class="alert alert-success">
 			<span
@@ -85,7 +82,7 @@
 <button class="btn" on:click={openModal}>open modal</button>
 <dialog bind:this={modal} id="temoignage" class="modal modal-bottom sm:modal-middle">
 	<div class="modal-box">
-		<form method="POST" use:enhance>
+		<form method="POST" action="/formSubmit?/sendRating">
 			<div class="flex flex-col gap-6 p-4">
 				<h3 class="font-bold text-lg">Laissez nous un temoignage</h3>
 				<div class="flex flex-col gap-2">

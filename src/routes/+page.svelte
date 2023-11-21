@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 	import { Reviews } from '$components';
 	import { onDestroy, onMount } from 'svelte';
 
