@@ -65,7 +65,7 @@
 <Navigation />
 {console.log($page.form)}
 {#if form?.success}
-	<div class="toast toast-bottom toast-center" transition:fade={{ duration: 3000 }}>
+	<div class="toast toast-bottom toast-center" transition:fade|global={{ duration: 3000 }}>
 		<div class="alert alert-success">
 			<span
 				>Votre message a été transmis avec succès. Il sera publié après avoir été soumis à notre
