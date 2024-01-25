@@ -11,7 +11,7 @@ export const actions: Actions = {
 
 		console.log(url);
 		console.log(origin);
-		throw redirect(303, origin);
+		redirect(303, origin);
 	},
 	sendRating: async ({ cookies, request }) => {
 		const data = await request.formData();
@@ -21,7 +21,7 @@ export const actions: Actions = {
 
 		if (cookies.get('ratingSent') == 'true') {
 			console.log('Message already sent');
-			cookies.delete('ratingSent');
+			/* @migration task: add path argument */ cookies.delete('ratingSent', { path: '/' });
 			console.log('cookie destroyed');
 			return { success: false };
 		} else {
