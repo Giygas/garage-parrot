@@ -1,7 +1,5 @@
-import days from '$lib/server/horaires.json';
-
-export function load() {
+export const load = async ({ locals: { getSession } }) => {
 	return {
-		days: days
+		session: await getSession()
 	};
-}
+};

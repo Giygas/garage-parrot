@@ -1,7 +1,7 @@
 CREATE TABLE public.temoignages(
   id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name varchar(30) NOT NULL,
-  note smallint NOT NULL,
+  rating smallint NOT NULL,
   message varchar(250) NOT NULL,
   approved boolean NOT NULL DEFAULT FALSE,
   approved_by uuid,

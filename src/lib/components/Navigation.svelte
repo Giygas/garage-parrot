@@ -15,7 +15,7 @@
 
 	// Logo animation
 	let isScrolled = false;
-	let timeoutId: number | null = null; //Need a debouncing function here
+	let timeoutId: NodeJS.Timeout | null = null; //Need a debouncing function here
 
 	onMount(() => {
 		// Add a scroll event listener to track when the user scrolls

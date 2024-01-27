@@ -1,20 +1,20 @@
 <script lang="ts">
+	import type { ReviewType } from '$lib/types';
+
 	// Individual component will reveive the name, rating and message
 	// as a prop
-	export let name: string;
-	export let rating: number;
-	export let message: string;
+	export let rv: ReviewType;
 
 	// Compute the stars array based on the rating
-	let stars = Array(rating)
+	let stars = Array(rv.rating)
 		.fill('filled')
-		.concat(Array(5 - rating).fill('empty'))
+		.concat(Array(5 - rv.rating).fill('empty'))
 		.map((star: string, index: number) => ({ star, key: index }));
 </script>
 
 <div class=" p-6 bg-primary/80 rounded-lg snap-center text-mont min-w-[20em] md:min-w-[23rem]">
 	<div class="flex flex-row justify-between text-xl">
-		<div class="uppercase text-lg text-base-100 font-semibold">{name}</div>
+		<div class="uppercase text-lg text-base-100 font-semibold">{rv.name}</div>
 		<div class="text-accent flex flex-row self-baseline gap-0">
 			{#each stars as star (star)}
 				{#if star.star === 'filled'}
@@ -74,6 +74,6 @@
 		</div>
 	</div>
 	<div class="uppercase flex text-justify p-2 pt-4 font-light text-base-100 text-xs md:text-sm">
-		{message}
+		{rv.message}
 	</div>
 </div>

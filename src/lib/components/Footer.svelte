@@ -1,10 +1,9 @@
 <script lang="ts">
+	import week from '$lib/db/horaires.json';
 	import type { Weekdays } from '$lib/types';
-
 	import { capitalizeFirstLetter } from '$lib/helper';
 
-	export let days: Weekdays;
-
+	const days: Weekdays = week;
 	// Fetch the google map for better loading time
 	import { onMount } from 'svelte';
 
