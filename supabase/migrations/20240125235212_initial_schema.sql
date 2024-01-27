@@ -4,12 +4,15 @@ CREATE TABLE public.temoignages(
   note smallint NOT NULL,
   message varchar(250) NOT NULL,
   approved boolean NOT NULL DEFAULT FALSE,
+  approved_by uuid,
   created_at timestamp NOT NULL DEFAULT now()
 );
-alter table temoignages
-add constraint temoignages_id unique(id);
+
+ALTER TABLE temoignages
+  ADD CONSTRAINT temoignages_id UNIQUE (id);
+
 CREATE TABLE public.employees(
-  id uuid primary key NOT NULL DEFAULT gen_random_uuid(),
+  id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
   name text NOT NULL,
   email text NOT NULL,
   password text NOT NULL DEFAULT md5(random()::text),
@@ -18,5 +21,7 @@ CREATE TABLE public.employees(
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   last_password timestamp with time zone
 );
-alter table employees
-add constraint employees_id unique(id);
+
+ALTER TABLE employees
+  ADD CONSTRAINT employees_id UNIQUE (id);
+
