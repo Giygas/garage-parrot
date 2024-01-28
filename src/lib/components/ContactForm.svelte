@@ -20,7 +20,7 @@
 </script>
 
 <div
-	class="container flex flex-col items-center gap-2 justify-center sm:flex-row sm:justify-between mt-16 lg:mt-24 mb-10 sm:px-16"
+	class="container flex flex-col gap-2 justify-center items-baseline sm:flex-row sm:justify-between mt-16 lg:mt-24 mb-10 sm:px-16"
 >
 	<h2 class="text-small-caps text-accent text-lg lg:text-3xl">Voulez-vous nous contacter?</h2>
 	<h4 class="text-center lg:text-2xl">Téléphone: 07 08 09 10 20</h4>

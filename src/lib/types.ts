@@ -14,3 +14,8 @@ export interface ReviewType {
 	rating: number;
 	message: string;
 }
+
+export type Message = {
+	success: boolean;
+	message: string;
+};

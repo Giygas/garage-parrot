@@ -3,9 +3,6 @@
 	import '../app.postcss';
 	import { ContactForm, Footer, Navigation } from '$components';
 
-	import type { PageData } from './$types';
-	// export const data: PageData;
-
 	// Preload fonts
 	import { onMount } from 'svelte';
 
@@ -36,8 +33,8 @@
 	// Sanitizing input
 	import DOMPurify from 'dompurify';
 	import { browser } from '$app/environment';
-	import { enhance } from '$app/forms';
 	import { page } from '$app/stores';
+	import { quintIn } from 'svelte/easing';
 
 	let name: string;
 	let message: string;
@@ -52,6 +49,8 @@
 			}
 		}
 	}
+
+	console.log($page.form);
 </script>
 
 <head>
@@ -59,13 +58,23 @@
 </head>
 
 <Navigation />
-{#if $page.data.succes}
-	<div class="toast toast-bottom toast-center" transition:fade|global={{ duration: 3000 }}>
+{#if $page.form && $page.form.success === true}
+	<div
+		class="toast toast-bottom toast-center"
+		transition:fade|global={{ delay: 1000, duration: 8000, easing: quintIn }}
+	>
 		<div class="alert alert-success">
-			<span
-				>Votre message a été transmis avec succès. Il sera publié après avoir été soumis à notre
-				processus de révision.</span
-			>
+			<span>{$page.form.message}</span>
+		</div>
+	</div>
+{/if}
+{#if $page.form && $page.form.success === false}
+	<div
+		class="toast toast-bottom toast-center"
+		transition:fade|global={{ delay: 1000, duration: 8000, easing: quintIn }}
+	>
+		<div class="alert alert-error">
+			<span>{$page.form.message}</span>
 		</div>
 	</div>
 {/if}
