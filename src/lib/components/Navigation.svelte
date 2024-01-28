@@ -15,7 +15,7 @@
 
 	// Logo animation
 	let isScrolled = false;
-	let timeoutId: number | null = null; //Need a debouncing function here
+	let timeoutId: NodeJS.Timeout | null = null; //Need a debouncing function here
 
 	onMount(() => {
 		// Add a scroll event listener to track when the user scrolls
@@ -96,7 +96,7 @@
 {#if showMenu}
 	<div
 		class="mobile z-20 fixed inset-0 p-8 h-full w-full bg-primary/30 backdrop-blur-2xl"
-		transition:fade={{ delay: 0, duration: 200 }}
+		transition:fade|global={{ delay: 0, duration: 200 }}
 	>
 		<ul class="menu menu-vertical space-y-16 text-2xl pt-32 h-full text-mont">
 			{#each nav as item}

@@ -5,8 +5,7 @@
 
 	export let data: PageData;
 
-	let reviews = data.revi;
-
+	const reviews: any = data.revs;
 	import vehicle_small from '$lib/assets/vehicle.png';
 	import reparation_small from '$lib/assets/reparation.png';
 

@@ -1,22 +1,19 @@
 <script lang="ts">
+	import week from '$lib/db/horaires.json';
 	import type { Weekdays } from '$lib/types';
-
 	import { capitalizeFirstLetter } from '$lib/helper';
 
-	export let days: Weekdays;
-
+	const days: Weekdays = week;
 	// Fetch the google map for better loading time
-	import { onMount } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
 
 	let src = '';
 
-	onMount(async () => {
+	afterUpdate(async () => {
 		const response = await fetch(
-			'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2888.0910114425365!2d1.4721163766063876!3d43.62546465422367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebcd2535754d3%3A0x571b09c8e5bff5eb!2s4%20Chem.%20de%20Nicol%2C%2031200%20Toulouse%2C%20France!5e0!3m2!1sen!2sar!4v1689192159461!5m2!1sen!2sar'
+			'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2888.0910114425365!2d1.4721163766063876!3d43.62546465422367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebcd2535754d3%3A0x571b09c8e5bff5eb!2s4%20Chem.%20de%20Nicol%2C%2031200%20Toulouse%2C%20France!5e0!3m2!1sen!2sar!4v1689192159461!5m2!1sen!2sar&loading=async'
 		);
-		const data = await response;
-		console.log(data.url);
-		src = data.url;
+		src = response.url;
 	});
 </script>
 
@@ -34,7 +31,6 @@
 			width="648"
 			height="310"
 			style="border:0;"
-			allow="false"
 			loading="lazy"
 			referrerpolicy="no-referrer-when-downgrade"
 		/>

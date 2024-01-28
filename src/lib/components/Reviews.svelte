@@ -1,21 +1,15 @@
 <script lang="ts">
 	import { Review } from '$components';
 	import type { ReviewType } from '$lib/types';
-	// Mock element for Review
-	export let reviews: ReviewType;
-	// Mock end
+	export let reviews: Array<ReviewType>;
 </script>
 
 <div
 	class="container min-w-full flex flex-row overflow-x-auto no-scrollbar snap-x snap-mandatory justify-start gap-8 p-5"
 >
-	<Review {...reviews} />
-	<Review {...reviews} />
-	<Review {...reviews} />
-	<Review {...reviews} />
-	<Review {...reviews} />
-	<Review {...reviews} />
-	<Review {...reviews} />
+	{#each reviews as rv}
+		<Review {rv} />
+	{/each}
 </div>
 
 <style lang="postcss">

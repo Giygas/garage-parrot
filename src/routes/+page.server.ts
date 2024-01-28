@@ -1,12 +1,26 @@
+import { db } from '$lib/db/client';
+import type { ReviewType } from '$lib/types';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = () => {
-	return {
-		revi: {
-			name: 'Pedro',
-			rating: 3,
-			message:
-				'Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum ipsum sequi error saepe	doloribus natus omnis iusto. Omnis, voluptatibus nihil et ut laboriosam tenetur! Quos, laboresit voluptates unde tempore molestiae dolore soluta quaerat est iure libero alias rerum. Quia architecto voluptates cupiditate aut autem sint tempora ad labore.'
-		}
-	};
+export const load: PageServerLoad = async () => {
+	const { data } = await db
+		.from('temoignages')
+		.select(`name, rating, message`)
+		.eq('approved', true)
+		.order('created_at', { ascending: false })
+		.returns<ReviewType>();
+
+	let reviewData: ReviewType;
+
+	if (data) {
+		reviewData = data as ReviewType;
+	} else {
+		reviewData = {
+			name: 'Not working',
+			rating: 5,
+			message: 'having some technical problems right now'
+		};
+	}
+
+	return { revs: reviewData };
 };
