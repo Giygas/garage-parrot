@@ -6,6 +6,7 @@
 	export let rv: ReviewType;
 
 	// Compute the stars array based on the rating
+
 	let stars = Array(rv.rating)
 		.fill('filled')
 		.concat(Array(5 - rv.rating).fill('empty'))
