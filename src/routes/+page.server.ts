@@ -6,6 +6,7 @@ export const load: PageServerLoad = async () => {
 	const { data } = await db
 		.from('temoignages')
 		.select(`name, rating, message`)
+		.order('created_at', { ascending: false })
 		.returns<ReviewType>();
 
 	let reviewData: ReviewType;

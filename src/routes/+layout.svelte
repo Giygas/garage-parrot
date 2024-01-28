@@ -75,9 +75,18 @@
 	<div class="w-full p-0 m-0">
 		<ContactForm />
 	</div>
+	<div
+		class="container flex flex-row text-center md:justify-end px-10 py-10 lg:py-20 text-lg lg:text-2xl"
+	>
+		<p>
+			... Ou, si vous voulez, vous pouvez laisser un petit <button
+				class="font-semibold text-accent underline"
+				on:click={openModal}>témoignage de nos services</button
+			>
+		</p>
+	</div>
 </div>
 
-<button class="btn" on:click={openModal}>open modal</button>
 <dialog bind:this={modal} id="temoignage" class="modal modal-bottom sm:modal-middle">
 	<div class="modal-box">
 		<form method="POST" action="/formSubmit?/sendRating">

@@ -20,13 +20,13 @@
 </script>
 
 <div
-	class="container flex flex-col items-center gap-2 justify-center sm:flex-row sm:justify-between mt-16 mb-10 sm:px-16"
+	class="container flex flex-col items-center gap-2 justify-center sm:flex-row sm:justify-between mt-16 lg:mt-24 mb-10 sm:px-16"
 >
-	<h2 class="text-small-caps text-accent text-lg">Voulez-vous nous contacter?</h2>
-	<h4 class="text-center">07 08 09 10 20</h4>
+	<h2 class="text-small-caps text-accent text-lg lg:text-3xl">Voulez-vous nous contacter?</h2>
+	<h4 class="text-center lg:text-2xl">Téléphone: 07 08 09 10 20</h4>
 </div>
 <div
-	class="contact-background m-8 p-4 sm:m-10 md:m-20 md:p-20 xl:w-[1000px] xl:mx-auto text-secondary text-sm md:text-lg"
+	class="contact-background m-8 p-4 sm:m-10 md:mt-20 md:p-20 xl:w-[1000px] xl:mx-auto text-secondary text-sm md:text-lg"
 >
 	<form method="POST" action="/formSubmit?/contact">
 		<input type="hidden" id="url" name="url" value={$page.url.pathname} />
