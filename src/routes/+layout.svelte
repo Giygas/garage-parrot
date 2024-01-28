@@ -49,8 +49,6 @@
 			}
 		}
 	}
-
-	console.log($page.form);
 </script>
 
 <head>
