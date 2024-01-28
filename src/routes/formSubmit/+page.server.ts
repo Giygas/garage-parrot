@@ -28,9 +28,9 @@ export const actions: Actions = {
 			message = data.get('message') as string;
 
 			if (cookies.get('ratingSent') == 'true') {
-				console.log('Message already sent');
-				cookies.delete('ratingSent', { path: '/' });
-				console.log('cookie destroyed');
+				//TODO: delete this commentary
+				// for deleting the cookie created, testing purposes
+				// cookies.delete('ratingSent', { path: '/' });
 				return { success: false, message: 'Vous avez déjà envoyé un témoignage' };
 			} else {
 				const { error } = await db
