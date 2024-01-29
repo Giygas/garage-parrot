@@ -1,9 +1,9 @@
 export class Service {
 	id: number;
 	title: string;
-	description: string;
+	description: string[];
 
-	constructor(id: number, t: string, d: string) {
+	constructor(id: number, t: string, d: string[]) {
 		this.id = id;
 		this.title = t;
 		this.description = d;

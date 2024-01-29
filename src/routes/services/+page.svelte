@@ -1,11 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import { Service } from '$lib/classes';
 
 	export let data: PageData;
 
-	const services = data.services as Service[];
-	console.log(data.services);
+	const services = data.services;
 </script>
 
 <svelte:head>
@@ -23,9 +21,12 @@
 			<h2 class="montserrat uppercase text-5xl text-primary font-bold tracking-widest mb-14">
 				{service.title}
 			</h2>
-			<p class="text-3xl text-primary leading-10 font-normal tracking-wide pl-28">
-				{service.description}
-			</p>
+			{#each service.description as desc}
+				<br />
+				<p class="text-3xl text-primary leading-10 font-normal tracking-wide pl-28">
+					{desc}
+				</p>
+			{/each}
 		</div>
 	{/each}
 </section>
