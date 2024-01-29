@@ -19,3 +19,8 @@ export type Message = {
 	success: boolean;
 	message: string;
 };
+
+export type Services = {
+	title: string;
+	description: string;
+};
