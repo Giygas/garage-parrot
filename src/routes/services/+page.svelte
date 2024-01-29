@@ -1,9 +1,11 @@
 <script lang="ts">
-	import jsonServices from '$lib/db/services.json';
-	import type { Services } from '$lib/types';
+	import type { PageData } from './$types';
+	import { Service } from '$lib/classes';
 
-	const services = jsonServices as Services[];
-	console.log(services);
+	export let data: PageData;
+
+	const services = data.services as Service[];
+	console.log(data.services);
 </script>
 
 <svelte:head>
