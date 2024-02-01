@@ -135,37 +135,49 @@ export interface Database {
         Row: {
           created_at: string
           created_by: string
-          description: string | null
+          doors: number | null
           equipment: string[] | null
           id: string
           image: string
           kilometrage: number
           options: string[] | null
+          power: string | null
           price: number
+          seats: number | null
+          traction_id: number | null
+          transmission: string | null
           year: number
         }
         Insert: {
           created_at?: string
           created_by: string
-          description?: string | null
+          doors?: number | null
           equipment?: string[] | null
           id?: string
           image: string
           kilometrage: number
           options?: string[] | null
+          power?: string | null
           price: number
+          seats?: number | null
+          traction_id?: number | null
+          transmission?: string | null
           year: number
         }
         Update: {
           created_at?: string
           created_by?: string
-          description?: string | null
+          doors?: number | null
           equipment?: string[] | null
           id?: string
           image?: string
           kilometrage?: number
           options?: string[] | null
+          power?: string | null
           price?: number
+          seats?: number | null
+          traction_id?: number | null
+          transmission?: string | null
           year?: number
         }
         Relationships: [
@@ -175,8 +187,30 @@ export interface Database {
             isOneToOne: false
             referencedRelation: "employees"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "voitures_traction_id_fket"
+            columns: ["traction_id"]
+            isOneToOne: false
+            referencedRelation: "voitures_traction"
+            referencedColumns: ["id"]
           }
         ]
+      }
+      voitures_traction: {
+        Row: {
+          description: string
+          id: number
+        }
+        Insert: {
+          description: string
+          id?: number
+        }
+        Update: {
+          description?: string
+          id?: number
+        }
+        Relationships: []
       }
     }
     Views: {
