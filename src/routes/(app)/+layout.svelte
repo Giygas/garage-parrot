@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import '../app.postcss';
+	import '../../app.postcss';
+	import '../../app.postcss';
 	import { ContactForm, Footer, Navigation } from '$components';
 
 	// Preload fonts
