@@ -51,9 +51,9 @@
 	}
 </script>
 
-<head>
+<svelte:head>
 	<link rel="stylesheet" href="fonts.css" />
-</head>
+</svelte:head>
 
 <Navigation />
 {#if $page.form && $page.form.success === true}
