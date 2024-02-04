@@ -5,4 +5,4 @@ INSERT INTO temoignages(name, rating, message, approved)
 ('Stephane', 1, 'Mon vehicule n''est jamais sorti du garage', FALSE);
 
 INSERT INTO public.employees(name, email, PASSWORD, ROLE)
-  VALUES ('admin', 'admin', 'admin', 1)
+  VALUES ('admin', 'admin@admin.com', 'admin', 1)

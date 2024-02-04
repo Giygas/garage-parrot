@@ -1,17 +1,22 @@
 <script>
-	import '../../app.postcss';
+	import { enhance } from '$app/forms';
+	import '../../../app.postcss';
+	// TODO:
+	// Create a new admin the first time the admin connects to the site
+	// use only the auth database?
 </script>
 
 <svelte:head>
-	<title>Garage Parrot Admin Panel</title>
-	<link rel="stylesheet" href="fonts.css" />
+	<title>Garage Parrot Admin Login</title>
+	<link rel="stylesheet" href="/fonts.css" />
 </svelte:head>
+
 <div class=" h-screen w-screen p-36 grid grid-cols-1 gap-0">
 	<div class="contact-background m-auto p-20">
 		<h2 class="mx-auto font-semibold text-4xl text-center font-montserrat text-accent">
 			Connexion
 		</h2>
-		<form method="POST" action="">
+		<form method="POST" use:enhance>
 			<div class="grid grid-cols-8 items-center gap-8 pt-10">
 				<div class="col-span-2 text-end">
 					<label for="email" class="text-2xl uppercase">Email:</label>

@@ -32,7 +32,6 @@
 
 	// Sanitizing input
 	import DOMPurify from 'dompurify';
-	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { quintIn } from 'svelte/easing';
 
