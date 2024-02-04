@@ -1,4 +1,3 @@
-// src/routes/+layout.ts
 import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public';
 import type { Database } from '$lib/db/types';
 import { createSupabaseLoadClient } from '@supabase/auth-helpers-sveltekit';

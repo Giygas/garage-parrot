@@ -1,6 +1,6 @@
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
-import type { Handle } from '@sveltejs/kit';
+import { redirect, type Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.supabase = createSupabaseServerClient({
@@ -20,6 +20,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 		} = await event.locals.supabase.auth.getSession();
 		return session;
 	};
+
+	if (event.url.pathname.startsWith('/adminpanel') && !event.url.pathname.includes('create-user')) {
+		const activeSession = await event.locals.getSession();
+		if (!activeSession) {
+			redirect(302, '/');
+		}
+	}
 
 	return resolve(event, {
 		filterSerializedResponseHeaders(name) {

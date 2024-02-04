@@ -1,9 +1,6 @@
-<script>
+<script lang="ts">
 	import { enhance } from '$app/forms';
-	import '../../../app.postcss';
-	// TODO:
-	// Create a new admin the first time the admin connects to the site
-	// use only the auth database?
+	import '../../app.postcss';
 </script>
 
 <svelte:head>
