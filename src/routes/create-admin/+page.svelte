@@ -1,19 +1,26 @@
 <script lang="ts">
+	import '../../app.postcss';
 	import { enhance } from '$app/forms';
 </script>
 
 <svelte:head>
-	<title>Garage Parrot Creation d'Utilisateur</title>
+	<title>Garage Parrot Creation d'Administrateur</title>
 	<link rel="stylesheet" href="/fonts.css" />
 </svelte:head>
 
 <div class=" h-screen w-screen p-36 grid grid-cols-1 gap-0">
 	<div class="contact-background m-auto p-20">
 		<h2 class="mx-auto font-semibold text-4xl text-center font-montserrat text-accent">
-			Creer un nouvel utilisateur
+			Creer l'identifiant pour l'administrateur
 		</h2>
 		<form method="POST" use:enhance>
 			<div class="grid grid-cols-8 items-center gap-8 pt-10">
+				<div class="col-span-2 text-end">
+					<label for="name" class="text-2xl uppercase">Nom et prénom:</label>
+				</div>
+				<div class="col-span-6">
+					<input type="text" class="input input-bordered w-full" name="name" />
+				</div>
 				<div class="col-span-2 text-end">
 					<label for="email" class="text-2xl uppercase">Email:</label>
 				</div>

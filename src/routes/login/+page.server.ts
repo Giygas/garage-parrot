@@ -1,5 +1,5 @@
 // src/routes/login/+page.server.ts
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 import { db } from '$lib/db/client';
 import type { PageServerLoad } from '../adminpanel/$types';
 
@@ -25,9 +25,14 @@ export const actions = {
 	}
 };
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ cookies }) => {
 	const rows = await db.from('employees').select();
 	if (rows.data?.length == 0) {
-		redirect(303, 'adminpanel/create-user');
+		cookies.set('firstTime', 'true', {
+			path: '/',
+			httpOnly: true,
+			sameSite: 'strict',
+			maxAge: 60 * 60
+		});
 	}
 };

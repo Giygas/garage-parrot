@@ -21,7 +21,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 		return session;
 	};
 
-	if (event.url.pathname.startsWith('/adminpanel') && !event.url.pathname.includes('create-user')) {
+	if (event.url.pathname.startsWith('/login') && event.cookies.get('firstTime')) {
+		redirect(302, '/create-admin');
+	}
+
+	if (event.url.pathname.includes('create-admin') && !event.cookies.get('firstTime')) {
+		redirect(302, '/');
+	}
+
+	if (event.url.pathname.startsWith('/adminpanel')) {
 		const activeSession = await event.locals.getSession();
 		if (!activeSession) {
 			redirect(302, '/');
