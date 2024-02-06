@@ -31,6 +31,7 @@
 						class="input input-bordered w-full"
 						name="name"
 						value={form?.name ?? ''}
+						required
 					/>
 				</div>
 				<div class="col-span-2 text-end">
@@ -42,13 +43,14 @@
 						class="input input-bordered w-full"
 						name="email"
 						value={form?.email ?? ''}
+						required
 					/>
 				</div>
 				<div class="col-span-2 text-end">
 					<label for="password" class="text-2xl uppercase">Mot de passe:</label>
 				</div>
 				<div class="col-span-6">
-					<input type="password" class="input input-bordered w-full" name="password" />
+					<input type="password" class="input input-bordered w-full" name="password" required />
 				</div>
 				<div class=" col-span-8 justify-self-end content-center">
 					<button class="btn btn-accent w-full lg:w-40">Creer Compte</button>

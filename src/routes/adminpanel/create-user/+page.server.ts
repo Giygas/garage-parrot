@@ -1,4 +1,4 @@
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 
 export const actions = {
 	default: async ({ request, cookies, locals }) => {
@@ -46,6 +46,8 @@ export const actions = {
 		}
 
 		cookies.delete('firstTime', { path: '/' });
-		redirect(302, '/login');
+		return {
+			success: true
+		};
 	}
 };
