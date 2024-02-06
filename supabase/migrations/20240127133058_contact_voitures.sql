@@ -22,7 +22,7 @@ CREATE TABLE public.voitures(
   created_by uuid NOT NULL,
   CONSTRAINT voitures_pkey PRIMARY KEY (id),
   CONSTRAINT voitures_id_key UNIQUE (id),
-  CONSTRAINT voitures_created_by_fkey FOREIGN KEY (created_by) REFERENCES employees(id) ON UPDATE CASCADE,
+  CONSTRAINT voitures_created_by_fkey FOREIGN KEY (created_by) REFERENCES profiles(id) ON UPDATE CASCADE,
   CONSTRAINT voitures_traction_id_fket FOREIGN KEY (traction_id) REFERENCES voitures_traction(id) ON UPDATE CASCADE
 );
 
@@ -40,11 +40,11 @@ CREATE TABLE public.contacts(
   CONSTRAINT contacts_pkey PRIMARY KEY (id),
   CONSTRAINT contacts_id_key UNIQUE (id),
   CONSTRAINT contacts_voiture_id_fkey FOREIGN KEY (voiture_id) REFERENCES voitures(id) ON UPDATE CASCADE ON DELETE SET NULL,
-  CONSTRAINT contacts_responded_by_fkey FOREIGN KEY (responded_by) REFERENCES employees(id) ON UPDATE CASCADE
+  CONSTRAINT contacts_responded_by_fkey FOREIGN KEY (responded_by) REFERENCES profiles(id) ON UPDATE CASCADE
 );
 
 ALTER TABLE temoignages
-  ADD CONSTRAINT temoignages_responded_by_fkey FOREIGN KEY (approved_by) REFERENCES employees(id) ON UPDATE CASCADE;
+  ADD CONSTRAINT temoignages_responded_by_fkey FOREIGN KEY (approved_by) REFERENCES profiles(id) ON UPDATE CASCADE;
 
 -- Trigger for generating a random password
 -- CREATE OR REPLACE FUNCTION public.password_gen()

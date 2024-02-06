@@ -11,17 +11,44 @@ CREATE TABLE public.temoignages(
 ALTER TABLE temoignages
   ADD CONSTRAINT temoignages_id UNIQUE (id);
 
-CREATE TABLE public.employees(
-  id uuid PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
+CREATE TABLE public.profiles(
+  id uuid NOT NULL REFERENCES auth.users ON DELETE CASCADE,
   name text NOT NULL,
-  email text NOT NULL,
-  password text NOT NULL DEFAULT md5(random()::text),
-  role smallint NOT NULL DEFAULT 2,
+  role_type smallint NOT NULL DEFAULT 2,
   -- 1 admin, 2 employee
-  created_at timestamp with time zone NOT NULL DEFAULT now(),
-  last_password timestamp with time zone
+  PRIMARY KEY (id)
 );
 
-ALTER TABLE employees
-  ADD CONSTRAINT employees_id UNIQUE (id);
+-- inserts a row into public.profiles
+CREATE FUNCTION public.handle_new_user()
+  RETURNS TRIGGER
+  LANGUAGE plpgsql
+  SECURITY DEFINER
+  SET search_path = public
+  AS $$
+DECLARE
+  is_admin boolean;
+BEGIN
+  SELECT
+    count(*) = 1
+    -- 1 because the user is inserted in the profiles tables after the insertion in auth table
+    -- so the first user will be admin
+  FROM
+    auth.users INTO is_admin;
+  IF is_admin THEN
+    INSERT INTO public.profiles(id, name, role_type)
+      VALUES (NEW.id, NEW.raw_user_meta_data ->> 'name', 1);
+  ELSE
+    INSERT INTO public.profiles(id, name, role_type)
+      VALUES (NEW.id, NEW.raw_user_meta_data ->> 'name', 2);
+  END IF;
+  RETURN new;
+END;
+$$;
+
+-- -- trigger the function every time a user is created
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.handle_new_user();
 

@@ -14,6 +14,7 @@ export const actions = {
 			password: password
 		});
 
+		// TODO change this error messages and log in the user
 		if (error) {
 			return fail(500, { message: 'Server error. Try again later.', success: false, email });
 		}
@@ -26,7 +27,7 @@ export const actions = {
 };
 
 export const load: PageServerLoad = async ({ cookies }) => {
-	const rows = await db.from('employees').select();
+	const rows = await db.from('profiles').select();
 	if (rows.data?.length == 0) {
 		cookies.set('firstTime', 'true', {
 			path: '/',

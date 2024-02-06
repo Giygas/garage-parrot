@@ -4,5 +4,3 @@ INSERT INTO temoignages(name, rating, message, approved)
 ('Frank', 2, 'Super le service, mais un peu cher', TRUE),
 ('Stephane', 1, 'Mon vehicule n''est jamais sorti du garage', FALSE);
 
-INSERT INTO public.employees(name, email, PASSWORD, ROLE)
-  VALUES ('admin', 'admin@admin.com', 'admin', 1)
