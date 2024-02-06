@@ -2,14 +2,8 @@
 	import '../../../app.postcss';
 	import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
-	import { redirect } from '@sveltejs/kit';
 
 	export let form: ActionData;
-
-	console.log(form);
-	if (form?.success) {
-		redirect(302, '/login');
-	}
 </script>
 
 <svelte:head>

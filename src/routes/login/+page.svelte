@@ -3,8 +3,14 @@
 	import '../../app.postcss';
 
 	import { page } from '$app/stores';
-	import { fade } from 'svelte/transition';
-	import { quintIn } from 'svelte/easing';
+	import { Toasts, toast } from 'svoast';
+
+	let userCreated: boolean;
+
+	userCreated = $page.url.searchParams.get('success') === 'true';
+	if (userCreated) {
+		toast.success('Utilisateur crée avec succès');
+	}
 </script>
 
 <svelte:head>
@@ -12,16 +18,8 @@
 	<link rel="stylesheet" href="/fonts.css" />
 </svelte:head>
 
-{#if $page.form.success}
-	<div
-		class="toast toast-bottom toast-center"
-		transition:fade|global={{ delay: 1000, duration: 8000, easing: quintIn }}
-	>
-		<div class="alert alert-success">
-			<span>Utilisateur a été créée avec succès</span>
-		</div>
-	</div>
-{/if}
+<Toasts position="top-right" />
+
 <div class=" h-screen w-screen p-36 grid grid-cols-1 gap-0">
 	<div class="contact-background m-auto p-20">
 		<h2 class="mx-auto font-semibold text-4xl text-center font-montserrat text-accent">

@@ -1,7 +1,7 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 
 export const actions = {
-	default: async ({ request, cookies, locals }) => {
+	default: async ({ request, locals }) => {
 		const formData = await request.formData();
 		const name = formData.get('name') as string;
 		const email = formData.get('email') as string;
@@ -45,9 +45,6 @@ export const actions = {
 			});
 		}
 
-		cookies.delete('firstTime', { path: '/' });
-		return {
-			success: true
-		};
+		redirect(302, '/login?success=true');
 	}
 };

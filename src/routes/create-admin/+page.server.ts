@@ -46,6 +46,6 @@ export const actions = {
 		}
 
 		cookies.delete('firstTime', { path: '/' });
-		redirect(302, '/login');
+		redirect(302, '/login?success=true');
 	}
 };

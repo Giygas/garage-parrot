@@ -8,11 +8,16 @@ export const actions = {
 		const formData = await request.formData();
 		const email = formData.get('email') as string;
 		const password = formData.get('password') as string;
+		// TODO add form validation
 
-		const { error } = await supabase.auth.signInWithPassword({
+		console.log(email);
+		console.log(password);
+		const { data, error } = await supabase.auth.signInWithPassword({
 			email: email,
 			password: password
 		});
+
+		console.log(data);
 
 		// TODO change this error messages and log in the user
 		if (error) {
