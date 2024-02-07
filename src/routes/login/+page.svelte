@@ -4,12 +4,24 @@
 
 	import { page } from '$app/stores';
 	import { Toasts, toast } from 'svoast';
+	import type { ActionData } from './$types';
+	import { goto } from '$app/navigation';
 
 	let userCreated: boolean;
 
 	userCreated = $page.url.searchParams.get('success') === 'true';
-	if (userCreated) {
+	$: if (userCreated) {
 		toast.success('Utilisateur crée avec succès');
+	}
+
+	export let form: ActionData;
+
+	$: if (form?.wrongId || form?.incomplete) {
+		toast.error(form.message, { duration: 3000 });
+	}
+
+	if (form?.success) {
+		goto('/adminpanel');
 	}
 </script>
 
@@ -31,16 +43,22 @@
 					<label for="email" class="text-2xl uppercase">Email:</label>
 				</div>
 				<div class="col-span-6">
-					<input type="email" class="input input-bordered w-full" name="email" />
+					<input
+						type="email"
+						class="input input-bordered w-full"
+						name="email"
+						required
+						value={form?.email ?? ''}
+					/>
 				</div>
 				<div class="col-span-2 text-end">
 					<label for="password" class="text-2xl uppercase">Mot de passe:</label>
 				</div>
 				<div class="col-span-6">
-					<input type="password" class="input input-bordered w-full" name="password" />
+					<input type="password" class="input input-bordered w-full" name="password" required />
 				</div>
 				<div class=" col-span-8 justify-self-end content-center">
-					<button class="btn btn-accent w-full lg:w-40">Se connecter</button>
+					<button class="btn btn-accent w-full lg:w-40" type="submit">Se connecter</button>
 				</div>
 			</div>
 		</form>

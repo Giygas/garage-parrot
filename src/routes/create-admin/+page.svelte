@@ -2,7 +2,6 @@
 	import '../../app.postcss';
 	import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
-	import { fade } from 'svelte/transition';
 
 	export let form: ActionData;
 </script>

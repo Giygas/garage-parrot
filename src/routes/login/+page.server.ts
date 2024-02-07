@@ -9,23 +9,33 @@ export const actions = {
 		const email = formData.get('email') as string;
 		const password = formData.get('password') as string;
 		// TODO add form validation
+		if (!email || !password) {
+			return fail(400, {
+				email,
+				incomplete: true,
+				message: 'Identifiants manquants'
+			});
+		}
 
-		console.log(email);
-		console.log(password);
-		const { data, error } = await supabase.auth.signInWithPassword({
+		const { error } = await supabase.auth.signInWithPassword({
 			email: email,
 			password: password
 		});
 
-		console.log(data);
-
-		// TODO change this error messages and log in the user
 		if (error) {
-			return fail(500, { message: 'Server error. Try again later.', success: false, email });
+			if (error.message === 'Invalid login credentials') {
+				return { message: 'Mauvais identifiants de connexion', wrongId: true, email };
+			} else {
+				return {
+					message: 'Une error est survenue lors de la connexion avec la base de donées',
+					wrongId: true,
+					email
+				};
+			}
 		}
 
 		return {
-			message: 'Please check your email for a magic link to log into the website.',
+			message: 'All good',
 			success: true
 		};
 	}
