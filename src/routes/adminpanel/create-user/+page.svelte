@@ -8,7 +8,6 @@
 
 <svelte:head>
 	<title>Garage Parrot Creation d'Utilisateur</title>
-	<link rel="stylesheet" href="/fonts.css" />
 </svelte:head>
 
 <div class=" h-screen w-screen p-36 grid grid-cols-1 gap-0">

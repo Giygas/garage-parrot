@@ -13,5 +13,6 @@
 	};
 </script>
 
-It works
-<button on:click={disconnect}>Disconnect</button>
+<div class="ml-96">
+	It works <button on:click={disconnect}>Disconnect</button>
+</div>

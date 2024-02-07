@@ -17,7 +17,7 @@ export const actions = {
 			});
 		}
 
-		const { error } = await supabase.auth.signInWithPassword({
+		const { data, error } = await supabase.auth.signInWithPassword({
 			email: email,
 			password: password
 		});
@@ -32,6 +32,12 @@ export const actions = {
 					email
 				};
 			}
+		}
+
+		const profile = await db.from('profiles').select('role_type').eq('id', data.user.id).single();
+		// Add the role type in the public database to the user created by authentication
+		if (profile.data) {
+			data.user.user_metadata.role_type = profile.data.role_type;
 		}
 
 		return {
