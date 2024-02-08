@@ -3,9 +3,9 @@
 	import '../../app.postcss';
 
 	import { page } from '$app/stores';
-	import { Toasts, toast } from 'svoast';
 	import type { ActionData } from './$types';
 	import { goto } from '$app/navigation';
+	import toast, { Toaster } from 'svelte-french-toast';
 
 	let userCreated: boolean;
 
@@ -30,7 +30,7 @@
 	<link rel="stylesheet" href="/fonts.css" />
 </svelte:head>
 
-<Toasts position="top-right" />
+<Toaster />
 
 <div class=" h-screen w-screen p-36 grid grid-cols-1 gap-0">
 	<div class="contact-background m-auto p-20">

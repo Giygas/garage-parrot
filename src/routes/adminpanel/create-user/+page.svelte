@@ -10,9 +10,9 @@
 	<title>Garage Parrot Creation d'Utilisateur</title>
 </svelte:head>
 
-<div class=" h-screen w-screen p-36 grid grid-cols-1 gap-0">
-	<div class="contact-background m-auto p-20">
-		<h2 class="mx-auto font-semibold text-4xl text-center font-montserrat text-accent">
+<div class="grid grid-cols-1 gap-0 h-full">
+	<div class="contact-background m-auto p-10 sm:p-20">
+		<h2 class="mx-auto font-semibold text-3xl text-center font-montserrat text-accent">
 			Creer l'identifiant pour un nouvel employé
 		</h2>
 		{#if form?.error}
@@ -21,7 +21,7 @@
 		<form method="POST" use:enhance>
 			<div class="grid grid-cols-8 items-center gap-8 pt-10">
 				<div class="col-span-2 text-end">
-					<label for="name" class="text-2xl uppercase">Nom et prénom:</label>
+					<label for="name" class="text-xl uppercase">Nom et prénom:</label>
 				</div>
 				<div class="col-span-6">
 					<input
@@ -33,7 +33,7 @@
 					/>
 				</div>
 				<div class="col-span-2 text-end">
-					<label for="email" class="text-2xl uppercase">Email:</label>
+					<label for="email" class="text-xl uppercase">Email:</label>
 				</div>
 				<div class="col-span-6">
 					<input
@@ -45,7 +45,7 @@
 					/>
 				</div>
 				<div class="col-span-2 text-end">
-					<label for="password" class="text-2xl uppercase">Mot de passe:</label>
+					<label for="password" class="text-xl uppercase">Mot de passe:</label>
 				</div>
 				<div class="col-span-6">
 					<input type="password" class="input input-bordered w-full" name="password" required />

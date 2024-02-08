@@ -1,4 +1,4 @@
-import { fail, redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 
 export const actions = {
 	default: async ({ request, locals }) => {
@@ -45,6 +45,8 @@ export const actions = {
 			});
 		}
 
-		redirect(302, '/login?success=true');
+		return {
+			success: true
+		};
 	}
 };

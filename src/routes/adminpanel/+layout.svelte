@@ -2,6 +2,7 @@
 	import '../../app.postcss';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import toast, { Toaster } from 'svelte-french-toast';
 
 	export let data;
 
@@ -19,6 +20,8 @@
 
 		return () => subscription.unsubscribe();
 	});
+
+	toast.success('User created successfully', { position: 'top-right' });
 </script>
 
 <svelte:head>
@@ -26,6 +29,8 @@
 
 	<link rel="stylesheet" href="/fonts.css" />
 </svelte:head>
+
+<Toaster />
 
 <div class="grid grid-cols-4 h-screen max-h-screen">
 	<div class="col-span-1">
