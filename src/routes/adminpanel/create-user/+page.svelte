@@ -1,9 +1,17 @@
 <script lang="ts">
 	import '../../../app.postcss';
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import type { ActionData } from './$types';
+	import toast from 'svelte-french-toast';
 
 	export let form: ActionData;
+
+	let errorMessage: string;
+	$: if (form?.error) {
+		errorMessage = form.message;
+	}
+	let password: string;
+	$: password = '';
 </script>
 
 <svelte:head>
@@ -18,7 +26,24 @@
 		{#if form?.error}
 			<span class="text-accent text-lg block text-center"> {form.message} </span>
 		{/if}
-		<form method="POST" use:enhance>
+		<form
+			method="POST"
+			use:enhance={() => {
+				return async ({ result, update }) => {
+					console.log(result);
+					if (result.type !== 'failure' && result.type !== 'error') {
+						toast.promise(applyAction(result), {
+							loading: "Création de l'utilisateur...",
+							success: 'Utilisateur créé',
+							error: "Une erreur s'est produite lors de la création de l'utilisateur"
+						});
+					} else {
+						password = '';
+					}
+					await update({ reset: true, invalidateAll: true });
+				};
+			}}
+		>
 			<div class="grid grid-cols-8 items-center gap-8 pt-10">
 				<div class="col-span-2 text-end">
 					<label for="name" class="text-xl uppercase">Nom et prénom:</label>
@@ -48,7 +73,13 @@
 					<label for="password" class="text-xl uppercase">Mot de passe:</label>
 				</div>
 				<div class="col-span-6">
-					<input type="password" class="input input-bordered w-full" name="password" required />
+					<input
+						type="password"
+						class="input input-bordered w-full"
+						name="password"
+						required
+						bind:value={password}
+					/>
 				</div>
 				<div class=" col-span-8 justify-self-end content-center">
 					<button class="btn btn-accent w-full lg:w-40">Creer Compte</button>

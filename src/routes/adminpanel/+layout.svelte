@@ -20,8 +20,6 @@
 
 		return () => subscription.unsubscribe();
 	});
-
-	toast.success('User created successfully', { position: 'top-right' });
 </script>
 
 <svelte:head>
