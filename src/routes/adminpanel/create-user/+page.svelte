@@ -6,10 +6,6 @@
 
 	export let form: ActionData;
 
-	let errorMessage: string;
-	$: if (form?.error) {
-		errorMessage = form.message;
-	}
 	let password: string;
 	$: password = '';
 </script>

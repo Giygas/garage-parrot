@@ -34,6 +34,7 @@
 	<div class="col-span-1">
 		<aside class="bg-slate-400 h-full">
 			<h1>Panel d'administration du garage</h1>
+			<!-- TODO Vertical Navbar here -->
 		</aside>
 	</div>
 	<div class="col-span-3">

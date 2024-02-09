@@ -8,7 +8,6 @@ export const actions = {
 		const formData = await request.formData();
 		const email = formData.get('email') as string;
 		const password = formData.get('password') as string;
-		// TODO add form validation
 		if (!email || !password) {
 			return fail(400, {
 				email,
