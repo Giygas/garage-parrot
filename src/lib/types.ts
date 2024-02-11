@@ -19,3 +19,9 @@ export type Message = {
 	success: boolean;
 	message: string;
 };
+
+export interface Service {
+	id: number;
+	title: string;
+	description: string;
+}

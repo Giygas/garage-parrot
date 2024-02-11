@@ -1,4 +1,4 @@
-import type { Service } from '$lib/classes';
+import type { Service } from '$lib/types';
 import jsonServices from '$lib/db/services.json';
 import type { PageServerLoad } from '../$types';
 
