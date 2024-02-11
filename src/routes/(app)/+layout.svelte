@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import '../app.postcss';
+	import '../../app.postcss';
 	import { ContactForm, Footer, Navigation } from '$components';
 
 	// Preload fonts
@@ -32,7 +32,6 @@
 
 	// Sanitizing input
 	import DOMPurify from 'dompurify';
-	import { browser } from '$app/environment';
 	import { page } from '$app/stores';
 	import { quintIn } from 'svelte/easing';
 
@@ -51,9 +50,9 @@
 	}
 </script>
 
-<head>
+<svelte:head>
 	<link rel="stylesheet" href="fonts.css" />
-</head>
+</svelte:head>
 
 <Navigation />
 {#if $page.form && $page.form.success === true}

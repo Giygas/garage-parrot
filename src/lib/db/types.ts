@@ -51,7 +51,7 @@ export interface Database {
             foreignKeyName: "contacts_responded_by_fkey"
             columns: ["responded_by"]
             isOneToOne: false
-            referencedRelation: "employees"
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
           {
@@ -63,35 +63,31 @@ export interface Database {
           }
         ]
       }
-      employees: {
+      profiles: {
         Row: {
-          created_at: string
-          email: string
           id: string
-          last_password: string | null
           name: string
-          password: string
-          role: number
+          role_type: number
         }
         Insert: {
-          created_at?: string
-          email: string
-          id?: string
-          last_password?: string | null
+          id: string
           name: string
-          password?: string
-          role?: number
+          role_type?: number
         }
         Update: {
-          created_at?: string
-          email?: string
           id?: string
-          last_password?: string | null
           name?: string
-          password?: string
-          role?: number
+          role_type?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       temoignages: {
         Row: {
@@ -126,7 +122,7 @@ export interface Database {
             foreignKeyName: "temoignages_responded_by_fkey"
             columns: ["approved_by"]
             isOneToOne: false
-            referencedRelation: "employees"
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           }
         ]
@@ -135,37 +131,49 @@ export interface Database {
         Row: {
           created_at: string
           created_by: string
-          description: string | null
+          doors: number | null
           equipment: string[] | null
           id: string
           image: string
           kilometrage: number
           options: string[] | null
+          power: string | null
           price: number
+          seats: number | null
+          traction_id: number | null
+          transmission: string | null
           year: number
         }
         Insert: {
           created_at?: string
           created_by: string
-          description?: string | null
+          doors?: number | null
           equipment?: string[] | null
           id?: string
           image: string
           kilometrage: number
           options?: string[] | null
+          power?: string | null
           price: number
+          seats?: number | null
+          traction_id?: number | null
+          transmission?: string | null
           year: number
         }
         Update: {
           created_at?: string
           created_by?: string
-          description?: string | null
+          doors?: number | null
           equipment?: string[] | null
           id?: string
           image?: string
           kilometrage?: number
           options?: string[] | null
+          power?: string | null
           price?: number
+          seats?: number | null
+          traction_id?: number | null
+          transmission?: string | null
           year?: number
         }
         Relationships: [
@@ -173,10 +181,32 @@ export interface Database {
             foreignKeyName: "voitures_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
-            referencedRelation: "employees"
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "voitures_traction_id_fket"
+            columns: ["traction_id"]
+            isOneToOne: false
+            referencedRelation: "voitures_traction"
             referencedColumns: ["id"]
           }
         ]
+      }
+      voitures_traction: {
+        Row: {
+          description: string
+          id: number
+        }
+        Insert: {
+          description: string
+          id?: number
+        }
+        Update: {
+          description?: string
+          id?: number
+        }
+        Relationships: []
       }
     }
     Views: {

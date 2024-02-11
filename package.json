@@ -41,6 +41,7 @@
 		"@supabase/auth-helpers-sveltekit": "^0.11.0",
 		"@supabase/supabase-js": "^2.39.3",
 		"@types/dompurify": "^3.0.5",
-		"dompurify": "^3.0.6"
+		"dompurify": "^3.0.6",
+		"svelte-french-toast": "^1.2.0"
 	}
 }
