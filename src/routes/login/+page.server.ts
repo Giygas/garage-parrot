@@ -1,5 +1,5 @@
 // src/routes/login/+page.server.ts
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import { db } from '$lib/db/client';
 import type { PageServerLoad } from '../adminpanel/$types';
 
@@ -55,5 +55,6 @@ export const load: PageServerLoad = async ({ cookies }) => {
 			sameSite: 'strict',
 			maxAge: 60 * 60
 		});
+		redirect(303, '/create-admin');
 	}
 };

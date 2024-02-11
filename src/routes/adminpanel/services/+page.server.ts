@@ -3,11 +3,7 @@ import type { PageServerLoad, Actions } from '../$types';
 import { db } from '$lib/db/client';
 
 export const load: PageServerLoad = async () => {
-	const { data, error } = await db
-		.from('services')
-		.select()
-		.order('id', { ascending: true })
-		.returns<Service[]>();
+	const { data, error } = await db.from('services').select().order('id', { ascending: true });
 
 	if (error) {
 		return {
@@ -42,19 +38,16 @@ export const actions = {
 			return { error: true, message: 'Des elements manquants', services: serviceData };
 		}
 		if (id == null || title == '' || description == '') {
-			return { error: true, message: 'Des elements manquants', services: serviceData };
+			return {
+				error: true,
+				message: 'Des elements manquants',
+				services: serviceData
+			};
 		}
 
 		const parsedId: number = parseInt(id);
 
 		console.log(parsedId, title, description);
-		const updating = {
-			id: parsedId,
-			title: title,
-			description: description
-		};
-
-		console.log(updating);
 
 		const { error } = await db
 			.from('services')
@@ -65,14 +58,41 @@ export const actions = {
 			return {
 				error: true,
 				message: 'Un problème est survenue lors de la mise a jour des données',
-				services: serviceData
+				services: serviceData as Service[]
 			};
 		} else {
+			const updatedServices = await db
+				.from('services')
+				.select()
+				.order('id', { ascending: true })
+				.returns<Service[]>();
+
 			return {
 				success: true,
 				message: 'Service mis á jour correctement',
-				services: serviceData
+				services: updatedServices.data as Service[]
 			};
+		}
+	},
+	deleteService: async ({ request }) => {
+		const data = await request.formData();
+		const i = data.get('id') as string;
+		let parsedId;
+		if (i) {
+			parsedId = parseInt(i);
+			const { error } = await db.from('services').delete().eq('id', parsedId);
+
+			if (error) {
+				return {
+					error: true,
+					message: 'Un problème est survenue lors de la eliminaiton du service'
+				};
+			} else {
+				return {
+					success: true,
+					message: 'Service effacé !'
+				};
+			}
 		}
 	}
 } satisfies Actions;

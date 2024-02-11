@@ -1,9 +1,8 @@
 <script lang="ts">
 	import '../../app.postcss';
 	import { goto, invalidate } from '$app/navigation';
-	import { createEventDispatcher, onMount } from 'svelte';
-	import toast, { Toaster } from 'svelte-french-toast';
-	import type { ActionData } from './$types.js';
+	import { onMount } from 'svelte';
+	import { Toaster } from 'svelte-french-toast';
 
 	export let data;
 
