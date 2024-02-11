@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { Service } from '$lib/types';
-	import { afterUpdate, onMount } from 'svelte';
 	import type { PageData } from './$types';
 	import type { ActionData } from './$types';
 	import toast from 'svelte-french-toast';
@@ -10,19 +9,6 @@
 	export let form: ActionData;
 
 	let services: Service[];
-	// onMount(() => {
-	// 	services = data.services as Service[];
-	// });
-	// let formServices = form?.services as Service[];
-	// $: formServices;
-	// $: services = formServices;
-	// $: {
-	// 	if (form?.services) {
-	// 		services = form.services;
-	// 	} else {
-	// 		services = data.services as Service[];
-	// 	}
-	// }
 
 	$: {
 		form;
@@ -51,7 +37,6 @@
 	<div class="flex flex-col w-full">
 		{#key services}
 			{#each services as service (service.id)}
-				{console.log(service.description)}
 				<form method="POST" action="?/updateService" use:enhance>
 					<input type="hidden" value={service.id} name="serviceId" />
 					<div class="flex flex-col min-w-full h-fit gap-6 pt-12">

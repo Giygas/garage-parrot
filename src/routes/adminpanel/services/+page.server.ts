@@ -45,10 +45,6 @@ export const actions = {
 			};
 		}
 
-		const parsedId: number = parseInt(id);
-
-		console.log(parsedId, title, description);
-
 		const { error } = await db
 			.from('services')
 			.update({ title: title, description: description })
@@ -76,21 +72,28 @@ export const actions = {
 	},
 	deleteService: async ({ request }) => {
 		const data = await request.formData();
-		const i = data.get('id') as string;
-		let parsedId;
+		const i = data.get('serviceId') as string;
 		if (i) {
-			parsedId = parseInt(i);
-			const { error } = await db.from('services').delete().eq('id', parsedId);
+			const id = parseInt(i);
+			const { error } = await db.from('services').delete().eq('id', id);
+			const services = await db
+				.from('services')
+				.select()
+				.order('id', { ascending: true })
+				.returns<Service[]>();
+			const serviceData = services.data as Service[];
 
 			if (error) {
 				return {
 					error: true,
-					message: 'Un problème est survenue lors de la eliminaiton du service'
+					message: 'Un problème est survenue lors de la eliminaiton du service',
+					services: serviceData
 				};
 			} else {
 				return {
 					success: true,
-					message: 'Service effacé !'
+					message: 'Service effacé !',
+					services: serviceData
 				};
 			}
 		}
