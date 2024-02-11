@@ -48,6 +48,7 @@ export const actions = {
 				},
 				email_confirm: true
 			});
+
 			if (error) {
 				if (error.status === 422) {
 					return fail(400, {

@@ -1,12 +1,12 @@
 <script lang="ts">
 	import '../../app.postcss';
-	import { invalidate } from '$app/navigation';
+	import { goto, invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import toast, { Toaster } from 'svelte-french-toast';
 
 	export let data;
 
-	let { supabase, session } = data;
+	let { supabase, session, options } = data;
 	$: ({ supabase, session } = data);
 
 	onMount(() => {
@@ -20,6 +20,11 @@
 
 		return () => subscription.unsubscribe();
 	});
+
+	const disconnect = async () => {
+		await supabase.auth.signOut();
+		goto('/login');
+	};
 </script>
 
 <svelte:head>
@@ -30,14 +35,26 @@
 
 <Toaster />
 
-<div class="grid grid-cols-4 h-screen max-h-screen">
-	<div class="col-span-1">
-		<aside class="bg-slate-400 h-full">
-			<h1>Panel d'administration du garage</h1>
-			<!-- TODO Vertical Navbar here -->
-		</aside>
+<div class="h-screen max-h-screen">
+	<div class="w-screen p-8">
+		<button on:click={disconnect} class="btn btn-sm btn-primary text-background float-end"
+			>Se deconnecter</button
+		>
+		<h1 class="text-4xl text-accent font-montserrat uppercase font-semibold">
+			Panel d'administration du garage
+		</h1>
+		<p class="text-lg pt-1">Utilisateur: {session?.user.user_metadata.name}</p>
 	</div>
-	<div class="col-span-3">
-		<slot />
+	<div class="grid grid-cols-5 pt-4">
+		<div class="col-span-1">
+			<aside class="p-8 justify-self-center flex flex-col gap-6">
+				{#each options as option}
+					<a href={option.link} class="btn btn-accent">{option.name}</a>
+				{/each}
+			</aside>
+		</div>
+		<div class="col-span-4 justify-self-center">
+			<slot />
+		</div>
 	</div>
 </div>

@@ -4,6 +4,8 @@
 	import type { ActionData } from './$types';
 
 	export let form: ActionData;
+	let password: string;
+	$: password = '';
 </script>
 
 <svelte:head>
@@ -48,7 +50,13 @@
 					<label for="password" class="text-2xl uppercase">Mot de passe:</label>
 				</div>
 				<div class="col-span-6">
-					<input type="password" class="input input-bordered w-full" name="password" required />
+					<input
+						type="password"
+						class="input input-bordered w-full"
+						name="password"
+						required
+						bind:value={password}
+					/>
 				</div>
 				<div class=" col-span-8 justify-self-end content-center">
 					<button class="btn btn-accent w-full lg:w-40">Creer Compte</button>

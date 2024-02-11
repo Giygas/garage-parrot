@@ -16,5 +16,31 @@ export const load = async ({ fetch, data, depends }) => {
 		data: { session }
 	} = await supabase.auth.getSession();
 
-	return { supabase, session };
+	const options = [
+		{ name: 'Annonces', link: '/adminpanel/annonces' },
+		{ name: 'Témoignages', link: '/adminpanel/temoignages' }
+	];
+
+	if (session?.user.user_metadata.admin) {
+		options.push(
+			{
+				name: 'Gestion des employés',
+				link: '/adminpanel/employes'
+			},
+			{
+				name: 'Modifier les services',
+				link: '/adminpanel/services'
+			},
+			{
+				name: "Horaires d'ouverture",
+				link: '/adminpanel/horaires'
+			},
+			{
+				name: 'Demandes de contact',
+				link: '/adminpanel/contact'
+			}
+		);
+	}
+
+	return { supabase, session, options };
 };
