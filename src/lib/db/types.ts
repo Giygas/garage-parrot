@@ -63,6 +63,24 @@ export interface Database {
           }
         ]
       }
+      horaires: {
+        Row: {
+          day: string
+          hours: string
+          id: number
+        }
+        Insert: {
+          day: string
+          hours: string
+          id?: never
+        }
+        Update: {
+          day?: string
+          hours?: string
+          id?: never
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           id: string

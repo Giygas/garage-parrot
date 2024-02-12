@@ -2,6 +2,12 @@
 	import { fade } from 'svelte/transition';
 	import '../../app.postcss';
 	import { ContactForm, Footer, Navigation } from '$components';
+	import type { Weekday } from '$lib/types';
+
+	export let data;
+
+	type Weekdays = NonNullable<Weekday[]>;
+	let weekdays = data.weekdays as Weekdays;
 
 	// Preload fonts
 	import { onMount } from 'svelte';
@@ -145,4 +151,4 @@
 		</form>
 	</div>
 </dialog>
-<Footer />
+<Footer {weekdays} />

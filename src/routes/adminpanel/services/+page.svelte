@@ -20,10 +20,10 @@
 	}
 
 	$: if (form?.success) {
-		toast.success(form.message);
+		toast.success(form.message, { duration: 4000 });
 	}
 	$: if (form?.error) {
-		toast.error(form.message);
+		toast.error(form.message, { duration: 4000 });
 	}
 
 	$: newService = false;

@@ -1,13 +1,8 @@
-export interface Weekdays {
-	lundi: string;
-	mardi: string;
-	mercredi: string;
-	jeudi: string;
-	vendredi: string;
-	samedi: string;
-	dimanche: string;
-	[key: string]: string;
-}
+export type Weekday = {
+	day: string;
+	hours: string;
+	id: number;
+};
 
 export interface ReviewType {
 	name: string;

@@ -118,6 +118,7 @@ export const actions = {
 				message: 'Des elements manquants'
 			};
 		} else {
+			//INSERT INTO SERVICES(title, description) VALUES (thisElement title, thisElement description)
 			const { error } = await db
 				.from('services')
 				.insert({ title: title, description: description });
