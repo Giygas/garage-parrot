@@ -1,11 +1,11 @@
 <script lang="ts">
-	import week from '$lib/db/horaires.json';
-	import type { Weekdays } from '$lib/types';
 	import { capitalizeFirstLetter } from '$lib/helper';
+	import type { Weekday } from '$lib/types';
 
-	const days: Weekdays = week;
+	export let weekdays: Weekday[];
+
 	// Fetch the google map for better loading time
-	import { afterUpdate, onMount } from 'svelte';
+	import { afterUpdate } from 'svelte';
 
 	let src = '';
 
@@ -40,13 +40,13 @@
 		<h2 class="text-accent text-xl md:text-3xl font-semibold py-3">Horaires d'ouverture</h2>
 		<table class="text-xs sm:text-base">
 			<tbody>
-				{#each Object.keys(days) as day}
+				{#each weekdays as day}
 					<tr>
 						<td class="text-right text-secondary w-fit">
-							{capitalizeFirstLetter(day)}:
+							{capitalizeFirstLetter(day.day)}:
 						</td>
 						<td class="px-3">
-							{days[day]}
+							{day.hours}
 						</td>
 					</tr>
 				{/each}

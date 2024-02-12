@@ -16,5 +16,15 @@ export const load = async ({ fetch, data, depends }) => {
 		data: { session }
 	} = await supabase.auth.getSession();
 
-	return { supabase, session };
+	const { weekdays } = data;
+	if (!weekdays) {
+		return {
+			supabase,
+			session,
+			error: true,
+			message: 'Problem loading hours'
+		};
+	}
+
+	return { supabase, session, weekdays };
 };
