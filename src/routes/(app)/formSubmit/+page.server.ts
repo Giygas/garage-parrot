@@ -6,7 +6,6 @@ import type { Actions } from '@sveltejs/kit';
 export const actions: Actions = {
 	contact: async ({ request, url }) => {
 		const data = await request.formData();
-		console.log([...data]);
 
 		const urlData = data.get('url');
 		const origin = typeof urlData === 'string' ? urlData : '/';

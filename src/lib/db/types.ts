@@ -89,6 +89,24 @@ export interface Database {
           }
         ]
       }
+      services: {
+        Row: {
+          description: string
+          id: number
+          title: string
+        }
+        Insert: {
+          description: string
+          id?: never
+          title: string
+        }
+        Update: {
+          description?: string
+          id?: never
+          title?: string
+        }
+        Relationships: []
+      }
       temoignages: {
         Row: {
           approved: boolean

@@ -2,7 +2,7 @@
 	import '../../app.postcss';
 	import { goto, invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import toast, { Toaster } from 'svelte-french-toast';
+	import { Toaster } from 'svelte-french-toast';
 
 	export let data;
 
@@ -36,7 +36,7 @@
 <Toaster />
 
 <div class="h-screen max-h-screen">
-	<div class="w-screen p-8">
+	<div class="w-screen p-8 xl:p-16">
 		<button on:click={disconnect} class="btn btn-sm btn-primary text-background float-end"
 			>Se deconnecter</button
 		>
@@ -53,7 +53,7 @@
 				{/each}
 			</aside>
 		</div>
-		<div class="col-span-4 justify-self-center">
+		<div class="col-span-4 justify-self-center p-8 lg:p-16 w-full max-w-[1200px]">
 			<slot />
 		</div>
 	</div>

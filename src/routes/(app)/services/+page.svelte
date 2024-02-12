@@ -21,12 +21,13 @@
 			<h2 class="montserrat uppercase text-5xl text-primary font-bold tracking-widest mb-14">
 				{service.title}
 			</h2>
-			{#each service.description as desc}
-				<br />
-				<p class="text-3xl text-primary leading-10 font-normal tracking-wide pl-28">
-					{desc}
-				</p>
-			{/each}
+			<br />
+			<p
+				class="text-3xl text-primary leading-10 font-normal tracking-wide pl-28"
+				style="white-space: pre-line;"
+			>
+				{service.description}
+			</p>
 		</div>
 	{/each}
 </section>

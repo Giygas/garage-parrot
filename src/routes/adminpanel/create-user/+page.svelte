@@ -26,7 +26,6 @@
 			method="POST"
 			use:enhance={() => {
 				return async ({ result, update }) => {
-					console.log(result);
 					if (result.type !== 'failure' && result.type !== 'error') {
 						toast.promise(applyAction(result), {
 							loading: "Création de l'utilisateur...",
