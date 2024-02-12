@@ -37,6 +37,11 @@ export const actions = {
 		} else {
 			return { error: true, message: 'Des elements manquants', services: serviceData };
 		}
+
+		//Clear user input
+		title = title.trim();
+		description = description.trim();
+
 		if (id == null || title == '' || description == '') {
 			return {
 				error: true,
@@ -94,6 +99,38 @@ export const actions = {
 					success: true,
 					message: 'Service effacé !',
 					services: serviceData
+				};
+			}
+		}
+	},
+	newService: async ({ request }) => {
+		const data = await request.formData();
+
+		let title = data.get('title') as string;
+		let description = data.get('description') as string;
+
+		title = title.trim();
+		description = description.trim();
+
+		if (title === '' || description === '') {
+			return {
+				error: true,
+				message: 'Des elements manquants'
+			};
+		} else {
+			const { error } = await db
+				.from('services')
+				.insert({ title: title, description: description });
+
+			if (error) {
+				return {
+					error: true,
+					message: error.message
+				};
+			} else {
+				return {
+					success: true,
+					message: 'Le service est ajouté correctement'
 				};
 			}
 		}

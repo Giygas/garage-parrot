@@ -22,7 +22,10 @@
 				{service.title}
 			</h2>
 			<br />
-			<p class="text-3xl text-primary leading-10 font-normal tracking-wide pl-28">
+			<p
+				class="text-3xl text-primary leading-10 font-normal tracking-wide pl-28"
+				style="white-space: pre-line;"
+			>
 				{service.description}
 			</p>
 		</div>
