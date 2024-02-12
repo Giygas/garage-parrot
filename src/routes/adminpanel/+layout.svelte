@@ -53,7 +53,7 @@
 				{/each}
 			</aside>
 		</div>
-		<div class="col-span-4 justify-self-center p-8 lg:p-16 w-full max-w-[1200px]">
+		<div class="col-span-4 justify-self-center p-8 lg:px-16 w-full max-w-[1200px]">
 			<slot />
 		</div>
 	</div>
