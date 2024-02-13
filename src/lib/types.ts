@@ -21,5 +21,15 @@ export interface Service {
 	description: string;
 }
 
+export type userData = {
+	prenom: string;
+	nom: string;
+	email: string;
+	telephone: string;
+	message: string;
+	[key: string]: string;
+};
+
 import type { Database } from '$lib/db/types';
 export type DatabaseReview = Database['public']['Tables']['temoignages']['Row'];
+export type DatabaseContact = Database['public']['Tables']['contacts']['Row'];

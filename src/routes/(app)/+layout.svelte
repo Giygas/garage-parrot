@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { Toaster } from 'svelte-french-toast';
 	import { fade } from 'svelte/transition';
 	import '../../app.postcss';
 	import { ContactForm, Footer, Navigation } from '$components';
-	import type { Weekday } from '$lib/types';
+	import type { Weekday, userData } from '$lib/types';
 
 	export let data;
 
@@ -40,6 +41,7 @@
 	import DOMPurify from 'dompurify';
 	import { page } from '$app/stores';
 	import { quintIn } from 'svelte/easing';
+	import { afterNavigate } from '$app/navigation';
 
 	let name: string;
 	let message: string;
@@ -54,13 +56,21 @@
 			}
 		}
 	}
+
+	let userData: userData | null = $page.form?.userData;
+	if (userData) {
+		userData = userData as userData;
+	}
 </script>
 
 <svelte:head>
 	<link rel="stylesheet" href="fonts.css" />
 </svelte:head>
 
+<Toaster />
+
 <Navigation />
+
 {#if $page.form && $page.form.success === true}
 	<div
 		class="toast toast-bottom toast-center"
@@ -84,8 +94,8 @@
 <div id="contents" class="container mx-auto">
 	<slot />
 
-	<div class="w-full p-0 m-0">
-		<ContactForm />
+	<div class="w-full p-0 m-0" id="contact-form">
+		<ContactForm {userData} />
 	</div>
 	<div
 		class="container flex flex-row text-center md:justify-end px-10 py-10 lg:py-20 text-lg lg:text-2xl"
@@ -102,6 +112,7 @@
 <dialog bind:this={modal} id="temoignage" class="modal modal-bottom sm:modal-middle">
 	<div class="modal-box">
 		<form method="POST" action="/formSubmit?/sendRating">
+			<input type="hidden" id="url" name="url" value={$page.url.pathname} />
 			<div class="flex flex-col gap-6 p-4">
 				<h3 class="font-bold text-lg">Laissez nous un temoignage</h3>
 				<div class="flex flex-col gap-2">

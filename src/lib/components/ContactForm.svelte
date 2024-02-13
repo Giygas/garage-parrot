@@ -1,15 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import type { userData } from '$lib/types';
 
-	async function sendData(event: Event) {
-		const form = event.target as HTMLFormElement;
-		const data = new FormData(form);
-
-		await fetch('/formSubmit', {
-			method: 'POST',
-			body: data
-		});
-	}
+	export let userData: userData | null = null;
 
 	const fields = [
 		{ name: 'prenom', label: 'PRENOM:', type: 'text' },
@@ -28,16 +21,23 @@
 <div
 	class="contact-background m-8 p-4 sm:m-10 md:mt-20 md:p-20 xl:w-[1000px] xl:mx-auto text-secondary text-sm md:text-lg"
 >
-	<form method="POST" action="/formSubmit?/contact">
+	<form
+		method="POST"
+		action="/formSubmit?/contact"
+		data-sveltekit-keepfocus
+		data-sveltekit-replacestate
+	>
 		<input type="hidden" id="url" name="url" value={$page.url.pathname} />
 		<div class="flex flex-col gap-4 mx-auto justify-center w-full lg:w-[600px]">
 			{#each fields as field}
+				{@const fieldName = field.name}
 				<div class="flex flex-col lg:flex-row lg:items-center">
 					<label for={field.name} class="pe-4 w-full lg:w-40 lg:text-right">{field.label}</label>
 					<input
 						type={field.type}
 						name={field.name}
 						class="input input-bordered input-sm md:input-md input-primary input-md grow w-full"
+						value={userData ? userData[fieldName] : ''}
 					/>
 				</div>
 			{/each}
@@ -47,6 +47,7 @@
 					name="message"
 					class="textarea textarea-primary grow w-full h-40"
 					maxlength="255"
+					value={userData ? userData.message : ''}
 				/>
 			</div>
 			<button class="btn btn-accent mt-5 w-full lg:w-40 self-end">ENVOYER</button>

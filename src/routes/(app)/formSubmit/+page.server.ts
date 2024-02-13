@@ -1,25 +1,62 @@
 import { db } from '$lib/db/client';
-import type { Message } from '$lib/types';
-import { redirect } from '@sveltejs/kit';
 import type { Actions } from '@sveltejs/kit';
 
-export const actions: Actions = {
-	contact: async ({ request, url }) => {
+export const actions = {
+	contact: async ({ request }) => {
 		const data = await request.formData();
+		const prenom = data.get('prenom')?.toString().trim();
+		const nom = data.get('nom')?.toString().trim();
+		const email = data.get('email')?.toString().trim();
+		const telephone = data.get('telephone')?.toString().trim();
+		const message = data.get('message')?.toString().trim();
+		const origin = data.get('url') as string;
 
-		const urlData = data.get('url');
-		const origin = typeof urlData === 'string' ? urlData : '/';
+		if (!prenom || !nom || !email || !telephone || !message) {
+			return {
+				success: false,
+				message: 'Tous les champs sont obligatoires',
+				userData: {
+					prenom,
+					nom,
+					email,
+					telephone,
+					message
+				},
+				redirectTo: origin
+			};
+		}
 
-		console.log(url);
-		console.log(origin);
-		redirect(303, origin);
+		const { error } = await db.from('contacts').insert({
+			first_name: prenom,
+			last_name: nom,
+			email: email,
+			telephone: telephone,
+			message: message
+		});
+
+		if (error) {
+			return {
+				error: true,
+				message: error.message,
+				redirectTo: origin
+			};
+		}
+
+		return {
+			success: true,
+			message: 'Message envoyé',
+			redirectTo: origin
+		};
 	},
-	sendRating: async ({ cookies, request }): Promise<Message> => {
+	sendRating: async ({ cookies, request }) => {
 		const data = await request.formData();
 
 		let name: string;
 		let rating: number;
 		let message: string;
+
+		const origin = data.get('url') as string;
+
 		// Check for data integrity
 		if (data.get('name') !== '' && data.get('rating') !== null && data.get('message') !== '') {
 			name = data.get('name') as string;
@@ -27,7 +64,12 @@ export const actions: Actions = {
 			message = data.get('message') as string;
 
 			if (cookies.get('ratingSent') == 'true') {
-				return { success: false, message: 'Vous avez déjà envoyé un témoignage' };
+				return {
+					success: false,
+					message: 'Vous avez déjà envoyé un témoignage',
+					redirectTo: origin,
+					rating: true
+				};
 			} else {
 				const { error } = await db
 					.from('temoignages')
@@ -43,17 +85,26 @@ export const actions: Actions = {
 					return {
 						success: true,
 						message:
-							'Votre message a été transmis avec succès. Il sera publié après avoir été soumis à notre processus de révision'
+							'Votre message a été transmis avec succès. Il sera publié après avoir été soumis à notre processus de révision',
+						redirectTo: origin,
+						rating: true
 					};
 				} else {
 					return {
 						success: false,
-						message: "Un problème est survenu lors de l'envoi du formulaire, veuillez réessayer"
+						message: "Un problème est survenu lors de l'envoi du formulaire, veuillez réessayer",
+						redirectTo: origin,
+						rating: true
 					};
 				}
 			}
 		} else {
-			return { success: false, message: 'Toutes les champs du formulaire doivent etre remplis' };
+			return {
+				success: false,
+				message: 'Toutes les champs du formulaire doivent etre remplis',
+				redirectTo: origin,
+				rating: true
+			};
 		}
 	}
 } satisfies Actions;
