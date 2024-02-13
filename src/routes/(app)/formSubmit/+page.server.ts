@@ -1,18 +1,53 @@
 import { db } from '$lib/db/client';
 import type { Message } from '$lib/types';
-import { redirect } from '@sveltejs/kit';
 import type { Actions } from '@sveltejs/kit';
 
-export const actions: Actions = {
-	contact: async ({ request, url }) => {
+export const actions = {
+	contact: async ({ request }) => {
 		const data = await request.formData();
+		const prenom = data.get('prenom')?.toString().trim();
+		const nom = data.get('nom')?.toString().trim();
+		const email = data.get('email')?.toString().trim();
+		const telephone = data.get('telephone')?.toString().trim();
+		const message = data.get('message')?.toString().trim();
+		const origin = data.get('url') as string;
 
-		const urlData = data.get('url');
-		const origin = typeof urlData === 'string' ? urlData : '/';
+		if (!prenom || !nom || !email || !telephone || !message) {
+			return {
+				success: false,
+				message: 'Tous les champs sont obligatoires',
+				userData: {
+					prenom,
+					nom,
+					email,
+					telephone,
+					message
+				},
+				redirectTo: origin
+			};
+		}
 
-		console.log(url);
-		console.log(origin);
-		redirect(303, origin);
+		const { error } = await db.from('contacts').insert({
+			first_name: prenom,
+			last_name: nom,
+			email: email,
+			telephone: telephone,
+			message: message
+		});
+
+		if (error) {
+			return {
+				error: true,
+				message: error.message,
+				redirectTo: origin
+			};
+		}
+
+		return {
+			success: true,
+			message: 'Message envoyé',
+			redirectTo: origin
+		};
 	},
 	sendRating: async ({ cookies, request }): Promise<Message> => {
 		const data = await request.formData();
