@@ -106,6 +106,9 @@
 						class="py-4 justify-center cleanbg {$page.url.pathname === item.path
 							? 'bg-accent text-base-100'
 							: ''} "
+						on:click={() => {
+							showMenu = !showMenu;
+						}}
 						>{item.title}
 					</a>
 				</li>

@@ -74,7 +74,7 @@
 		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 2xl:mt-40 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
 	>
 		<div
-			class="col-span-3 md:col-span-2 xl:col-span-3 text-black md:text-lg p-8 md:pe-0 lg:text-2xl {isSmallScreen
+			class="col-span-3 md:col-span-2 xl:col-span-3 text-black md:text-primary md:text-lg p-8 md:pe-0 lg:text-2xl {isSmallScreen
 				? 'text-content reparation'
 				: ''} text-right"
 		>
@@ -107,7 +107,7 @@
 			</div>
 		{/if}
 		<div
-			class="col-span-3 md:col-span-2 xl:col-span-3 text-black md:text-lg p-8 md:ps-0 lg:text-2xl {isSmallScreen
+			class="col-span-3 md:col-span-2 xl:col-span-3 text-black md:text-primary md:text-lg p-8 md:ps-0 lg:text-2xl {isSmallScreen
 				? 'text-content vehicule'
 				: ''}"
 		>
@@ -142,6 +142,7 @@
 		inset: 0;
 		background-image: var(--background-image);
 		mix-blend-mode: overlay;
+		opacity: 0.6;
 		z-index: -1;
 	}
 

@@ -41,7 +41,6 @@
 	import DOMPurify from 'dompurify';
 	import { page } from '$app/stores';
 	import { quintIn } from 'svelte/easing';
-	import { afterNavigate } from '$app/navigation';
 
 	let name: string;
 	let message: string;
@@ -73,20 +72,20 @@
 
 {#if $page.form && $page.form.success === true}
 	<div
-		class="toast toast-bottom toast-center"
+		class="toast toast-bottom toast-center z-40"
 		transition:fade|global={{ delay: 1000, duration: 8000, easing: quintIn }}
 	>
-		<div class="alert alert-success">
+		<div class="alert alert-success z-40">
 			<span>{$page.form.message}</span>
 		</div>
 	</div>
 {/if}
 {#if $page.form && $page.form.success === false}
 	<div
-		class="toast toast-bottom toast-center"
+		class="toast toast-bottom toast-center z-40"
 		transition:fade|global={{ delay: 1000, duration: 8000, easing: quintIn }}
 	>
-		<div class="alert alert-error">
+		<div class="alert alert-error z-40">
 			<span>{$page.form.message}</span>
 		</div>
 	</div>
