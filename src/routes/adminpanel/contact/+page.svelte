@@ -6,17 +6,16 @@
 	import toast from 'svelte-french-toast';
 
 	export let data: PageData;
-	// export let form: ActionData;
-	let contacts = data.contacts as DatabaseContact[];
+	export let form: ActionData;
 
-	console.log(contacts);
+	$: contacts = data.contacts as DatabaseContact[];
 
-	// $: if (form?.success) {
-	// 	toast.success(form.message, { duration: 4000 });
-	// }
-	// $: if (form?.error) {
-	// 	toast.error(form.message, { duration: 4000 });
-	// }
+	$: if (form?.success) {
+		toast.success(form.message, { duration: 4000 });
+	}
+	$: if (form?.error) {
+		toast.error(form.message, { duration: 4000 });
+	}
 </script>
 
 <div class="overflow-x-auto">
