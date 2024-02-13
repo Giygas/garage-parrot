@@ -48,6 +48,7 @@
 						<form action="?/approveReview" method="POST" use:enhance class="w-fit">
 							<input type="hidden" value={rev.id} name="id" />
 							<button class={rev.approved ? 'btn-disabled' : ''}>
+								<noscript> Approuver </noscript>
 								<Icon
 									icon="lets-icons:check-fill"
 									style="{rev.approved ? 'color: #aaa' : 'color: #318536'}; font-size: 24px;"
@@ -60,6 +61,7 @@
 							<input type="hidden" value={rev.id} name="id" />
 							<button>
 								<Icon icon="mdi:trash-can-circle" style="color: #830e21; font-size: 24px" />
+								<noscript> Effacer </noscript>
 							</button>
 						</form>
 					</td>

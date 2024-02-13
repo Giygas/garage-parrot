@@ -1,25 +1,28 @@
 <script lang="ts" type="module">
-	import { afterNavigate, goto, replaceState } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import type { ActionData } from './$types';
+	import { redirect } from '@sveltejs/kit';
 
 	export let form: ActionData;
 
-	let redirectTo: string | undefined = form?.redirectTo as string;
+	let redirectTo: string | undefined = form?.redirectTo;
 	let url: string;
 
-	afterNavigate(() => {
-		replaceState('', url);
-	});
+	console.log(redirectTo);
+	if (redirectTo) {
+		if (redirectTo === '/') {
+			url = '/#contact-form';
+		} else {
+			url = redirectTo + '/#contact-form';
+		}
 
-	if (redirectTo === '/') {
-		url = '/#contact-form';
+		console.log('goto?');
+		if (browser) {
+			goto(url, { replaceState: true, keepFocus: true });
+		}
 	} else {
-		url = redirectTo + '/#contact-form';
-	}
-
-	if (browser) {
-		goto(url, { replaceState: true, keepFocus: true });
+		redirect(303, '/');
 	}
 </script>
 
