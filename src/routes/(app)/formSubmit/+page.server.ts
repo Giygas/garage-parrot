@@ -1,5 +1,4 @@
 import { db } from '$lib/db/client';
-import type { Message } from '$lib/types';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions = {
@@ -49,12 +48,15 @@ export const actions = {
 			redirectTo: origin
 		};
 	},
-	sendRating: async ({ cookies, request }): Promise<Message> => {
+	sendRating: async ({ cookies, request }) => {
 		const data = await request.formData();
 
 		let name: string;
 		let rating: number;
 		let message: string;
+
+		const origin = data.get('url') as string;
+
 		// Check for data integrity
 		if (data.get('name') !== '' && data.get('rating') !== null && data.get('message') !== '') {
 			name = data.get('name') as string;
@@ -62,7 +64,12 @@ export const actions = {
 			message = data.get('message') as string;
 
 			if (cookies.get('ratingSent') == 'true') {
-				return { success: false, message: 'Vous avez déjà envoyé un témoignage' };
+				return {
+					success: false,
+					message: 'Vous avez déjà envoyé un témoignage',
+					redirectTo: origin,
+					rating: true
+				};
 			} else {
 				const { error } = await db
 					.from('temoignages')
@@ -78,17 +85,26 @@ export const actions = {
 					return {
 						success: true,
 						message:
-							'Votre message a été transmis avec succès. Il sera publié après avoir été soumis à notre processus de révision'
+							'Votre message a été transmis avec succès. Il sera publié après avoir été soumis à notre processus de révision',
+						redirectTo: origin,
+						rating: true
 					};
 				} else {
 					return {
 						success: false,
-						message: "Un problème est survenu lors de l'envoi du formulaire, veuillez réessayer"
+						message: "Un problème est survenu lors de l'envoi du formulaire, veuillez réessayer",
+						redirectTo: origin,
+						rating: true
 					};
 				}
 			}
 		} else {
-			return { success: false, message: 'Toutes les champs du formulaire doivent etre remplis' };
+			return {
+				success: false,
+				message: 'Toutes les champs du formulaire doivent etre remplis',
+				redirectTo: origin,
+				rating: true
+			};
 		}
 	}
 } satisfies Actions;

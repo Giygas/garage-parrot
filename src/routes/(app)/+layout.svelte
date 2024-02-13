@@ -112,6 +112,7 @@
 <dialog bind:this={modal} id="temoignage" class="modal modal-bottom sm:modal-middle">
 	<div class="modal-box">
 		<form method="POST" action="/formSubmit?/sendRating">
+			<input type="hidden" id="url" name="url" value={$page.url.pathname} />
 			<div class="flex flex-col gap-6 p-4">
 				<h3 class="font-bold text-lg">Laissez nous un temoignage</h3>
 				<div class="flex flex-col gap-2">
