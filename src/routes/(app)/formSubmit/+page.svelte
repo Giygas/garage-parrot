@@ -1,5 +1,5 @@
 <script lang="ts" type="module">
-	import { goto } from '$app/navigation';
+	import { afterNavigate, goto, replaceState } from '$app/navigation';
 	import { browser } from '$app/environment';
 	import type { ActionData } from './$types';
 
@@ -7,6 +7,11 @@
 
 	let redirectTo: string | undefined = form?.redirectTo as string;
 	let url: string;
+
+	afterNavigate(() => {
+		replaceState('', url);
+	});
+
 	if (redirectTo === '/') {
 		url = '/#contact-form';
 	} else {
@@ -14,6 +19,6 @@
 	}
 
 	if (browser) {
-		goto(url, { replaceState: true });
+		goto(url, { replaceState: true, keepFocus: true });
 	}
 </script>

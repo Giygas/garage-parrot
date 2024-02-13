@@ -1,9 +1,15 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { page } from '$app/stores';
+	import { afterNavigate, replaceState } from '$app/navigation';
 
 	export let data: PageData;
 
 	const services = data.services;
+
+	afterNavigate(() => {
+		replaceState('', $page.url.href.split('#')[0]);
+	});
 </script>
 
 <svelte:head>
