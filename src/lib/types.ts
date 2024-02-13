@@ -20,3 +20,6 @@ export interface Service {
 	title: string;
 	description: string;
 }
+
+import type { Database } from '$lib/db/types';
+export type DatabaseReview = Database['public']['Tables']['temoignages']['Row'];

@@ -21,8 +21,8 @@
 
 <section class="flex-row">
 	<div class="flex">
-		<h1 class="montserrat text-accent text-small-caps text-4xl font-semibold">
-			Modifier les horaires d'ouverture
+		<h1 class="montserrat text-accent text-small-caps text-3xl font-semibold">
+			Horaires d'ouverture
 		</h1>
 	</div>
 	<div class="flex justify-center pt-4">

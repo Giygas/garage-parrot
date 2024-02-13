@@ -1,5 +1,6 @@
 import { db } from '$lib/db/client';
 import type { Weekday } from '$lib/types';
+import type { Actions } from '@sveltejs/kit';
 
 export const load = async () => {
 	const { data, error } = await db.from('horaires').select().order('id', { ascending: true });
@@ -43,4 +44,4 @@ export const actions = {
 			message: "Les heures d'ouverture ont été modifiées avec succès"
 		};
 	}
-};
+} satisfies Actions;

@@ -79,8 +79,9 @@ export const actions = {
 		const data = await request.formData();
 		const i = data.get('serviceId') as string;
 		if (i) {
-			const id = parseInt(i);
-			const { error } = await db.from('services').delete().eq('id', id);
+			const parsedId = parseInt(i);
+			// DELETE FROM SERVICES WHERE services.id = parsedId
+			const { error } = await db.from('services').delete().eq('id', parsedId);
 			const services = await db
 				.from('services')
 				.select()

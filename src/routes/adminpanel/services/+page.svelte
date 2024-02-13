@@ -31,9 +31,7 @@
 
 <section>
 	<div class="flex justify-between">
-		<h1 class="montserrat text-accent text-small-caps text-4xl font-semibold">
-			Modifier les services
-		</h1>
+		<h1 class="montserrat text-accent text-small-caps text-4xl font-semibold">Services</h1>
 		<a
 			class="btn btn-accent w-fit"
 			on:click|preventDefault={() => {
@@ -42,8 +40,7 @@
 			href="/adminpanel/services/new">Ajouter un nouveau service</a
 		>
 	</div>
-	<div class="flex flex-col w-full">
-		<!-- Placeholder for new service -->
+	<div class="flex flex-col w-full px-2 xl:px-12">
 		{#if newService}
 			<form method="POST" action="?/newService" use:enhance>
 				<div class="flex flex-col min-w-full h-fit gap-6 pt-12">
