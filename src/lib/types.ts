@@ -32,3 +32,4 @@ export type userData = {
 
 import type { Database } from '$lib/db/types';
 export type DatabaseReview = Database['public']['Tables']['temoignages']['Row'];
+export type DatabaseContact = Database['public']['Tables']['contacts']['Row'];
