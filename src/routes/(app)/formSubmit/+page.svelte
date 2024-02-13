@@ -22,3 +22,5 @@
 		goto(url, { replaceState: true, keepFocus: true });
 	}
 </script>
+
+<div class="fixed w-screen h-screen top-0 left-0 bg-neutral z-50" />

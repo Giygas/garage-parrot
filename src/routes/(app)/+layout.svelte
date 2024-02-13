@@ -41,6 +41,7 @@
 	import DOMPurify from 'dompurify';
 	import { page } from '$app/stores';
 	import { quintIn } from 'svelte/easing';
+	import { afterNavigate } from '$app/navigation';
 
 	let name: string;
 	let message: string;
