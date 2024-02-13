@@ -36,25 +36,11 @@ CREATE TABLE public.contacts(
   voiture_id uuid,
   created_at timestamp with time zone NOT NULL DEFAULT now(),
   responded boolean NOT NULL DEFAULT FALSE,
-  responded_by uuid,
   CONSTRAINT contacts_pkey PRIMARY KEY (id),
   CONSTRAINT contacts_id_key UNIQUE (id),
-  CONSTRAINT contacts_voiture_id_fkey FOREIGN KEY (voiture_id) REFERENCES voitures(id) ON UPDATE CASCADE ON DELETE SET NULL,
-  CONSTRAINT contacts_responded_by_fkey FOREIGN KEY (responded_by) REFERENCES profiles(id) ON UPDATE CASCADE
+  CONSTRAINT contacts_voiture_id_fkey FOREIGN KEY (voiture_id) REFERENCES voitures(id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 ALTER TABLE temoignages
   ADD CONSTRAINT temoignages_responded_by_fkey FOREIGN KEY (approved_by) REFERENCES profiles(id) ON UPDATE CASCADE;
 
--- Trigger for generating a random password
--- CREATE OR REPLACE FUNCTION public.password_gen()
---  RETURNS trigger
---  LANGUAGE plpgsql
--- AS $function$
--- BEGIN
---   NEW.password = md5(random()::text);
---   RETURN NEW;
--- END;
--- $function$;
--- CREATE TRIGGER password_generation BEFORE INSERT ON public.employees FOR EACH ROW EXECUTE FUNCTION password_gen();
--- Trigger

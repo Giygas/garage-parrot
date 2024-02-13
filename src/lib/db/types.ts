@@ -18,7 +18,6 @@ export interface Database {
           last_name: string
           message: string
           responded: boolean
-          responded_by: string | null
           telephone: string
           voiture_id: string | null
         }
@@ -30,7 +29,6 @@ export interface Database {
           last_name: string
           message: string
           responded?: boolean
-          responded_by?: string | null
           telephone: string
           voiture_id?: string | null
         }
@@ -42,18 +40,10 @@ export interface Database {
           last_name?: string
           message?: string
           responded?: boolean
-          responded_by?: string | null
           telephone?: string
           voiture_id?: string | null
         }
         Relationships: [
-          {
-            foreignKeyName: "contacts_responded_by_fkey"
-            columns: ["responded_by"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "contacts_voiture_id_fkey"
             columns: ["voiture_id"]
