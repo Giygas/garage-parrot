@@ -18,4 +18,9 @@ INSERT INTO horaires(day, hours)
 ('jeudi', '08:45 - 12:30, 14:30 - 18:00'),
 ('vendredi', '08:45 - 12:30, 14:30 - 18:00'),
 ('samedi', '08:45 - 12:30'),
-('dimanche', 'Fermé')
+('dimanche', 'Fermé');
+
+INSERT INTO voitures_transmission(description)
+  VALUES ('Boîte de vitesses manuelle'),
+('Boîte de vitesses automatique'),
+('Boîte de vitesses séquentielle')

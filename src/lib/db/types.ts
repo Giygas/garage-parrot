@@ -158,68 +158,71 @@ export interface Database {
           created_at: string
           created_by: string
           doors: number | null
-          equipment: string[] | null
+          engine: string | null
           id: string
           image: string
           kilometrage: number
           options: string[] | null
-          power: string | null
+          other_images: string[] | null
+          power: number | null
           price: number
           seats: number | null
-          traction_id: number | null
-          transmission: string | null
+          traction: string | null
+          transmission: number | null
           year: number
         }
         Insert: {
           created_at?: string
           created_by: string
           doors?: number | null
-          equipment?: string[] | null
+          engine?: string | null
           id?: string
           image: string
           kilometrage: number
           options?: string[] | null
-          power?: string | null
+          other_images?: string[] | null
+          power?: number | null
           price: number
           seats?: number | null
-          traction_id?: number | null
-          transmission?: string | null
+          traction?: string | null
+          transmission?: number | null
           year: number
         }
         Update: {
           created_at?: string
           created_by?: string
           doors?: number | null
-          equipment?: string[] | null
+          engine?: string | null
           id?: string
           image?: string
           kilometrage?: number
           options?: string[] | null
-          power?: string | null
+          other_images?: string[] | null
+          power?: number | null
           price?: number
           seats?: number | null
-          traction_id?: number | null
-          transmission?: string | null
+          traction?: string | null
+          transmission?: number | null
           year?: number
         }
         Relationships: [
+          {
+            foreignKeyName: "voiture_transmission_fk"
+            columns: ["transmission"]
+            isOneToOne: false
+            referencedRelation: "voitures_transmission"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "voitures_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "voitures_traction_id_fket"
-            columns: ["traction_id"]
-            isOneToOne: false
-            referencedRelation: "voitures_traction"
-            referencedColumns: ["id"]
           }
         ]
       }
-      voitures_traction: {
+      voitures_transmission: {
         Row: {
           description: string
           id: number
