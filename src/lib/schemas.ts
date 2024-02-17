@@ -18,7 +18,7 @@ export const vehicleSchema = z.object({
 		.min(1886, 'Le année doit être superieur à 1886')
 		.max(2100, 'Le titre doit être inférieur à 2100'),
 	engine: z.string().min(1).nullable(),
-	power: z.number().min(1).nullable(),
+	power: z.number().positive('La puissance doit être positive').min(1).nullable(),
 	transmission: z.number().min(1).max(3).nullable(),
 	traction: z.string().min(5).max(7).nullable(),
 	doors: z
@@ -34,8 +34,7 @@ export const vehicleSchema = z.object({
 	options: z.string().nullable(),
 	imagePrincipal: z
 		.custom<File>((f) => f instanceof File, "L 'image principal est obligatoire")
-		.refine((f) => f.size < MAX_FILE_SIZE, 'Max 1000 kB upload size.')
-		.nullable(),
+		.refine((f) => f.size < MAX_FILE_SIZE, 'Max 1000 kB upload size.'),
 	otherImages: z
 		.custom<File>((f) => f instanceof File, "Mauvais format d'image")
 		.refine((f) => f.size < MAX_FILE_SIZE, 'Max 1000 kB upload size.')

@@ -1,7 +1,7 @@
 <script lang="ts">
 	const annoncesOptions = [
 		{ href: '/adminpanel/annonces/new-annonce', name: 'Nouvel annonce' },
-		{ href: '/adminpanel/annonces/annonce-list', name: 'Lister les annonces' }
+		{ href: '/adminpanel/annonces', name: 'Lister les annonces' }
 	];
 </script>
 

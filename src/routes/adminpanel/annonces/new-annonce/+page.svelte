@@ -1,16 +1,30 @@
 <script lang="ts">
-	import SuperDebug, { intProxy, numberProxy, stringProxy, superForm } from 'sveltekit-superforms';
+	import { intProxy, numberProxy, stringProxy, superForm } from 'sveltekit-superforms';
 	import type { PageData } from './$types';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { vehicleSchema } from '$lib/schemas';
 	import Icon from '@iconify/svelte';
+	import toast from 'svelte-french-toast';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 
-	const { form, errors, enhance, allErrors } = superForm(data.form, {
+	let showImagePrincipal = false;
+	let previewOthers = new Array();
+	$: previewOthers;
+
+	const { form, errors, enhance, message } = superForm(data.form, {
 		customValidity: true,
 		validators: zodClient(vehicleSchema)
 	});
+
+	// Clear the image previews and show the success toast
+	$: if ($message) {
+		toast.success($message);
+		showImagePrincipal = false;
+		previewOthers = new Array();
+		goto('/adminpanel/annonces', { replaceState: true });
+	}
 
 	const kilometrage = intProxy(form, 'kilometrage', {
 		empty: 'zero',
@@ -24,10 +38,7 @@
 	const engine = stringProxy(form, 'engine', { empty: 'null' });
 	const traction = stringProxy(form, 'traction', { empty: 'null' });
 
-	let showImagePrincipal = false;
 	let previewPrincipal: any | undefined;
-	let previewOthers = new Array();
-	$: previewOthers;
 
 	$: if ($form.imagePrincipal) {
 		showImagePrincipal = true;
@@ -96,8 +107,6 @@
 	};
 </script>
 
-<SuperDebug label="Form Data" data={{ $form, $errors }} />
-
 <div class="flex flex-col gap-10 items-center w-full mt-10">
 	<h2 class="font-montserrat uppercase text-3xl text-accent self-start">Creer un Annonce</h2>
 	<p class="text-xl">
@@ -115,7 +124,13 @@
 		</ul>
 	{/if} -->
 
-	<form method="POST" enctype="multipart/form-data" class="w-full text-xl" use:enhance>
+	<form
+		method="POST"
+		enctype="multipart/form-data"
+		class="w-full text-xl"
+		use:enhance
+		id="vehicle-form"
+	>
 		<div class="grid grid-cols-12 w-full gap-8 items-center">
 			<div class="col-span-2 justify-self-end">
 				<label for="title" class="underline">TITRE:</label>
@@ -129,14 +144,7 @@
 					aria-invalid={$errors.title ? 'true' : undefined}
 				/>
 			</div>
-			<!-- TODO: delete this -->
-			<!-- {#if $errors.title}
-				<div class="col-span-12 justify-self-center p-0 m-0">
-					<span class="text-accent -mt-16 -top-1.5">
-						{$errors.title}
-					</span>
-				</div>
-			{/if} -->
+
 			<!-- Second line -->
 			<div class="col-span-2 justify-self-end">
 				<label for="kilometrage" class="underline">KILOMETRAGE:</label>
@@ -270,7 +278,7 @@
 			</div>
 			<div class="col-span-12 mt-8">
 				<p class="text-primary/70">
-					Vous pouvez ajouter plusieurs options séparées par des points-virgules
+					Vous pouvez ajouter plusieurs options séparées par des virgules
 				</p>
 			</div>
 			<div class="col-span-2 justify-self-end text-primary/70">
@@ -297,6 +305,7 @@
 					name="imagePrincipal"
 					accept="image/jpeg, image/jpg, image/png, image/webp"
 					on:input={(e) => {
+						//@ts-expect-error
 						$form.imagePrincipal = e.currentTarget.files?.item(0) ?? null;
 					}}
 					aria-invalid={$errors.imagePrincipal ? 'true' : undefined}
@@ -307,16 +316,8 @@
 					<img bind:this={previewPrincipal} src="" alt="Preview" class="rounded-lg" />
 				</div>
 			{/if}
-			<!-- TODO: remove this -->
-			<!-- {#if $errors.imagePrincipal}
-				<div class="col-span-12 justify-self-center">
-					<span class="text-xl text-accent">
-						{$errors.imagePrincipal}
-					</span>
-				</div>
-			{/if} -->
+
 			<!-- Other Images       -->
-			<!-- {#key $form.otherImages} -->
 			<div class="col-span-12 justify-self-start">
 				<label for="otherImages" class="text-primary/70">AUTRES IMAGES:</label>
 			</div>
@@ -329,7 +330,6 @@
 					multiple
 					accept="image/jpeg, image/jpg, image/png, image/webp"
 					on:input={(e) => {
-						// $form.otherImages = Array.from(e.currentTarget.files ?? []);
 						readMultipleImages(e);
 					}}
 					aria-invalid={$errors.otherImages ? 'true' : undefined}
@@ -364,7 +364,6 @@
 					</div>
 				</div>
 			{/if}
-			<!-- {/key} -->
 			<!-- Buttons -->
 			<div class="col-span-12 flex justify-between gap-5 my-16">
 				<button class="btn btn-secondary w-60" type="reset">Réinitialiser</button>
