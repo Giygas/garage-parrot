@@ -167,6 +167,7 @@ export interface Database {
           power: number | null
           price: number
           seats: number | null
+          title: string
           traction: string | null
           transmission: number | null
           year: number
@@ -184,6 +185,7 @@ export interface Database {
           power?: number | null
           price: number
           seats?: number | null
+          title: string
           traction?: string | null
           transmission?: number | null
           year: number
@@ -201,6 +203,7 @@ export interface Database {
           power?: number | null
           price?: number
           seats?: number | null
+          title?: string
           traction?: string | null
           transmission?: number | null
           year?: number

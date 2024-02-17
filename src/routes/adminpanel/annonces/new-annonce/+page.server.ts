@@ -96,6 +96,7 @@ export const actions = {
 
 		const { error: insertError } = await db.from('voitures').insert({
 			//@ts-expect-error: don't know why it says price doesnt exists
+			title: fields.title,
 			price: fields.price,
 			year: fields.year,
 			kilometrage: fields.kilometrage,

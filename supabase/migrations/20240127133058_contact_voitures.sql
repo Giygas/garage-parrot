@@ -1,5 +1,6 @@
 CREATE TABLE public.voitures(
   id uuid NOT NULL DEFAULT gen_random_uuid(),
+  title text NOT NULL,
   price real NOT NULL,
   year smallint NOT NULL,
   kilometrage integer NOT NULL,
