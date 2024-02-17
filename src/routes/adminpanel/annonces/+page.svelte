@@ -73,6 +73,15 @@
 			>
 				Prix: {vehicle.price}
 			</div>
+			<div class="flex h-9 px-2 rounded-lg items-center absolute bottom-2 right-0">
+				<a
+					href="/adminpanel/annonces/edit/{vehicle.title.split(' ').join('-')}"
+					class="btn btn-disabled text-xs"
+					data-sveltekit-preload-data="false"
+				>
+					EDITER</a
+				>
+			</div>
 		</div>
 	{/each}
 </div>

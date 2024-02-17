@@ -113,16 +113,6 @@
 		Ici vous pouvez créer un nouvel annonce. Les elements surlignées sont obligatoires, le reste
 		sont optionnels
 	</p>
-	<!-- TODO: delete this -->
-	<!-- {#if $allErrors.length}
-		<ul>
-			{#each $allErrors as error}
-				<li class="text-accent">
-					{error.messages.join('. ')}
-				</li>
-			{/each}
-		</ul>
-	{/if} -->
 
 	<form
 		method="POST"
