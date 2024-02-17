@@ -54,19 +54,18 @@
 		});
 	}
 
-	let files: (File | null)[];
-	$: files;
 	function readMultipleImages(e: Event) {
 		//@ts-expect-error
-		files = Array.from(e.currentTarget.files) ?? [];
+		const files = e.currentTarget.files;
+
+		$form.otherImages = Array.from(files) ?? [];
 		let readers = [];
 
-		$form.otherImages = files;
-		if (!files?.length) return;
+		if (!$form.otherImages.length) return;
 
 		//Promises in an array
-		for (let i = 0; i < files.length; i++) {
-			readers.push(readFileAsDataURL(files[i]));
+		for (let i = 0; i < $form.otherImages.length; i++) {
+			readers.push(readFileAsDataURL($form.otherImages[i]));
 		}
 
 		//Trigger all the promises
@@ -74,6 +73,27 @@
 			previewOthers = values;
 		});
 	}
+
+	const removeFileFromOtherImages = (index: number) => {
+		const dt = new DataTransfer();
+
+		const input = document.getElementById('otherImages');
+
+		const files = $form.otherImages;
+		for (let i = 0; i < files.length; i++) {
+			const file = files[i];
+			console.log(file);
+
+			if (index != i) {
+				if (file) dt.items.add(file);
+			}
+		}
+
+		//@ts-expect-error
+		input.files = dt.files; // Assign the updates list
+
+		input?.dispatchEvent(new Event('input'));
+	};
 </script>
 
 <SuperDebug label="Form Data" data={{ $form, $errors }} />
@@ -331,9 +351,8 @@
 								<img src={img} alt="Others preview" class="w-60 rounded-lg" />
 								<button
 									class="absolute -top-4 -right-4"
-									on:click={(e) => {
-										files = files.filter((e) => e != img);
-										$form.otherImages = $form.otherImages.splice(i, 1);
+									on:click={() => {
+										removeFileFromOtherImages(i);
 									}}
 									><Icon
 										icon="typcn:delete"
