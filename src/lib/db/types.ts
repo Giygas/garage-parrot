@@ -89,7 +89,7 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "profiles_id_fkey"
+            foreignKeyName: "profiles_auth_fk"
             columns: ["id"]
             isOneToOne: true
             referencedRelation: "users"
@@ -149,6 +149,13 @@ export interface Database {
             columns: ["approved_by"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "temoignages_responded_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
@@ -222,6 +229,13 @@ export interface Database {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "voitures_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
           }
         ]
       }
@@ -242,7 +256,25 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      users: {
+        Row: {
+          created_at: string | null
+          deleted_at: string | null
+          email: string | null
+          id: string | null
+          last_sign_in_at: string | null
+          name: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_auth_fk"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Functions: {
       [_ in never]: never

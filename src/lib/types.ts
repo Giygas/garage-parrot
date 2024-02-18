@@ -34,7 +34,13 @@ import type { Database } from '$lib/db/types';
 export type DatabaseReview = Database['public']['Tables']['temoignages']['Row'];
 export type DatabaseContact = Database['public']['Tables']['contacts']['Row'];
 export type DatabaseVoiture = Database['public']['Tables']['voitures']['Row'];
+// export type DatabaseUser = Database['public']['Views']['users']['Row'];
 
-export interface DatabaseVoitureJoined extends DatabaseVoiture {
-	transmissionType: string;
-}
+export type DatabaseUser = {
+	created_at: string;
+	deleted_at: string | null;
+	email: string;
+	id: string;
+	last_sing_in_at: string | null;
+	name: string;
+};

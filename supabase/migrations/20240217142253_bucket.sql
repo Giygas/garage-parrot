@@ -10,3 +10,15 @@ CREATE POLICY "public_view" ON storage.objects
   FOR SELECT
     USING (TRUE);
 
+CREATE VIEW public.users AS
+SELECT
+  p.id,
+  p.name,
+  au.email,
+  au.last_sign_in_at,
+  au.created_at,
+  au. deleted_at
+FROM
+  public.profiles AS p
+  INNER JOIN auth.users AS au ON p.id = au.id;
+
