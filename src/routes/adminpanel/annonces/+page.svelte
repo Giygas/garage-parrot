@@ -1,8 +1,17 @@
 <script lang="ts">
-	export let data;
+	import { enhance } from '$app/forms';
+	import toast from 'svelte-french-toast';
 
-	const vehicles = data.vehicles;
-	const images = data.images as { [key: string]: string };
+	export let data;
+	export let form;
+
+	$: vehicles = data.vehicles;
+	$: images = data.images as { [key: string]: string };
+	console.log(data);
+
+	$: if (form?.succes) {
+		toast.success(form.message);
+	}
 </script>
 
 <div class=" flex flex-col w-full mt-10">
@@ -74,13 +83,32 @@
 				Prix: {vehicle.price}
 			</div>
 			<div class="flex h-9 px-2 rounded-lg items-center absolute bottom-2 right-0">
-				<a
-					href="/adminpanel/annonces/edit/{vehicle.title.split(' ').join('-')}"
-					class="btn btn-disabled text-xs"
-					data-sveltekit-preload-data="false"
-				>
-					EDITER</a
-				>
+				<div class="flex gap-3">
+					<a
+						href="/adminpanel/annonces/edit/{vehicle.title.split(' ').join('-')}"
+						class="btn btn-disabled text-xs"
+						data-sveltekit-preload-data="false"
+					>
+						EDITER</a
+					>
+
+					<form
+						method="POST"
+						action="?/deleteAnnonce"
+						use:enhance={({ cancel }) => {
+							if (confirm('Vous êtes sûr ?')) {
+								return async ({ update }) => {
+									return update({ invalidateAll: true });
+								};
+							} else {
+								cancel();
+							}
+						}}
+					>
+						<input type="hidden" name="id" value={vehicle.id} />
+						<button class="btn btn-secondary text-neutral">Effacer</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	{/each}

@@ -33,3 +33,27 @@ export const load = async () => {
 		images
 	};
 };
+
+export const actions = {
+	deleteAnnonce: async ({ request }) => {
+		const data = await request.formData();
+
+		const id = data.get('id')?.toString();
+		if (id) {
+			const { data, error } = await db
+				.from('voitures')
+				.delete()
+				.eq('id', id)
+				.select('image')
+				.single();
+
+			if (error) throw error;
+
+			const { error: imageError } = await db.storage.from('vehicles').remove([data.image]);
+
+			if (imageError) throw imageError;
+		}
+
+		return { succes: true, message: 'Vehicule effacé !' };
+	}
+};
