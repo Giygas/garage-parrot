@@ -8,14 +8,14 @@
 	export let data: PageData;
 	const users = data.users as DatabaseUser[];
 
-	// export let form: ActionData;
+	export let form: ActionData;
 
-	// $: if (form?.success) {
-	// 	toast.success(form.message, { duration: 4000 });
-	// }
-	// $: if (form?.error) {
-	// 	toast.error(form.message, { duration: 4000 });
-	// }
+	$: if (form?.success) {
+		toast.success(form.message, { duration: 4000 });
+	}
+	$: if (form?.error) {
+		toast.error(form.message, { duration: 4000 });
+	}
 </script>
 
 <div class="overflow-x-auto">
@@ -41,7 +41,7 @@
 					<td class="text-center">{date}</td>
 					<td class="text-center">{dateLast}</td>
 					<td class="w-6 text-center">
-						<form action="?/deleteuser" method="POST" use:enhance>
+						<form action="?/deleteUser" method="POST" use:enhance>
 							<input type="hidden" value={user.id} name="id" />
 							<button>
 								<Icon icon="mdi:trash-can-circle" style="color: #830e21; font-size: 24px" />

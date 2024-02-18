@@ -20,5 +20,7 @@ SELECT
   au. deleted_at
 FROM
   public.profiles AS p
-  INNER JOIN auth.users AS au ON p.id = au.id;
+  INNER JOIN auth.users AS au ON p.id = au.id
+WHERE
+  au.deleted_at IS NULL;
 

@@ -2,7 +2,15 @@ import { db } from '$lib/db/client';
 import type { Weekday } from '$lib/types';
 import type { Actions } from '@sveltejs/kit';
 
-export const load = async () => {
+import { redirect } from '@sveltejs/kit';
+
+export const load = async ({ locals: { getSession } }) => {
+	const session = await getSession();
+
+	if (!session?.user.user_metadata.admin) {
+		redirect(303, '/adminpanel');
+	}
+
 	const { data, error } = await db.from('horaires').select().order('id', { ascending: true });
 
 	if (error) {

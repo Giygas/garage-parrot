@@ -1,8 +1,15 @@
 import type { Service } from '$lib/types';
 import type { PageServerLoad, Actions } from '../$types';
 import { db } from '$lib/db/client';
+import { redirect } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ locals: { getSession } }) => {
+	const session = await getSession();
+
+	if (!session?.user.user_metadata.admin) {
+		redirect(303, '/adminpanel');
+	}
+
 	const { data, error } = await db.from('services').select().order('id', { ascending: true });
 
 	if (error) {

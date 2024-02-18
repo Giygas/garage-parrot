@@ -44,6 +44,20 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 	}
 
+	const routes = event.url.pathname;
+
+	if (
+		routes.startsWith('/contact') ||
+		routes.startsWith('/employes') ||
+		routes.startsWith('/horaires') ||
+		routes.startsWith('/horaires')
+	) {
+		const activeSession = await event.locals.getSession();
+		if (activeSession?.user.user_metadata.admin) {
+			redirect(303, '/adminpanel');
+		}
+	}
+
 	return resolve(event, {
 		filterSerializedResponseHeaders(name) {
 			return name === 'content-range';
