@@ -61,26 +61,74 @@
 </div>
 
 <div class="flex flex-col justify-center">
-	<div class="grid grid-cols-12 h-[576px]">
-		<div class="col-span-12 md:col-span-8 h-[570px]">
+	<div class="grid grid-cols-12">
+		<div class="col-span-12 md:col-span-8">
 			<img src={vehicle.image} alt="Principal" />
 		</div>
 		<div class="col-span-12 md:col-span-4 bg-slate-400">
 			{#if vehicle.other_images}
-				<div class="carousel carousel-vertical h-full max-h-fit">
-					{#each vehicle.other_images as img}
-						<div class="carousel-item h-1/2">
-							<img src={img} class="w-full" alt="Vehicle" />
+				<section class="carousel-container w-full">
+					<div class="slider-wrapper">
+						<div class="slider">
+							{#each vehicle.other_images as img, i}
+								<img src={img} alt="Vehicle image numero {i}" id="slide-{i}" />
+							{/each}
 						</div>
-					{/each}
-				</div>
+					</div>
+					<div class="slider-nav">
+						{#each vehicle.other_images as img, i}
+							<a href="#slide-{i}" />
+						{/each}
+					</div>
+				</section>
 			{/if}
 		</div>
 	</div>
 </div>
 
-<!-- <style>
-	.carousel {
-		height: 100cqb;
+<style>
+	.slider-wrapper {
+		position: relative;
+		max-height: 45rem;
+		margin: auto 0;
 	}
-</style> -->
+
+	.slider {
+		display: flex;
+		flex-direction: column;
+		aspect-ratio: 16/9;
+		overflow-x: auto;
+		scrollbar-width: none;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+	}
+
+	.slider img {
+		flex: 1 0 50%;
+		scroll-snap-align: start;
+		object-fit: cover;
+	}
+
+	.slider-nav {
+		display: flex;
+		column-gap: 1rem;
+		position: absolute;
+		bottom: 1.25rem;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1;
+	}
+
+	.slider-nav a {
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 50%;
+		background-color: #fff;
+		opacity: 0.75;
+		transition: opacity ease 250ms;
+	}
+
+	.slider-nav a:hover {
+		opacity: 1;
+	}
+</style>
