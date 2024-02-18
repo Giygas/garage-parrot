@@ -7,7 +7,6 @@
 
 	$: vehicles = data.vehicles;
 	$: images = data.images as { [key: string]: string };
-	console.log(data);
 
 	$: if (form?.succes) {
 		toast.success(form.message);

@@ -15,7 +15,7 @@
 <svelte:head>
 	<title>Services - Garage Parrot</title>
 </svelte:head>
-<!-- #TODO: Responsive design here -->
+<!-- TODO: delete this -->
 <!-- <div class="mt-52 md:mt-64 xl:mb-44 xl:px-12"> -->
 <div class="md:hidden h-[120px]" />
 <div
