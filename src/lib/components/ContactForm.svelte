@@ -3,6 +3,7 @@
 	import type { userData } from '$lib/types';
 
 	export let userData: userData | null = null;
+	export let vehicleId: string | null = null;
 
 	const fields = [
 		{ name: 'prenom', label: 'PRENOM:', type: 'text' },
@@ -15,19 +16,23 @@
 <div
 	class="container flex flex-col gap-2 justify-center items-center sm:flex-row sm:justify-between mt-16 lg:mt-24 mb-10 sm:px-16"
 >
-	<h2 class="text-small-caps text-accent text-lg lg:text-3xl">Voulez-vous nous contacter?</h2>
+	{#if vehicleId}
+		<h2 class="text-small-caps text-accent text-lg lg:text-2xl">
+			Voulez-vous nous contacter par rapport a cet vehicule?
+		</h2>
+	{:else}
+		<h2 class="text-small-caps text-accent text-lg lg:text-3xl">Voulez-vous nous contacter?</h2>
+	{/if}
 	<h4 class="text-center lg:text-2xl">Téléphone: 07 08 09 10 20</h4>
 </div>
 <div
 	class="contact-background m-8 p-4 sm:m-10 md:mt-20 md:p-20 xl:w-[1000px] xl:mx-auto text-secondary text-sm md:text-lg"
 >
-	<form
-		method="POST"
-		action="/formSubmit?/contact"
-		data-sveltekit-keepfocus
-		data-sveltekit-replacestate
-	>
+	<form method="POST" action="/formSubmit?/contact">
 		<input type="hidden" id="url" name="url" value={$page.url.pathname} />
+
+		<input type="hidden" name="vehicleId" value={vehicleId} id="vehicleId" />
+
 		<div class="flex flex-col gap-4 mx-auto justify-center w-full lg:w-[600px]">
 			{#each fields as field}
 				{@const fieldName = field.name}

@@ -5,25 +5,10 @@
 
 	export let form: ActionData;
 
-	let redirectTo = form?.redirectTo;
-	let isRating = form?.rating;
-	let url: string;
+	let redirectTo = form?.redirectTo as string;
 
-	if (redirectTo) {
-		if (isRating) {
-			url = redirectTo;
-		} else {
-			if (redirectTo === '/') {
-				url = '/#contact-form';
-			} else {
-				url = redirectTo + '/#contact-form';
-			}
-		}
-	} else {
-		url = '/';
-	}
 	if (browser) {
-		goto(url, { replaceState: true, keepFocus: true });
+		goto(redirectTo, { replaceState: true });
 	}
 </script>
 
