@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { PageServerLoad } from '../$types.js';
+import type { PageServerLoad } from './$types.js';
 import { adminAuthClient } from '$lib/db/adminClient.js';
 
 export const load: PageServerLoad = async ({ locals }) => {

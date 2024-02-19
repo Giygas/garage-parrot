@@ -12,12 +12,15 @@ ALTER TABLE temoignages
   ADD CONSTRAINT temoignages_id UNIQUE (id);
 
 CREATE TABLE public.profiles(
-  id uuid NOT NULL REFERENCES auth.users ON DELETE CASCADE,
+  id uuid NOT NULL,
   name text NOT NULL,
-  role_type smallint NOT NULL DEFAULT 2,
   -- 1 admin, 2 employee
-  PRIMARY KEY (id)
+  role_type smallint NOT NULL DEFAULT 2,
+  CONSTRAINT profiles_pkey PRIMARY KEY (id)
 );
+
+ALTER TABLE public.profiles
+  ADD CONSTRAINT profiles_auth_fk FOREIGN KEY (id) REFERENCES auth.users(id) ON UPDATE CASCADE;
 
 -- inserts a row into public.profiles
 CREATE FUNCTION public.handle_new_user()

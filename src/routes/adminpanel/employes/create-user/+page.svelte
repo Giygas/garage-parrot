@@ -1,5 +1,4 @@
 <script lang="ts">
-	import '../../../app.postcss';
 	import { applyAction, enhance } from '$app/forms';
 	import type { ActionData } from './$types';
 	import toast from 'svelte-french-toast';
@@ -14,7 +13,7 @@
 	<title>Garage Parrot Creation d'Utilisateur</title>
 </svelte:head>
 
-<div class="grid grid-cols-1 gap-0 h-full">
+<div class="grid grid-cols-1 gap-0 h-full mt-8">
 	<div class="contact-background m-auto p-10 sm:p-20">
 		<h2 class="mx-auto font-semibold text-3xl text-center font-montserrat text-accent">
 			Creer l'identifiant pour un nouvel employé

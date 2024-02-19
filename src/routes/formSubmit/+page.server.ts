@@ -1,9 +1,11 @@
 import { db } from '$lib/db/client';
+import type { userData } from '$lib/types';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions = {
 	contact: async ({ request }) => {
 		const data = await request.formData();
+		const id = data.get('vehicleId');
 		const prenom = data.get('prenom')?.toString().trim();
 		const nom = data.get('nom')?.toString().trim();
 		const email = data.get('email')?.toString().trim();
@@ -11,17 +13,26 @@ export const actions = {
 		const message = data.get('message')?.toString().trim();
 		const origin = data.get('url') as string;
 
+		let vehicleId;
+		if (id) {
+			vehicleId = id.toString() as string;
+		} else {
+			vehicleId = null;
+		}
+
 		if (!prenom || !nom || !email || !telephone || !message) {
+			const userData = {
+				prenom: prenom,
+				nom: nom,
+				email: email,
+				telephone: telephone,
+				message: message
+			} as userData;
+
 			return {
-				success: false,
+				error: true,
 				message: 'Tous les champs sont obligatoires',
-				userData: {
-					prenom,
-					nom,
-					email,
-					telephone,
-					message
-				},
+				userData,
 				redirectTo: origin
 			};
 		}
@@ -31,7 +42,8 @@ export const actions = {
 			last_name: nom,
 			email: email,
 			telephone: telephone,
-			message: message
+			message: message,
+			voiture_id: vehicleId
 		});
 
 		if (error) {

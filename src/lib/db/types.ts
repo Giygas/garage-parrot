@@ -89,7 +89,7 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "profiles_id_fkey"
+            foreignKeyName: "profiles_auth_fk"
             columns: ["id"]
             isOneToOne: true
             referencedRelation: "users"
@@ -150,6 +150,13 @@ export interface Database {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "temoignages_responded_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
           }
         ]
       }
@@ -158,51 +165,64 @@ export interface Database {
           created_at: string
           created_by: string
           doors: number | null
-          equipment: string[] | null
+          engine: string | null
           id: string
           image: string
           kilometrage: number
           options: string[] | null
-          power: string | null
+          other_images: string[] | null
+          power: number | null
           price: number
           seats: number | null
-          traction_id: number | null
-          transmission: string | null
+          title: string
+          traction: string | null
+          transmission: number | null
           year: number
         }
         Insert: {
           created_at?: string
           created_by: string
           doors?: number | null
-          equipment?: string[] | null
+          engine?: string | null
           id?: string
           image: string
           kilometrage: number
           options?: string[] | null
-          power?: string | null
+          other_images?: string[] | null
+          power?: number | null
           price: number
           seats?: number | null
-          traction_id?: number | null
-          transmission?: string | null
+          title: string
+          traction?: string | null
+          transmission?: number | null
           year: number
         }
         Update: {
           created_at?: string
           created_by?: string
           doors?: number | null
-          equipment?: string[] | null
+          engine?: string | null
           id?: string
           image?: string
           kilometrage?: number
           options?: string[] | null
-          power?: string | null
+          other_images?: string[] | null
+          power?: number | null
           price?: number
           seats?: number | null
-          traction_id?: number | null
-          transmission?: string | null
+          title?: string
+          traction?: string | null
+          transmission?: number | null
           year?: number
         }
         Relationships: [
+          {
+            foreignKeyName: "voiture_transmission_fk"
+            columns: ["transmission"]
+            isOneToOne: false
+            referencedRelation: "voitures_transmission"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "voitures_created_by_fkey"
             columns: ["created_by"]
@@ -211,15 +231,15 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "voitures_traction_id_fket"
-            columns: ["traction_id"]
+            foreignKeyName: "voitures_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
-            referencedRelation: "voitures_traction"
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
       }
-      voitures_traction: {
+      voitures_transmission: {
         Row: {
           description: string
           id: number
@@ -236,7 +256,25 @@ export interface Database {
       }
     }
     Views: {
-      [_ in never]: never
+      users: {
+        Row: {
+          created_at: string | null
+          deleted_at: string | null
+          email: string | null
+          id: string | null
+          last_sign_in_at: string | null
+          name: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_auth_fk"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Functions: {
       [_ in never]: never
