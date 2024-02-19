@@ -2,8 +2,6 @@
 	import type { DatabaseVoiture } from '$lib/types';
 
 	export let vehicle: DatabaseVoiture;
-
-	console.log(vehicle);
 </script>
 
 <a href="vehicles/detail/{vehicle.title.split(' ').join('-')}">

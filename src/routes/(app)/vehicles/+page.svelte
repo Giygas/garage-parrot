@@ -26,7 +26,7 @@
 
 <div class="grid grid-autofill gap-8 place-items-center mt-10 p-10">
 	<VehicleCard vehicle={firstOne} />
-	<VehicleCard vehicle={firstOne} />
+	<VehicleCard vehicle={vehicles[1]} />
 	<VehicleCard vehicle={firstOne} />
 	<VehicleCard vehicle={firstOne} />
 	<VehicleCard vehicle={firstOne} />
