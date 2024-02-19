@@ -1,32 +1,13 @@
 <script lang="ts">
-	import { Toaster } from 'svelte-french-toast';
-	import { fade } from 'svelte/transition';
-	import '../../app.postcss';
+	import toast, { Toaster } from 'svelte-french-toast';
+	import '../../../../app.postcss';
 	import { ContactForm, Footer, Navigation } from '$components';
 	import type { Weekday, userData } from '$lib/types';
 
 	export let data;
 
-	let userData: userData | null;
 	type Weekdays = NonNullable<Weekday[]>;
 	let weekdays = data.weekdays as Weekdays;
-
-	// Preload fonts
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		const link = document.createElement('link');
-		link.rel = 'preload';
-		link.href = 'fonts.css';
-		link.as = 'style';
-		link.onload = () => {
-			link.onload = null;
-			link.rel = 'stylesheet';
-		};
-		document.head.appendChild(link);
-		name = '';
-		message = '';
-	});
 
 	let modal: HTMLDialogElement;
 
@@ -38,59 +19,38 @@
 		modal.close();
 	}
 
-	// Sanitizing input
-	import DOMPurify from 'dompurify';
 	import { page } from '$app/stores';
-	import { quintIn } from 'svelte/easing';
+
+	let userData: userData | null = $page.form?.userData;
+	$: if (userData) {
+		userData = userData as userData;
+	}
 
 	let name: string;
 	let message: string;
 
-	function handleInput(event: Event) {
-		if (event.target instanceof HTMLInputElement) {
-			const inputElement = event.target;
-			if (inputElement.name === 'name') {
-				name = DOMPurify.sanitize(inputElement.value);
-			} else if (inputElement.name === 'message') {
-				message = DOMPurify.sanitize(inputElement.value);
-			}
+	export let vehicleId: string | undefined = data.vehicleId;
+
+	$: $page.form;
+
+	$: if ($page.form) {
+		if ($page.form.success) {
+			toast.success($page.form.message);
+		} else {
+			toast.error($page.form.message);
 		}
 	}
 </script>
-
-<svelte:head>
-	<link rel="stylesheet" href="fonts.css" />
-</svelte:head>
 
 <Toaster />
 
 <Navigation />
 
-{#if $page.form && $page.form.success === true}
-	<div
-		class="toast toast-bottom toast-center z-40"
-		transition:fade|global={{ delay: 1000, duration: 8000, easing: quintIn }}
-	>
-		<div class="alert alert-success z-40">
-			<span>{$page.form.message}</span>
-		</div>
-	</div>
-{/if}
-{#if $page.form && $page.form.success === false}
-	<div
-		class="toast toast-bottom toast-center z-40"
-		transition:fade|global={{ delay: 1000, duration: 8000, easing: quintIn }}
-	>
-		<div class="alert alert-error z-40">
-			<span>{$page.form.message}</span>
-		</div>
-	</div>
-{/if}
 <div id="contents" class="container mx-auto">
 	<slot />
 
 	<div class="w-full p-0 m-0" id="contact-form">
-		<ContactForm {userData} />
+		<ContactForm {userData} {vehicleId} />
 	</div>
 	<div
 		class="container flex flex-row text-center md:justify-end px-10 py-10 lg:py-20 text-lg lg:text-2xl"
@@ -116,7 +76,6 @@
 						name="name"
 						type="text"
 						class="input input-bordered bg-neutral/50"
-						on:input={handleInput}
 						bind:value={name}
 					/>
 				</div>
@@ -145,7 +104,6 @@
 					rows="6"
 					class="textarea textarea-bordered bg-neutral/50"
 					bind:value={message}
-					on:input={handleInput}
 				/>
 				<div class="modal-action flex flex-row gap-5">
 					<button class="btn" on:click|preventDefault={closeModal}>FERMER</button>

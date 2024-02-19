@@ -1,4 +1,5 @@
 import { db } from '$lib/db/client';
+import type { userData } from '$lib/types';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions = {
@@ -20,16 +21,18 @@ export const actions = {
 		}
 
 		if (!prenom || !nom || !email || !telephone || !message) {
+			const userData = {
+				prenom: prenom,
+				nom: nom,
+				email: email,
+				telephone: telephone,
+				message: message
+			} as userData;
+
 			return {
 				error: true,
 				message: 'Tous les champs sont obligatoires',
-				userData: {
-					prenom,
-					nom,
-					email,
-					telephone,
-					message
-				},
+				userData,
 				redirectTo: origin
 			};
 		}
