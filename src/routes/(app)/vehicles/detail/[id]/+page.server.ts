@@ -12,12 +12,14 @@ export const load = async ({ params }) => {
 
 	// Replace the path in the vehicle image for the publicURL
 	if (vehicle) {
-		vehicle.image = await db.storage.from('vehicles').getPublicUrl(vehicle.image).data.publicUrl;
+		const pURL = db.storage.from('vehicles').getPublicUrl(vehicle.image);
+		vehicle.image = pURL.data.publicUrl;
 
 		const otherImages: string[] = [];
 		if (vehicle.other_images) {
 			for (const img of vehicle.other_images) {
-				const i = await db.storage.from('vehicles').getPublicUrl(img).data.publicUrl;
+				const query = db.storage.from('vehicles').getPublicUrl(img);
+				const i = query.data.publicUrl;
 
 				otherImages.push(i);
 			}

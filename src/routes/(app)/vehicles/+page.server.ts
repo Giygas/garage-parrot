@@ -17,7 +17,7 @@ export const load = (async () => {
 	// Replace the path in the vehicle image for the publicURL
 	if (vehicles) {
 		for (const vehicle of vehicles) {
-			const img = await db.storage.from('vehicles').getPublicUrl(vehicle.image);
+			const img = db.storage.from('vehicles').getPublicUrl(vehicle.image);
 
 			vehicle.image = img.data.publicUrl;
 		}

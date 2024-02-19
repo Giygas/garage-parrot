@@ -54,7 +54,7 @@
 </script>
 
 <svelte:head>
-	<title>Services - Garage Parrot</title>
+	<title>{vehicle.title} - Garage Parrot</title>
 </svelte:head>
 
 <div
@@ -68,16 +68,96 @@
 	</button>
 </div>
 
-<div class="flex flex-col place-items-center h-[300px] md:h-[450px] lg:h-[600px] px-10">
+<div class="flex flex-col place-items-center px-10">
 	<div class="carousel carousel-center sm:rounded-box">
 		{#each images as img, i}
 			<div class="carousel-item">
 				<img
 					src={img}
 					alt="Vehicule image numero {i}"
-					class=" aspect-video h-[300px] md:h-[450px] lg:h-[600px]"
+					class=" h-[300px] md:h-[450px] lg:h-[600px]"
 				/>
 			</div>
 		{/each}
 	</div>
+
+	<!-- TITLE -->
+	<div class="flex mt-10 justify-between w-full items-baseline">
+		<h1 class="montserrat text-accent text-xl md:text-4xl drop-shadow-lg">
+			{vehicle.title}
+		</h1>
+		<h2 class="text-xl md:text-3xl font-semibold">€ {vehicle.price}</h2>
+	</div>
+
+	<div class="divider divider-accent mt-8" />
+
+	<div
+		class="grid grid-cols-2 text-sm md:text-2xl text-primary w-full font-barlow items-center gap-2 md:gap-10 mt-4 md:mt-10"
+	>
+		<div class="flex gap-1 md:gap-6 items-baseline">
+			<h3 class="font-barlow font-semibold">Année:</h3>
+			<span class="font-light text-xs sm:text-sm md:text-2xl">
+				{vehicle.year}
+			</span>
+		</div>
+		<div class="flex gap-1 md:gap-6 items-baseline">
+			<h3 class="font-barlow font-semibold">Moteur:</h3>
+			<span class="font-light text-xs sm:text-sm md:text-2xl">
+				{vehicle.engine ?? 'Non Renseigné'}
+			</span>
+		</div>
+		<div class="flex gap-1 md:gap-6 items-baseline">
+			<h3 class="font-barlow font-semibold">Kilometrage:</h3>
+			<span class="font-light text-xs sm:text-sm md:text-2xl">
+				{vehicle.kilometrage}
+			</span>
+		</div>
+		<div class="flex gap-1 md:gap-6 items-baseline">
+			<h3 class="font-barlow font-semibold">Traction:</h3>
+			<span class="font-light text-xs sm:text-sm md:text-2xl">
+				{vehicle.traction ?? 'Non Renseigné'}
+			</span>
+		</div>
+		<div class="flex gap-1 md:gap-6 items-baseline">
+			<h3 class="font-barlow font-semibold">Puissance:</h3>
+			<span class="font-light text-xs sm:text-sm md:text-2xl">
+				{vehicle.power ? vehicle.power + ' ch' : 'Non Renseigné'}
+			</span>
+		</div>
+		<div class="flex gap-1 md:gap-6 items-baseline">
+			<h3 class="font-barlow font-semibold">Portes:</h3>
+			<span class="font-light text-xs sm:text-sm md:text-2xl">
+				{vehicle.doors ?? 'Non Renseigné'}
+			</span>
+		</div>
+		<div class="flex gap-1 md:gap-6 items-baseline">
+			<h3 class="font-barlow font-semibold">Boîte:</h3>
+			<span class="font-light text-xs sm:text-sm md:text-2xl">
+				{vehicle.transmission ?? 'Non Renseigné'}
+			</span>
+		</div>
+		<div class="flex gap-1 md:gap-6 items-baseline">
+			<h3 class="font-barlow font-semibold">Sièges:</h3>
+			<span class="font-light text-xs sm:text-sm md:text-2xl">
+				{vehicle.seats ?? 'Non Renseigné'}
+			</span>
+		</div>
+	</div>
+
+	<div class="flex place-self-start text-secondary text-lg md:text-3xl mt-10">EQUIPEMENT:</div>
+	{#if vehicle.options?.length}
+		<div class="grid grid-cols-2 px-24">
+			<ul>
+				{#each vehicle.options as option}
+					<li class="font-barlow font-light text-xs sm:text-sm md:text-2xl list-disc text-primary">
+						option
+					</li>
+				{/each}
+			</ul>
+		</div>
+	{:else}
+		<div class="flex text-2xl mt-4 md:mt-10">
+			<span class="font-light sm:text-md md:text-2xl"> Non Renseigné </span>
+		</div>
+	{/if}
 </div>

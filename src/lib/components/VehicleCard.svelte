@@ -48,7 +48,7 @@
 		<div
 			class="flex bg-secondary text-neutral text-lg w-fit h-9 px-2 rounded-lg items-center absolute top-2 right-2"
 		>
-			Prix: {vehicle.price}
+			{vehicle.price} €
 		</div>
 	</div>
 </a>
