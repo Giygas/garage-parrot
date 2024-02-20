@@ -21,7 +21,3 @@ FROM
 WHERE
   au.deleted_at IS NULL;
 
-CREATE POLICY "public_view_view" ON public.users
-  FOR SELECT
-    USING (TRUE);
-

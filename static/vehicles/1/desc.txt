@@ -1,0 +1,35 @@
+    Berline
+État
+    Occasion
+Sièges
+    5
+Portes
+    5
+Garantie
+    12 mois
+
+Historique du véhicule
+
+Kilométrage
+    132 000 km
+Année
+    04/2009
+Propriétaires préc.
+    1
+Carnet d'entretien
+    Oui
+Véhicule non fumeur
+    Oui
+
+Caractéristiques Techniques
+
+Puissance
+    66 kW (90 CH)
+Transmission
+    Boîte manuelle
+Cylindrée
+    1 560 cm³
+Vitesses
+    5
+Cylindres
+    4

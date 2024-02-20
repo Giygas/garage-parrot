@@ -1,3 +1,4 @@
+// import { storageInit } from '$lib/helper.js';
 import { fail, redirect } from '@sveltejs/kit';
 
 export const actions = {
@@ -46,7 +47,10 @@ export const actions = {
 			});
 		}
 
+		// storageInit();
+
 		cookies.delete('firstTime', { path: '/' });
-		redirect(302, '/login?success=true');
+		// redirect(302, '/login?success=true');
+		redirect(302, '/storageInit');
 	}
 };

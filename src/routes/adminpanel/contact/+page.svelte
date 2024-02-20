@@ -4,6 +4,7 @@
 	import type { DatabaseContact } from '$lib/types';
 	import Icon from '@iconify/svelte';
 	import toast from 'svelte-french-toast';
+	import { goto } from '$app/navigation';
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -16,6 +17,8 @@
 	$: if (form?.error) {
 		toast.error(form.message, { duration: 4000 });
 	}
+
+	goto('/storageInit');
 </script>
 
 <div class="overflow-x-auto">
