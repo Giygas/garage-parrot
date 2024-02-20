@@ -9,8 +9,13 @@
 		{ title: "Vehicles d'ocassion", path: '/vehicles' }
 	];
 
+	export let session: Session | null = null;
+	if (session) {
+		nav.push({ title: 'Admin Panel', path: '/adminpanel' });
+	}
 	//Menu logic
 	import { fade } from 'svelte/transition';
+	import type { Session } from '@supabase/supabase-js';
 	let showMenu: boolean = false;
 
 	// Logo animation

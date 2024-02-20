@@ -37,9 +37,12 @@
 
 <div class="h-screen max-h-screen">
 	<div class="w-screen p-8 xl:p-16">
-		<button on:click={disconnect} class="btn btn-sm btn-primary text-background float-end"
-			>Se deconnecter</button
-		>
+		<div class="flex justify-end">
+			<a href="/" class="btn btn-sm btn-primary text-background float-end mr-6">Retourner au site</a
+			><button on:click={disconnect} class="btn btn-sm btn-primary text-background float-end"
+				>Se deconnecter</button
+			>
+		</div>
 		<h1 class="text-4xl text-accent font-montserrat uppercase font-semibold">
 			Panel d'administration du garage
 		</h1>

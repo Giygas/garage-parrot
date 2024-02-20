@@ -6,4 +6,4 @@
 	}
 </script>
 
-<div class="w-full">content here</div>
+<div class="w-full">TODO: user settings here</div>

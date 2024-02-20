@@ -5,6 +5,11 @@
 	import Icon from '@iconify/svelte';
 	import toast from 'svelte-french-toast';
 
+	const links = [
+		{ href: '/adminpanel/temoignages/new', name: 'Créer un témoignage' },
+		{ href: '/adminpanel/temoignages', name: 'Lister les témoignages' }
+	];
+
 	export let data: PageData;
 	export let form: ActionData;
 	$: reviews = data.reviews as DatabaseReview[];
@@ -18,8 +23,15 @@
 </script>
 
 <div class="overflow-x-auto">
-	<div class="flex pb-8">
-		<h1 class="montserrat text-accent text-small-caps text-3xl font-semibold">Témoignages</h1>
+	<div class="flex w-full justify-between px-5 items-center pb-10">
+		<h1 class="montserrat text-accent text-small-caps text-3xl font-semibold">
+			Gestión des Témoignages
+		</h1>
+		<div class="flex gap-6">
+			{#each links as l}
+				<a class="btn btn-primary" href={l.href}>{l.name}</a>
+			{/each}
+		</div>
 	</div>
 	<table class="table table-zebra table-md">
 		<thead>
