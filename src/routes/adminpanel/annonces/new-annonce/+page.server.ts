@@ -51,7 +51,6 @@ export const actions = {
 		}
 
 		const session = await locals.getSession();
-		console.log(session);
 
 		// TODO: Save image to bucket, then save the link to supabase
 
@@ -67,7 +66,6 @@ export const actions = {
 
 		const baseImgPath = imgData.path.split('/')[0];
 		const arrayImages = [];
-		console.log(baseImgPath);
 
 		for (const img of otherImages) {
 			if (img instanceof File) {
@@ -79,14 +77,13 @@ export const actions = {
 				const { error } = await db.storage.from('vehicles').upload(path, img);
 
 				if (error) {
-					console.log(error);
 					return setError(form, 'Problème avec la base de données' + error);
 				}
 
 				arrayImages.push(path);
 			}
 		}
-		//TODO: split the options
+
 		let options: string[];
 		if (fields.options) {
 			options = fields.options.split(',');
@@ -113,7 +110,6 @@ export const actions = {
 		});
 
 		if (insertError) {
-			console.log(insertError);
 			return setError(form, 'Problème avec la base de données' + error);
 		}
 

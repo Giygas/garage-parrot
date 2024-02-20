@@ -40,11 +40,7 @@
 				v.year >= yearValues[0] &&
 				v.year <= yearValues[1]
 		);
-
-		console.log('vehicles Display', vehiclesDisplay);
 	}
-
-	$: console.log(priceValues);
 </script>
 
 <svelte:head>

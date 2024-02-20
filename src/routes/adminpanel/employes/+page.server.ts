@@ -17,7 +17,6 @@ export const actions = {
 		const data = await request.formData();
 
 		const id = data.get('id') as string;
-		console.log(id);
 
 		if (id) {
 			const { error } = await adminAuthClient.deleteUser(id, true);

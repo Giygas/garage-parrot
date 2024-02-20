@@ -93,7 +93,6 @@
 		const files = $form.otherImages;
 		for (let i = 0; i < files.length; i++) {
 			const file = files[i];
-			console.log(file);
 
 			if (index != i) {
 				if (file) dt.items.add(file);
