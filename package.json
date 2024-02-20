@@ -20,6 +20,7 @@
 		"@sveltejs/adapter-vercel": "^4.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/svelte-range-slider-pips": "^2.0.4",
 		"@typescript-eslint/eslint-plugin": "^6.9.0",
 		"@typescript-eslint/parser": "^6.9.0",
 		"autoprefixer": "^10.4.14",
@@ -32,6 +33,7 @@
 		"prettier-plugin-svelte": "^2.10.1",
 		"svelte": "^4.2.2",
 		"svelte-check": "^3.4.3",
+		"svelte-range-slider-pips": "^2.3.1",
 		"sveltekit-superforms": "^2.1.0",
 		"tailwindcss": "^3.3.2",
 		"tslib": "^2.4.1",
@@ -46,5 +48,10 @@
 		"@types/dompurify": "^3.0.5",
 		"dompurify": "^3.0.6",
 		"svelte-french-toast": "^1.2.0"
+	},
+	"exports": {
+		".": {
+			"svelte": "./dist/svelte-range-slider-pips.mjs"
+		}
 	}
 }
