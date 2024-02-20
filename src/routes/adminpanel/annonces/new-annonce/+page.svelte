@@ -34,6 +34,8 @@
 
 	const year = intProxy(form, 'year', { empty: 'zero', initiallyEmptyIfZero: true });
 	const transmission = intProxy(form, 'transmission', { empty: 'null' });
+	const doors = intProxy(form, 'doors', { empty: 'null' });
+	const seats = intProxy(form, 'seats', { empty: 'null' });
 	const power = intProxy(form, 'power', { empty: 'zero', initiallyEmptyIfZero: true });
 	const engine = stringProxy(form, 'engine', { empty: 'null' });
 	const traction = stringProxy(form, 'traction', { empty: 'null' });
@@ -236,7 +238,7 @@
 					type="text"
 					name="doors"
 					class="input h-12 input-primary w-full text-lg"
-					bind:value={$form.doors}
+					bind:value={$doors}
 					aria-invalid={$errors.doors ? 'true' : undefined}
 				/>
 			</div>
@@ -248,7 +250,7 @@
 					type="text"
 					name="seats"
 					class="input h-12 input-primary w-full text-lg"
-					bind:value={$form.seats}
+					bind:value={$seats}
 					aria-invalid={$errors.seats ? 'true' : undefined}
 				/>
 			</div>
