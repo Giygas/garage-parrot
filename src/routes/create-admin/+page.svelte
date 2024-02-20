@@ -23,7 +23,7 @@
 		<form method="POST" use:enhance>
 			<div class="grid grid-cols-8 items-center gap-8 pt-10">
 				<div class="col-span-2 text-end">
-					<label for="name" class="text-2xl uppercase">Nom et prénom:</label>
+					<label for="name" class="text-xl uppercase">Nom et prénom:</label>
 				</div>
 				<div class="col-span-6">
 					<input
@@ -35,7 +35,7 @@
 					/>
 				</div>
 				<div class="col-span-2 text-end">
-					<label for="email" class="text-2xl uppercase">Email:</label>
+					<label for="email" class="text-xl uppercase">Email:</label>
 				</div>
 				<div class="col-span-6">
 					<input
@@ -47,7 +47,7 @@
 					/>
 				</div>
 				<div class="col-span-2 text-end">
-					<label for="password" class="text-2xl uppercase">Mot de passe:</label>
+					<label for="password" class="text-xl uppercase">Mot de passe:</label>
 				</div>
 				<div class="col-span-6">
 					<input

@@ -53,72 +53,73 @@
 >
 	<h1 class="montserrat text-accent text-small-caps font-semibold">Nos Vehicules</h1>
 </div>
-
-<div class="grid xs:max-lg:grid-rows-3 lg:grid-cols-3 gap-2 md:gap-15 lg:gap-20 p-10 w-full">
-	<div class="flex flex-col shrink-0 w-full mt-2">
-		<h3>Price:</h3>
-		<div>
+{#if vehicles?.length}
+	<div class="grid xs:max-lg:grid-rows-3 lg:grid-cols-3 gap-2 md:gap-15 lg:gap-20 p-10 w-full">
+		<div class="flex flex-col shrink-0 w-full mt-2">
+			<h3>Price:</h3>
+			<div>
+				<RangeSlider
+					id="price"
+					max={maxPrice}
+					min={minPrice}
+					range="true"
+					bind:values={priceValues}
+				/>
+			</div>
+			<div class="flex flex-row gap-2 justify-between align-top pt-2 md:pt-0">
+				<p class="flex items-center md:self-start text-xs self-center h-full">
+					{priceValues[0]} - {priceValues[1]}
+				</p>
+				<button
+					class="btn btn-primary btn-xs max-w-24 place-self-end"
+					on:click={() => (priceValues = [minPrice, maxPrice])}>Réinitialiser</button
+				>
+			</div>
+		</div>
+		<div class="flex flex-col shrink-0 w-full mt-2">
+			<h3>Kilométrage:</h3>
+			<div>
+				<RangeSlider
+					id="kilometrage"
+					max={maxKilometrage}
+					min={minKilometrage}
+					range="true"
+					bind:values={kilometrageValues}
+				/>
+			</div>
+			<div class="flex flex-col md:flex-row gap-2 justify-between align-top">
+				<p class="flex items-center md:self-start text-xs self-center h-full">
+					{kilometrageValues[0]} - {kilometrageValues[1]}
+				</p>
+				<button
+					class="btn btn-primary btn-xs max-w-24 place-self-end"
+					on:click={() => (kilometrageValues = [minKilometrage, maxKilometrage])}
+					>Réinitialiser</button
+				>
+			</div>
+		</div>
+		<div class="flex flex-col shrink-0 w-full mt-2">
+			<h3>Année:</h3>
 			<RangeSlider
 				id="price"
-				max={maxPrice}
-				min={minPrice}
+				max={maxYear}
+				min={minYear}
 				range="true"
-				bind:values={priceValues}
+				bind:values={yearValues}
+				float
 			/>
-		</div>
-		<div class="flex flex-row gap-2 justify-between align-top pt-2 md:pt-0">
-			<p class="flex items-center md:self-start text-xs self-center h-full">
-				{priceValues[0]} - {priceValues[1]}
-			</p>
-			<button
-				class="btn btn-primary btn-xs max-w-24 place-self-end"
-				on:click={() => (priceValues = [minPrice, maxPrice])}>Réinitialiser</button
-			>
-		</div>
-	</div>
-	<div class="flex flex-col shrink-0 w-full mt-2">
-		<h3>Kilométrage:</h3>
-		<div>
-			<RangeSlider
-				id="kilometrage"
-				max={maxKilometrage}
-				min={minKilometrage}
-				range="true"
-				bind:values={kilometrageValues}
-			/>
-		</div>
-		<div class="flex flex-col md:flex-row gap-2 justify-between align-top">
-			<p class="flex items-center md:self-start text-xs self-center h-full">
-				{kilometrageValues[0]} - {kilometrageValues[1]}
-			</p>
-			<button
-				class="btn btn-primary btn-xs max-w-24 place-self-end"
-				on:click={() => (kilometrageValues = [minKilometrage, maxKilometrage])}
-				>Réinitialiser</button
-			>
+			<div class="flex flex-col md:flex-row gap-2 justify-between align-top">
+				<p class="flex items-center md:self-start text-xs self-center h-full">
+					{yearValues[0]} - {yearValues[1]}
+				</p>
+				<button
+					class="btn btn-primary btn-xs max-w-24 place-self-end"
+					on:click={() => (yearValues = [minYear, maxYear])}>Réinitialiser</button
+				>
+			</div>
 		</div>
 	</div>
-	<div class="flex flex-col shrink-0 w-full mt-2">
-		<h3>Année:</h3>
-		<RangeSlider
-			id="price"
-			max={maxYear}
-			min={minYear}
-			range="true"
-			bind:values={yearValues}
-			float
-		/>
-		<div class="flex flex-col md:flex-row gap-2 justify-between align-top">
-			<p class="flex items-center md:self-start text-xs self-center h-full">
-				{yearValues[0]} - {yearValues[1]}
-			</p>
-			<button
-				class="btn btn-primary btn-xs max-w-24 place-self-end"
-				on:click={() => (yearValues = [minYear, maxYear])}>Réinitialiser</button
-			>
-		</div>
-	</div>
-</div>
+{/if}
 
 {#if vehiclesDisplay.length}
 	<div class="grid grid-autofill gap-8 place-items-center mt-10 p-10">
