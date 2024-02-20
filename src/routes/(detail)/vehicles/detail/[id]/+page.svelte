@@ -87,11 +87,11 @@
 	</div>
 
 	<!-- TITLE -->
-	<div class="flex mt-10 justify-between w-full items-baseline">
-		<h1 class="montserrat text-accent text-xl md:text-4xl drop-shadow-lg">
+	<div class="flex mt-10 justify-between w-full place-items-center">
+		<h1 class="montserrat text-accent text-xl md:text-2xl drop-shadow-lg">
 			{vehicle.title}
 		</h1>
-		<h2 class="text-xl md:text-3xl font-semibold">€ {vehicle.price}</h2>
+		<h2 class="text-xl md:text-3xl font-semibold shrink-0">€ {vehicle.price}</h2>
 	</div>
 
 	<div class="divider divider-accent mt-8" />
@@ -149,13 +149,15 @@
 		</div>
 	</div>
 
-	<div class="flex place-self-start text-secondary text-lg md:text-3xl mt-10">EQUIPEMENT:</div>
+	<div class="flex place-self-start text-secondary text-lg md:text-3xl mt-10 mb-4">EQUIPEMENT:</div>
 	{#if vehicle.options?.length}
-		<div class="grid grid-cols-2 px-24">
+		<div class="flex flex-col px-24">
 			<ul>
 				{#each vehicle.options as option}
-					<li class="font-barlow font-light text-xs sm:text-sm md:text-2xl list-disc text-primary">
-						option
+					<li
+						class="font-barlow font-light text-xs sm:text-sm md:text-2xl list-disc text-primary w-full"
+					>
+						{option}
 					</li>
 				{/each}
 			</ul>
