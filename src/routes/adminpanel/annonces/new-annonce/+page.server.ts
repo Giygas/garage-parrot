@@ -38,6 +38,7 @@ export const actions = {
 		if (otherImages.every((x) => x instanceof File)) {
 			const files = otherImages as File[];
 			if (files.length > 9) {
+				console.log('Max images');
 				setError(
 					form,
 					'otherImages._errors',
@@ -61,6 +62,7 @@ export const actions = {
 			.upload(uuid + '/' + uuid, form.data.imagePrincipal);
 
 		if (error) {
+			console.log(error);
 			return setError(form, 'Problème avec la base de données' + error);
 		}
 
@@ -77,6 +79,7 @@ export const actions = {
 				const { error } = await db.storage.from('vehicles').upload(path, img);
 
 				if (error) {
+					console.log(error);
 					return setError(form, 'Problème avec la base de données' + error);
 				}
 
@@ -92,7 +95,7 @@ export const actions = {
 		}
 
 		const { error: insertError } = await db.from('voitures').insert({
-			//@ts-expect-error: don't know why it says price doesnt exists
+			//@ts-expect-error: don't know why it says title doesn't exists
 			title: fields.title,
 			price: fields.price,
 			year: fields.year,
@@ -110,6 +113,7 @@ export const actions = {
 		});
 
 		if (insertError) {
+			console.log(insertError);
 			return setError(form, 'Problème avec la base de données' + error);
 		}
 

@@ -36,7 +36,7 @@ export const vehicleSchema = z.object({
 		.custom<File>((f) => f instanceof File, "L 'image principal est obligatoire")
 		.refine((f) => f.size < MAX_FILE_SIZE, 'Max 1000 kB upload size.'),
 	otherImages: z
-		.custom<File>((f) => f instanceof File, "Mauvais format d'image")
+		.custom<File>()
 		.refine((f) => f.size < MAX_FILE_SIZE, 'Max 1000 kB upload size.')
 		.nullable()
 		.array()
