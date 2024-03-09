@@ -47,10 +47,7 @@ export const actions = {
 			});
 		}
 
-		// storageInit();
-
 		cookies.delete('firstTime', { path: '/' });
-		// redirect(302, '/login?success=true');
-		redirect(302, '/storageInit');
+		redirect(302, '/adminpanel');
 	}
 };

@@ -116,8 +116,7 @@ fs.readdir(baseFolder, (err, files) => {
 					image: firstImg1,
 					other_images: otherImages1,
 					price: 4650,
-					transmission: 1,
-					created_by: null
+					transmission: 1
 				});
 
 				if (error) {
@@ -203,7 +202,6 @@ fs.readdir(baseFolder2, (err, files) => {
 					other_images: otherImages2,
 					price: 12500,
 					transmission: 2,
-					created_by: null,
 					options: ['Ecran Multimédia', 'Cámera de recule', 'Volant Multifonction']
 				});
 
