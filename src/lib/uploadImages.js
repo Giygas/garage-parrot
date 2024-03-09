@@ -24,7 +24,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
 	}
 });
 
-const staticDir = 'static/vehicles/';
+const staticDir = 'src/lib/assets/vehicles/';
 
 /**
  *
