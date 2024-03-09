@@ -1,27 +1,26 @@
-import { db } from './db/client';
-
 export function capitalizeFirstLetter(string: string) {
 	return string.charAt(0).toUpperCase() + string.slice(1);
 }
-export async function uploadImg(path: string, serverName: string, type: string) {
-	const response = await fetch(path);
-	console.log(response);
-	const data = await response.blob();
-	const metadata = {
-		type: type
-	};
 
-	const file = new File([data], serverName, metadata);
-	console.log(file);
+// export async function uploadImg(path: string, serverName: string, type: string) {
+// 	const response = await fetch(path);
+// 	console.log(response);
+// 	const data = await response.blob();
+// 	const metadata = {
+// 		type: type
+// 	};
 
-	const { error } = await db.storage.from('vehicles').upload(serverName, path);
+// 	const file = new File([data], serverName, metadata);
+// 	console.log(file);
 
-	if (error) {
-		console.log(error);
-	} else {
-		console.log('success');
-	}
-}
+// 	const { error } = await db.storage.from('vehicles').upload(serverName, path);
+
+// 	if (error) {
+// 		console.log(error);
+// 	} else {
+// 		console.log('success');
+// 	}
+// }
 // // async function createFile(path: string, name: string, type: string): Promise<File> {
 // // 	const response = await fetch(path);
 // // 	const data = await response.blob();

@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
+		"init-images": "Node src/lib/uploadImages.js",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -48,6 +49,7 @@
 		"@types/dompurify": "^3.0.5",
 		"@vercel/speed-insights": "^1.0.10",
 		"dompurify": "^3.0.6",
+		"dotenv": "^16.4.5",
 		"svelte-french-toast": "^1.2.0"
 	},
 	"exports": {
