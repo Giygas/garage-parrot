@@ -95,6 +95,17 @@ export const actions = {
 			options = [];
 		}
 
+		// Verify if the title exists already
+		const { data: titleData } = await db
+			.from('voitures')
+			.select('title')
+			.eq('title', fields.title)
+			.single();
+
+		if (titleData) {
+			fields.title = fields.title + ' ' + Date.now();
+		}
+
 		//@ts-expect-error: don't know why it says title doesn't exists
 		const { error: insertError } = await db.from('voitures').insert({
 			title: fields.title,
