@@ -1,4 +1,4 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { message, setError, superValidate, withFiles } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
@@ -52,8 +52,9 @@ export const actions = {
 		}
 
 		const session = await locals.getSession();
-
-		// TODO: Save image to bucket, then save the link to supabase
+		if (!session) {
+			redirect(300, '/login');
+		}
 
 		const uuid = crypto.randomUUID();
 
@@ -94,8 +95,8 @@ export const actions = {
 			options = [];
 		}
 
+		//@ts-expect-error: don't know why it says title doesn't exists
 		const { error: insertError } = await db.from('voitures').insert({
-			//@ts-expect-error: don't know why it says title doesn't exists
 			title: fields.title,
 			price: fields.price,
 			year: fields.year,
@@ -109,7 +110,7 @@ export const actions = {
 			transmission: fields.transmission,
 			options: options,
 			other_images: arrayImages,
-			created_by: session?.user.id
+			created_by: session.user.id
 		});
 
 		if (insertError) {
