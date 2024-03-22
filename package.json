@@ -1,11 +1,13 @@
 {
 	"name": "garage",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "npm run init-images && vite build",
-		"init-images": "Node src/lib/uploadImages.js",
+		// "build": "npm run init-images && vite build",
+		"build": "vite build",
+    "postbuild": "node src/lib/uploadImages.js",
+		// "init-images": "node src/lib/uploadImages.js",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
