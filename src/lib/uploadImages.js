@@ -78,7 +78,7 @@ fs.readdir(baseFolder, (err, files) => {
 
 	Promise.all(uploadPromises)
 		.then(() => {
-			console.log('All files uploaded successfully');
+			console.log('Vehicle 1 files uploaded successfully');
 
 			/**
 			 * @type {string[]}
@@ -163,7 +163,7 @@ fs.readdir(baseFolder2, (err, files) => {
 
 	Promise.all(uploadPromises)
 		.then(() => {
-			console.log('All files uploaded successfully');
+			console.log('Vehicle 2 files uploaded successfully');
 
 			/**
 			 * @type {string[]}
@@ -249,7 +249,7 @@ fs.readdir(baseFolder3, (err, files) => {
 
 	Promise.all(uploadPromises)
 		.then(() => {
-			console.log('All files uploaded successfully');
+			console.log('Vehicle 3 files uploaded successfully');
 
 			/**
 			 * @type {string[]}
