@@ -1,0 +1,15 @@
+{
+	"version": 2,
+	"builds": [
+		{
+			"src": "/src/assets/vehicles/*",
+			"use": "@now/static"
+		}
+	],
+	"routes": [
+		{
+			"src": "/src/assets/vehicles/*",
+			"dest": "/static/vehicles"
+		}
+	]
+}
