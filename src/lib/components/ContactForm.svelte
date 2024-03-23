@@ -14,16 +14,16 @@
 </script>
 
 <div
-	class="container flex flex-col gap-2 justify-center items-center sm:flex-row sm:justify-between mt-16 lg:mt-24 mb-10 sm:px-16"
+	class="container flex flex-col gap-2 justify-center items-center lg:flex-row sm:justify-between mt-16 lg:mt-24 mb-10 px-8 sm:px-16 text-center md:text-left"
 >
 	{#if vehicleId}
-		<h2 class="text-small-caps text-accent text-lg md:text-lg lg:text-2xl">
+		<h2 class=" text-small-caps text-accent text-lg md:text-lg lg:text-2xl">
 			Voulez-vous nous contacter par rapport a cet vehicule?
 		</h2>
 	{:else}
-		<h2 class="text-small-caps text-accent text-lg lg:text-3xl">Voulez-vous nous contacter?</h2>
+		<h2 class=" text-small-caps text-accent text-lg lg:text-3xl">Voulez-vous nous contacter?</h2>
 	{/if}
-	<h4 class="text-center md:text-lg lg:text-2xl">Téléphone: 07 08 09 10 20</h4>
+	<h4 class="text-center md:text-lg lg:text-2xl shrink-0">Téléphone: 07 08 09 10 20</h4>
 </div>
 <div
 	class="contact-background m-8 p-4 sm:m-10 md:mt-20 md:p-20 xl:w-[1000px] xl:mx-auto text-secondary text-sm md:text-lg"

@@ -10,7 +10,7 @@
 	export let data: PageData;
 
 	let showImagePrincipal = false;
-	let previewOthers = new Array();
+	let previewOthers: any[] = [];
 	$: previewOthers;
 
 	const { form, errors, enhance, message } = superForm(data.form, {
@@ -22,7 +22,7 @@
 	$: if ($message) {
 		toast.success($message);
 		showImagePrincipal = false;
-		previewOthers = new Array();
+		previewOthers = [];
 		goto('/adminpanel/annonces', { replaceState: true });
 	}
 
@@ -68,7 +68,7 @@
 	}
 
 	function readMultipleImages(e: Event) {
-		//@ts-expect-error
+		//@ts-expect-error files possibly null
 		const files = e.currentTarget.files;
 
 		$form.otherImages = Array.from(files) ?? [];
@@ -101,7 +101,7 @@
 			}
 		}
 
-		//@ts-expect-error
+		//@ts-expect-error input I know there's the input in the document. It's not possible to be null
 		input.files = dt.files; // Assign the updates list
 
 		input?.dispatchEvent(new Event('input'));

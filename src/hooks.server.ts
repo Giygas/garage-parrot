@@ -21,7 +21,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		return session;
 	};
 
-	if (event.url.pathname.startsWith('/login')) {
+	if (event.url.pathname.endsWith('/login')) {
 		// Set the cookie for the first time the admin tries to log in
 		if (event.cookies.get('firstTime')) {
 			redirect(302, '/create-admin');
@@ -30,6 +30,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		// If the user tries to log in while he's already logged in, redirect to the admin panel
 		if (await event.locals.getSession()) {
 			redirect(302, '/adminpanel');
+		} else if (event.url.pathname !== '/login') {
+			redirect(302, '/login');
 		}
 	}
 

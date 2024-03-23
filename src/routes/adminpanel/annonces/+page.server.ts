@@ -17,20 +17,18 @@ export const load = async () => {
 	const vehicles: vehiclesWithTransmission = data;
 
 	// Will use the uuid of the vehicule for the array index
-	const images: { [key: string]: string } = {};
 
 	for (const vehicle of vehicles) {
 		const img = db.storage
 			.from('vehicles')
 			.getPublicUrl(vehicle.image, { transform: { height: 280, width: 350 } });
 
-		images[vehicle.id] = img.data.publicUrl;
+		vehicle.image = img.data.publicUrl;
 	}
 
 	return {
 		status: 200,
-		vehicles,
-		images
+		vehicles
 	};
 };
 

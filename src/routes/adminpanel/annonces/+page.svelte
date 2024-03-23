@@ -6,7 +6,6 @@
 	export let form;
 
 	$: vehicles = data.vehicles;
-	$: images = data.images as { [key: string]: string };
 
 	$: if (form?.succes) {
 		toast.success(form.message);
@@ -20,7 +19,7 @@
 		>
 			<div class="grid grid-cols-4 items-center content-center w-full">
 				<div class="col-span-1">
-					<img src={images[vehicle.id]} alt="Principale" class="rounded-lg" />
+					<img src={vehicle.image} alt="Principale" class="rounded-lg" />
 				</div>
 
 				<div class="col-span-3 ml-8">

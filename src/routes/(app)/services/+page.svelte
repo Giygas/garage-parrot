@@ -15,8 +15,7 @@
 <svelte:head>
 	<title>Services - Garage Parrot</title>
 </svelte:head>
-<!-- TODO: delete this -->
-<!-- <div class="mt-52 md:mt-64 xl:mb-44 xl:px-12"> -->
+
 <div class="md:hidden h-[120px]" />
 <div
 	class="flex flex-wrap pt-5 justify-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl md:pt-52 md:justify-end md:pr-12 md:pb-12 lg:pr-24 lg:pt-60 xl:pr-40 xl:pb-24"

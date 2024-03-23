@@ -1,9 +1,10 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { message, setError, superValidate, withFiles } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { vehicleSchema } from '$lib/schemas';
 import { db } from '$lib/db/client';
+import { imageToWebp } from '$lib/sharp';
 
 export const load: PageServerLoad = async () => {
 	const form = await superValidate(zod(vehicleSchema));
@@ -52,14 +53,18 @@ export const actions = {
 		}
 
 		const session = await locals.getSession();
-
-		// TODO: Save image to bucket, then save the link to supabase
+		if (!session) {
+			redirect(300, '/login');
+		}
 
 		const uuid = crypto.randomUUID();
 
+		// Optimize image before uploading
+		const principalOpt = await imageToWebp(form.data.imagePrincipal);
+
 		const { data: imgData, error } = await db.storage
 			.from('vehicles')
-			.upload(uuid + '/' + uuid, form.data.imagePrincipal);
+			.upload(uuid + '/' + uuid, principalOpt, { contentType: 'image/webp' });
 
 		if (error) {
 			console.log(error);
@@ -76,7 +81,12 @@ export const actions = {
 
 				const path = baseImgPath + '/' + uuid;
 
-				const { error } = await db.storage.from('vehicles').upload(path, img);
+				// Optimize the image
+				const optImg = await imageToWebp(img);
+
+				const { error } = await db.storage
+					.from('vehicles')
+					.upload(path, optImg, { contentType: 'image/webp' });
 
 				if (error) {
 					console.log(error);
@@ -94,8 +104,19 @@ export const actions = {
 			options = [];
 		}
 
+		// Verify if the title exists already
+		const { data: titleData } = await db
+			.from('voitures')
+			.select('title')
+			.eq('title', fields.title)
+			.single();
+
+		if (titleData) {
+			fields.title = fields.title + ' ' + Date.now();
+		}
+
+		//@ts-expect-error: don't know why it says title doesn't exists
 		const { error: insertError } = await db.from('voitures').insert({
-			//@ts-expect-error: don't know why it says title doesn't exists
 			title: fields.title,
 			price: fields.price,
 			year: fields.year,
@@ -109,7 +130,7 @@ export const actions = {
 			transmission: fields.transmission,
 			options: options,
 			other_images: arrayImages,
-			created_by: session?.user.id
+			created_by: session.user.id
 		});
 
 		if (insertError) {

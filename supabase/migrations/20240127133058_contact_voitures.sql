@@ -14,7 +14,7 @@ CREATE TABLE public.voitures(
   options text[],
   other_images text[],
   created_at timestamp with time zone NOT NULL DEFAULT now(),
-  created_by uuid NOT NULL,
+  created_by uuid,
   CONSTRAINT voitures_pkey PRIMARY KEY (id),
   CONSTRAINT voitures_id_key UNIQUE (id),
   CONSTRAINT voitures_created_by_fkey FOREIGN KEY (created_by) REFERENCES profiles(id) ON UPDATE CASCADE
