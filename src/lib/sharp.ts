@@ -6,3 +6,10 @@ export async function imageToWebp(img: File): Promise<Buffer> {
 
 	return image;
 }
+
+export async function annonceVehicle(img: File): Promise<Buffer> {
+	const imgBuffer = Buffer.from(await img.arrayBuffer());
+	const image = sharp(imgBuffer).resize({ height: 280, width: 350 }).toBuffer();
+
+	return image;
+}

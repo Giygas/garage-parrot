@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+
+	injectSpeedInsights();
 	const annoncesOptions = [
 		{ href: '/adminpanel/annonces/new-annonce', name: 'Nouvel annonce' },
 		{ href: '/adminpanel/annonces', name: 'Lister les annonces' }
