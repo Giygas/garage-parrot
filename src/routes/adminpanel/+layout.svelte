@@ -9,6 +9,7 @@
 	let { supabase, session, options } = data;
 	$: ({ supabase, session } = data);
 
+	console.log(session);
 	onMount(() => {
 		const {
 			data: { subscription }

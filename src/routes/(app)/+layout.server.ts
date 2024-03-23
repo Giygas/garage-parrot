@@ -1,5 +1,7 @@
 import { db } from '$lib/db/client';
-export const load = async ({ locals: { getSession } }) => {
+import type { LayoutServerLoad } from './$types';
+
+export const load: LayoutServerLoad = async ({ locals: { getSession } }) => {
 	const { error, data } = await db.from('horaires').select();
 
 	if (error) {

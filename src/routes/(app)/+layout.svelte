@@ -7,6 +7,10 @@
 
 	export let data;
 
+	let { supabase, session } = data;
+	$: ({ supabase, session } = data);
+
+	console.log(session);
 	let userData: userData | null;
 	type Weekdays = NonNullable<Weekday[]>;
 	let weekdays = data.weekdays as Weekdays;
