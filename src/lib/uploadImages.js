@@ -1,8 +1,8 @@
 import path from 'path';
-import { promises as fsp } from 'fs';
 import fs from 'fs';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
+import sharp from 'sharp';
 
 import { createClient } from '@supabase/supabase-js';
 
@@ -34,7 +34,7 @@ const staticDir = 'src/lib/assets/vehicles/';
  */
 async function uploadFile(supabasePath, localPath, format) {
 	try {
-		const fileBuffer = await fsp.readFile(localPath);
+		const fileBuffer = await sharp(localPath).resize({ height: 1200 }).toBuffer();
 		const { error } = await supabase.storage.from('vehicles').upload(supabasePath, fileBuffer, {
 			contentType: format
 		});
