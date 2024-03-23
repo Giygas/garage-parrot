@@ -52,9 +52,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (event.url.pathname.startsWith('/adminpanel')) {
-		const activeSession = await event.locals.getSession();
-		if (!activeSession) {
-			redirect(302, '/');
+		const activeUser = (await event.locals.supabase.auth.getUser()).data.user;
+		if (!activeUser) {
+			await event.locals.supabase.auth.refreshSession();
+
+			redirect(302, '/login');
 		}
 	}
 

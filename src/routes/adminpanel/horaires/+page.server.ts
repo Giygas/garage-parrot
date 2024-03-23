@@ -1,17 +1,16 @@
-import { db } from '$lib/db/client';
 import type { Weekday } from '$lib/types';
 import type { Actions } from '@sveltejs/kit';
 
 import { redirect } from '@sveltejs/kit';
 
-export const load = async ({ locals: { getSession } }) => {
+export const load = async ({ locals: { getSession, supabase } }) => {
 	const session = await getSession();
 
 	if (!session?.user.user_metadata.admin) {
 		redirect(303, '/adminpanel');
 	}
 
-	const { data, error } = await db.from('horaires').select().order('id', { ascending: true });
+	const { data, error } = await supabase.from('horaires').select().order('id', { ascending: true });
 
 	if (error) {
 		return {
@@ -28,7 +27,7 @@ export const load = async ({ locals: { getSession } }) => {
 };
 
 export const actions = {
-	updateHours: async ({ request }) => {
+	updateHours: async ({ request, locals: { supabase } }) => {
 		const data = await request.formData();
 
 		const days = data.entries();
@@ -37,7 +36,7 @@ export const actions = {
 			const id = parseInt(day[0]);
 			const hours = day[1].toString();
 			// UPDATE HORAIRES SET (horaires.)HOURS = (this.)HOURS WHERE (horaires.)ID = (this.)ID
-			const { error } = await db.from('horaires').update({ hours: hours }).eq('id', id);
+			const { error } = await supabase.from('horaires').update({ hours: hours }).eq('id', id);
 
 			if (error) {
 				return {

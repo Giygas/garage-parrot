@@ -1,8 +1,7 @@
-import { db } from '$lib/db/client';
 import type { LayoutServerLoad } from './$types';
 
-export const load: LayoutServerLoad = async ({ locals: { getSession } }) => {
-	const { error, data } = await db.from('horaires').select();
+export const load: LayoutServerLoad = async ({ locals: { getSession, supabase } }) => {
+	const { error, data } = await supabase.from('horaires').select();
 
 	if (error) {
 		return {

@@ -52,7 +52,7 @@
 					<div class="grid grid-cols-4">
 						<div class="font-montserrat font-bold">MOTEUR:</div>
 						<div>
-							{vehicle.engine}
+							{vehicle.engine ?? 'Non résigné'}
 						</div>
 						<div class="font-montserrat font-bold">TRANSMISSION:</div>
 						<div>
