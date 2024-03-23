@@ -22,8 +22,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 	};
 
 	if (event.url.pathname.endsWith('/login')) {
-		console.log(event.url.pathname.endsWith('/login'));
-		console.log(event.url.pathname);
 		// Set the cookie for the first time the admin tries to log in
 		if (event.cookies.get('firstTime')) {
 			redirect(302, '/create-admin');
