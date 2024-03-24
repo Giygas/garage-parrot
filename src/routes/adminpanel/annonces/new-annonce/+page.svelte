@@ -10,7 +10,7 @@
 	export let data: PageData;
 
 	let showImagePrincipal = false;
-	let previewOthers: any[] = [];
+	let previewOthers: (string | null)[] = [];
 	$: previewOthers;
 
 	const { form, errors, enhance, message } = superForm(data.form, {
@@ -51,8 +51,8 @@
 		reader.readAsDataURL($form.imagePrincipal);
 	}
 
-	function readFileAsDataURL(file: any) {
-		return new Promise(function (resolve, reject) {
+	function readFileAsDataURL(file: File) {
+		return new Promise<string | ArrayBuffer | null>(function (resolve, reject) {
 			let fr = new FileReader();
 
 			fr.onload = function () {
@@ -68,7 +68,7 @@
 	}
 
 	function readMultipleImages(e: Event) {
-		//@ts-expect-error files possibly null
+		//@ts-expect-error files actually does exist in currentTarget
 		const files = e.currentTarget.files;
 
 		$form.otherImages = Array.from(files) ?? [];
@@ -78,12 +78,14 @@
 
 		//Promises in an array
 		for (let i = 0; i < $form.otherImages.length; i++) {
-			readers.push(readFileAsDataURL($form.otherImages[i]));
+			if ($form.otherImages[i]) {
+				readers.push(readFileAsDataURL($form.otherImages[i] as File));
+			}
 		}
 
 		//Trigger all the promises
 		Promise.all(readers).then((values) => {
-			previewOthers = values;
+			previewOthers = values as (string | null)[];
 		});
 	}
 
@@ -296,7 +298,7 @@
 					name="imagePrincipal"
 					accept="image/jpeg, image/jpg, image/png, image/webp"
 					on:input={(e) => {
-						//@ts-expect-error
+						//@ts-expect-error I already checked for null
 						$form.imagePrincipal = e.currentTarget.files?.item(0) ?? null;
 					}}
 					aria-invalid={$errors.imagePrincipal ? 'true' : undefined}
