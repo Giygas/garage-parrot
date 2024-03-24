@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 import { message, setError, superValidate, withFiles } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import { vehicleSchema } from '$lib/schemas';
-import { db } from '$lib/db/client';
+import { imageToWebp } from '$lib/sharp';
 
 export const load: PageServerLoad = async () => {
 	const form = await superValidate(zod(vehicleSchema));
@@ -13,6 +13,7 @@ export const load: PageServerLoad = async () => {
 
 export const actions = {
 	default: async ({ request, locals }) => {
+		const db = locals.supabase;
 		const formData = await request.formData();
 		const form = await superValidate(formData, zod(vehicleSchema));
 
@@ -58,9 +59,12 @@ export const actions = {
 
 		const uuid = crypto.randomUUID();
 
+		// Optimize image before uploading
+		const principalOpt = await imageToWebp(form.data.imagePrincipal);
+
 		const { data: imgData, error } = await db.storage
 			.from('vehicles')
-			.upload(uuid + '/' + uuid, form.data.imagePrincipal);
+			.upload(uuid + '/' + uuid, principalOpt, { contentType: 'image/webp' });
 
 		if (error) {
 			console.log(error);
@@ -77,7 +81,12 @@ export const actions = {
 
 				const path = baseImgPath + '/' + uuid;
 
-				const { error } = await db.storage.from('vehicles').upload(path, img);
+				// Optimize the image
+				const optImg = await imageToWebp(img);
+
+				const { error } = await db.storage
+					.from('vehicles')
+					.upload(path, optImg, { contentType: 'image/webp' });
 
 				if (error) {
 					console.log(error);
@@ -106,7 +115,7 @@ export const actions = {
 			fields.title = fields.title + ' ' + Date.now();
 		}
 
-		//@ts-expect-error: don't know why it says title doesn't exists
+		//@ts-expect-error I already checked for null in kilometrage higher up... Good ol' typescript
 		const { error: insertError } = await db.from('voitures').insert({
 			title: fields.title,
 			price: fields.price,

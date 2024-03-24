@@ -1,8 +1,7 @@
-import { db } from '$lib/db/client';
 import type { QueryData } from '@supabase/supabase-js';
 
-export const load = async () => {
-	const query = db
+export const load = async ({ locals: { supabase } }) => {
+	const query = supabase
 		.from('voitures')
 		.select(
 			`id, title, price, year, kilometrage, image, engine, traction, power, doors, seats, options, other_images, created_at, created_by, voitures_transmission (description) `
@@ -17,30 +16,25 @@ export const load = async () => {
 	const vehicles: vehiclesWithTransmission = data;
 
 	// Will use the uuid of the vehicule for the array index
-	const images: { [key: string]: string } = {};
-
 	for (const vehicle of vehicles) {
-		const img = db.storage
-			.from('vehicles')
-			.getPublicUrl(vehicle.image, { transform: { height: 280, width: 350 } });
+		const img = supabase.storage.from('vehicles').getPublicUrl(vehicle.image);
 
-		images[vehicle.id] = img.data.publicUrl;
+		vehicle.image = img.data.publicUrl;
 	}
 
 	return {
 		status: 200,
-		vehicles,
-		images
+		vehicles
 	};
 };
 
 export const actions = {
-	deleteAnnonce: async ({ request }) => {
+	deleteAnnonce: async ({ request, locals: { supabase } }) => {
 		const data = await request.formData();
 
 		const id = data.get('id')?.toString();
 		if (id) {
-			const { data, error } = await db
+			const { data, error } = await supabase
 				.from('voitures')
 				.delete()
 				.eq('id', id)
@@ -49,7 +43,7 @@ export const actions = {
 
 			if (error) throw error;
 
-			const { error: imageError } = await db.storage.from('vehicles').remove([data.image]);
+			const { error: imageError } = await supabase.storage.from('vehicles').remove([data.image]);
 
 			if (imageError) throw imageError;
 		}

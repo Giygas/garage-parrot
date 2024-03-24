@@ -1,9 +1,8 @@
 import { adminAuthClient } from '$lib/db/adminClient';
-import { db } from '$lib/db/client';
 import type { DatabaseUser } from '$lib/types';
 
-export const load = async () => {
-	const { data, error } = await db.from('users').select().returns<DatabaseUser[]>();
+export const load = async ({ locals: { supabase } }) => {
+	const { data, error } = await supabase.from('users').select().returns<DatabaseUser[]>();
 
 	if (error) throw error;
 
@@ -13,7 +12,7 @@ export const load = async () => {
 };
 
 export const actions = {
-	deleteUser: async ({ request }) => {
+	deleteUser: async ({ request, locals: { supabase } }) => {
 		const data = await request.formData();
 
 		const id = data.get('id') as string;
@@ -28,7 +27,7 @@ export const actions = {
 				};
 			}
 
-			const { error: errorPublic } = await db.from('profiles').delete().eq('id', id);
+			const { error: errorPublic } = await supabase.from('profiles').delete().eq('id', id);
 
 			if (errorPublic) {
 				return {

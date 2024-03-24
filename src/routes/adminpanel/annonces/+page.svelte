@@ -6,7 +6,6 @@
 	export let form;
 
 	$: vehicles = data.vehicles;
-	$: images = data.images as { [key: string]: string };
 
 	$: if (form?.succes) {
 		toast.success(form.message);
@@ -20,7 +19,7 @@
 		>
 			<div class="grid grid-cols-4 items-center content-center w-full">
 				<div class="col-span-1">
-					<img src={images[vehicle.id]} alt="Principale" class="rounded-lg" />
+					<img src={vehicle.image} alt="Principale" class="rounded-lg object-contain" />
 				</div>
 
 				<div class="col-span-3 ml-8">
@@ -53,7 +52,7 @@
 					<div class="grid grid-cols-4">
 						<div class="font-montserrat font-bold">MOTEUR:</div>
 						<div>
-							{vehicle.engine}
+							{vehicle.engine ?? 'Non résigné'}
 						</div>
 						<div class="font-montserrat font-bold">TRANSMISSION:</div>
 						<div>
@@ -77,15 +76,15 @@
 			</div>
 			<!-- Absolute price -->
 			<div
-				class="flex bg-secondary text-neutral text-lg w-fit h-9 px-2 rounded-lg items-center absolute top-2 right-2"
+				class="flex bg-secondary text-neutral text-lg w-fit h-8 px-2 rounded-lg items-center absolute top-2 right-2"
 			>
 				Prix: {vehicle.price}
 			</div>
 			<div class="flex h-9 px-2 rounded-lg items-center absolute bottom-2 right-0">
-				<div class="flex gap-3">
+				<div class="flex gap-3 align-middle items-center">
 					<a
 						href="/adminpanel/annonces/edit/{vehicle.title.split(' ').join('-')}"
-						class="btn btn-disabled text-xs"
+						class="btn btn-disabled text-xs btn-sm"
 						data-sveltekit-preload-data="false"
 					>
 						EDITER</a
@@ -105,7 +104,7 @@
 						}}
 					>
 						<input type="hidden" name="id" value={vehicle.id} />
-						<button class="btn btn-secondary text-neutral">Effacer</button>
+						<button class="btn btn-secondary btn-sm text-neutral">Effacer</button>
 					</form>
 				</div>
 			</div>

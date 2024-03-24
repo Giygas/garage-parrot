@@ -1,8 +1,7 @@
-import { db } from '$lib/db/client.js';
 import type { DatabaseVoiture } from '$lib/types.js';
 
-export const load = async ({ params, locals: { getSession } }) => {
-	const { error: horairesError, data } = await db.from('horaires').select();
+export const load = async ({ params, locals: { getSession, supabase } }) => {
+	const { error: horairesError, data } = await supabase.from('horaires').select();
 
 	if (horairesError) {
 		return {
@@ -16,7 +15,7 @@ export const load = async ({ params, locals: { getSession } }) => {
 
 	const title = params.id.split('-').join(' ');
 
-	const { data: vehicleData, error } = await db
+	const { data: vehicleData, error } = await supabase
 		.from('voitures')
 		.select()
 		.eq('title', title)
@@ -28,13 +27,13 @@ export const load = async ({ params, locals: { getSession } }) => {
 
 	// Replace the path in the vehicle image for the publicURL
 	if (vehicle) {
-		const pURL = db.storage.from('vehicles').getPublicUrl(vehicle.image);
+		const pURL = supabase.storage.from('vehicles').getPublicUrl(vehicle.image);
 		vehicle.image = pURL.data.publicUrl;
 
 		const otherImages: string[] = [];
 		if (vehicle.other_images) {
 			for (const img of vehicle.other_images) {
-				const query = db.storage.from('vehicles').getPublicUrl(img);
+				const query = supabase.storage.from('vehicles').getPublicUrl(img);
 				const i = query.data.publicUrl;
 
 				otherImages.push(i);

@@ -1,6 +1,5 @@
 // src/routes/login/+page.server.ts
 import { fail, redirect } from '@sveltejs/kit';
-import { db } from '$lib/db/client';
 import type { PageServerLoad } from '../adminpanel/$types';
 
 export const actions = {
@@ -33,7 +32,11 @@ export const actions = {
 			}
 		}
 
-		const profile = await db.from('profiles').select('role_type').eq('id', data.user.id).single();
+		const profile = await supabase
+			.from('profiles')
+			.select('role_type')
+			.eq('id', data.user.id)
+			.single();
 		// Add the role type in the public database to the user created by authentication
 		if (profile.data) {
 			data.user.user_metadata.role_type = profile.data.role_type;
@@ -46,8 +49,8 @@ export const actions = {
 	}
 };
 
-export const load: PageServerLoad = async ({ cookies }) => {
-	const rows = await db.from('profiles').select();
+export const load: PageServerLoad = async ({ cookies, locals: { supabase } }) => {
+	const rows = await supabase.from('profiles').select();
 	if (rows.data?.length == 0) {
 		cookies.set('firstTime', 'true', {
 			path: '/',

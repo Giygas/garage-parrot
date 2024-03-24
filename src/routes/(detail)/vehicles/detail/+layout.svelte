@@ -3,7 +3,9 @@
 	import '../../../../app.postcss';
 	import { ContactForm, Footer, Navigation } from '$components';
 	import type { Weekday, userData } from '$lib/types';
+	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 
+	injectSpeedInsights();
 	export let data;
 
 	type Weekdays = NonNullable<Weekday[]>;

@@ -1,9 +1,8 @@
 import type { Service } from '$lib/types';
 import type { PageServerLoad } from '../$types';
-import { db } from '$lib/db/client';
 
-export const load: PageServerLoad = async () => {
-	const services = await db
+export const load: PageServerLoad = async ({ locals: { supabase } }) => {
+	const services = await supabase
 		.from('services')
 		.select()
 		.order('id', { ascending: true })

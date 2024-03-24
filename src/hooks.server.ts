@@ -1,12 +1,24 @@
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
-import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit';
 import { redirect, type Handle } from '@sveltejs/kit';
+import { createServerClient } from '@supabase/ssr';
 
 export const handle: Handle = async ({ event, resolve }) => {
-	event.locals.supabase = createSupabaseServerClient({
-		supabaseUrl: PUBLIC_SUPABASE_URL,
-		supabaseKey: PUBLIC_SUPABASE_ANON_KEY,
-		event
+	event.locals.supabase = createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
+		cookies: {
+			get: (key) => event.cookies.get(key),
+			/**
+			 * Note: You have to add the `path` variable to the
+			 * set and remove method due to sveltekit's cookie API
+			 * requiring this to be set, setting the path to an empty string
+			 * will replicate previous/standard behaviour (https://kit.svelte.dev/docs/types#public-types-cookies)
+			 */
+			set: (key, value, options) => {
+				event.cookies.set(key, value, { ...options, path: '/' });
+			},
+			remove: (key, options) => {
+				event.cookies.delete(key, { ...options, path: '/' });
+			}
+		}
 	});
 
 	/**
@@ -22,8 +34,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 	};
 
 	if (event.url.pathname.endsWith('/login')) {
-		console.log(event.url.pathname.endsWith('/login'));
-		console.log(event.url.pathname);
 		// Set the cookie for the first time the admin tries to log in
 		if (event.cookies.get('firstTime')) {
 			redirect(302, '/create-admin');
@@ -42,9 +52,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (event.url.pathname.startsWith('/adminpanel')) {
-		const activeSession = await event.locals.getSession();
-		if (!activeSession) {
-			redirect(302, '/');
+		const activeUser = (await event.locals.supabase.auth.getUser()).data.user;
+		if (!activeUser) {
+			await event.locals.supabase.auth.refreshSession();
+
+			redirect(302, '/login');
 		}
 	}
 

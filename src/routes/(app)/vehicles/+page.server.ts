@@ -1,9 +1,8 @@
-import { db } from '$lib/db/client';
 import type { DatabaseVoiture } from '$lib/types';
 import type { PageServerLoad } from '../$types';
 
-export const load = (async () => {
-	const { data, error } = await db.from('voitures').select();
+export const load = (async ({ locals: { supabase } }) => {
+	const { data, error } = await supabase.from('voitures').select();
 
 	if (error) {
 		return {
@@ -17,7 +16,7 @@ export const load = (async () => {
 	// Replace the path in the vehicle image for the publicURL
 	if (vehicles) {
 		for (const vehicle of vehicles) {
-			const img = db.storage.from('vehicles').getPublicUrl(vehicle.image);
+			const img = supabase.storage.from('vehicles').getPublicUrl(vehicle.image);
 
 			vehicle.image = img.data.publicUrl;
 		}
