@@ -40,13 +40,13 @@
 	const engine = stringProxy(form, 'engine', { empty: 'null' });
 	const traction = stringProxy(form, 'traction', { empty: 'null' });
 
-	let previewPrincipal: any | undefined;
+	let previewPrincipal: Element;
 
 	$: if ($form.imagePrincipal) {
 		showImagePrincipal = true;
 		const reader = new FileReader();
 		reader.onload = function () {
-			previewPrincipal.setAttribute('src', reader.result);
+			previewPrincipal.setAttribute('src', reader.result as string);
 		};
 		reader.readAsDataURL($form.imagePrincipal);
 	}
