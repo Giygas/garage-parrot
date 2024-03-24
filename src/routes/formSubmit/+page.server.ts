@@ -61,7 +61,7 @@ export const actions = {
 			redirectTo: origin
 		};
 	},
-	sendRating: async ({ cookies, request, locals: { supabase } }) => {
+	sendRating: async ({ cookies, request, locals: { supabase, getSession } }) => {
 		const data = await request.formData();
 
 		let name: string;
@@ -88,13 +88,16 @@ export const actions = {
 					.from('temoignages')
 					.insert({ name: name, rating: rating, message: message });
 				if (!error) {
-					// Set the cookie sent to prevent spamming
-					cookies.set('ratingSent', 'true', {
-						path: '/',
-						httpOnly: true,
-						sameSite: 'strict',
-						maxAge: 60 * 60 * 24
-					});
+					const session = await getSession();
+					if (!session) {
+						// Set the cookie sent to prevent spamming to non logged in users
+						cookies.set('ratingSent', 'true', {
+							path: '/',
+							httpOnly: true,
+							sameSite: 'strict',
+							maxAge: 60 * 60 * 24
+						});
+					}
 					return {
 						success: true,
 						message:
