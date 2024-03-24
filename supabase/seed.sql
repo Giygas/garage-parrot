@@ -26,5 +26,5 @@ INSERT INTO voitures_transmission(description)
 ('Boîte de vitesses séquentielle');
 
 INSERT INTO storage.buckets(id, name, public, avif_autodetection, file_size_limit, allowed_mime_types)
-  VALUES ('vehicles', 'vehicles', TRUE, FALSE, 10000000, ARRAY['image/png', 'image/jpg', 'image/jpeg', 'image/webp']);
+  VALUES ('vehicles', 'vehicles', TRUE, FALSE, 6000000, ARRAY['image/png', 'image/jpg', 'image/jpeg', 'image/webp']);
 
