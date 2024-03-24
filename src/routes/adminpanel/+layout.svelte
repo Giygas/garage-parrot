@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import '../../app.postcss';
 	import { goto } from '$app/navigation';
 	import { Toaster } from 'svelte-french-toast';
@@ -12,6 +13,15 @@
 		await supabase.auth.signOut();
 		goto('/login');
 	};
+
+	const minAdminWidth = 1069;
+	let innerWidth: number = 1070;
+
+	$: if (innerWidth < minAdminWidth) {
+		if (browser) {
+			goto('/small-screen');
+		}
+	}
 </script>
 
 <svelte:head>
@@ -19,6 +29,8 @@
 
 	<link rel="stylesheet" href="/fonts.css" />
 </svelte:head>
+
+<svelte:window bind:innerWidth />
 
 <Toaster />
 

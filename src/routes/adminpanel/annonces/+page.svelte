@@ -15,21 +15,21 @@
 <div class=" flex flex-col w-full mt-10">
 	{#each vehicles as vehicle}
 		<div
-			class="flex flex-row h-48 border-2 rounded-lg border-secondary/15 justify-center relative mb-16"
+			class="flex flex-row h-60 rounded-lg bg-base-100/25 shadow-xl justify-center relative mb-16"
 		>
 			<div class="grid grid-cols-4 items-center content-center w-full">
-				<div class="col-span-1">
+				<div class="col-span-1 pl-5">
 					<img src={vehicle.image} alt="Principale" class="rounded-lg object-contain" />
 				</div>
 
 				<div class="col-span-3 ml-8">
-					<div class="grid grid-cols-4">
+					<div class="grid grid-cols-4 max-w-[500px] items-center">
 						<div class="font-montserrat font-bold">TITRE:</div>
-						<div class="col-span-3">
+						<div class="col-span-3 items-baseline">
 							{vehicle.title}
 						</div>
 					</div>
-					<div class="grid grid-cols-4">
+					<div class="grid grid-cols-4 items-baseline">
 						<div class="font-montserrat font-bold">ANNEE:</div>
 						<div>
 							{vehicle.year}
@@ -39,7 +39,7 @@
 							{vehicle.doors ?? 'Non résigné'}
 						</div>
 					</div>
-					<div class="grid grid-cols-4">
+					<div class="grid grid-cols-4 items-baseline">
 						<div class="font-montserrat font-bold">KILOMETRAGE:</div>
 						<div>
 							{vehicle.kilometrage}
@@ -49,7 +49,7 @@
 							{vehicle.seats ?? 'Non résigné'}
 						</div>
 					</div>
-					<div class="grid grid-cols-4">
+					<div class="grid grid-cols-4 items-baseline">
 						<div class="font-montserrat font-bold">MOTEUR:</div>
 						<div>
 							{vehicle.engine ?? 'Non résigné'}
@@ -60,7 +60,7 @@
 						</div>
 					</div>
 
-					<div class="grid grid-cols-4">
+					<div class="grid grid-cols-4 items-baseline">
 						<div class="font-montserrat font-bold">TRACTION:</div>
 						<div class="col-span-3">
 							{vehicle.traction ?? 'Non résigné'}

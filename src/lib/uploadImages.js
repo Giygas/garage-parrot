@@ -105,7 +105,7 @@ fs.readdir(baseFolder, (err, files) => {
 			// Save the vehicle in the database
 			const uploadToDb = async () => {
 				const { error } = await supabase.from('voitures').insert({
-					title: 'Ford Fiesta 1.6 TDCi Econetic*1ER MAIN*CLIM*CARNET*GARANTIE',
+					title: 'Ford Fiesta 1.6 TDCi Econetic 1ER MAIN CLIM CARNET GARANTIE',
 					year: 2009,
 					doors: 5,
 					seats: 5,
