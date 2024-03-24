@@ -1,3 +1,23 @@
+-- Function for checking if id passed as param is admin
+CREATE OR REPLACE FUNCTION is_admin(id uuid)
+  RETURNS boolean
+  AS $$
+BEGIN
+  IF id IN(
+    SELECT
+      profiles.id
+    FROM
+      profiles
+    WHERE
+      profiles.role_type = 0) THEN
+    RETURN TRUE;
+  ELSE
+    RETURN FALSE;
+  END IF;
+END;
+$$
+LANGUAGE PLpgSQL;
+
 ALTER TABLE public.voitures ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "public_view_vehicles" ON public.voitures
@@ -49,26 +69,6 @@ CREATE POLICY "contact_delete" ON public.contacts
 
 ALTER TABLE public.horaires ENABLE ROW LEVEL SECURITY;
 
--- Function for checking if id passed as param is admin
-CREATE OR REPLACE FUNCTION is_admin(id uuid)
-  RETURNS boolean
-  AS $$
-BEGIN
-  IF id IN(
-    SELECT
-      profiles.id
-    FROM
-      profiles
-    WHERE
-      profiles.role_type = 1) THEN
-    RETURN TRUE;
-  ELSE
-    RETURN FALSE;
-  END IF;
-END;
-$$
-LANGUAGE PLpgSQL;
-
 CREATE POLICY "only_admin" ON public.horaires
   FOR ALL TO authenticated
     USING (is_admin(auth.uid()))
@@ -77,4 +77,26 @@ CREATE POLICY "only_admin" ON public.horaires
 CREATE POLICY "horaires_view" ON public.horaires
   FOR SELECT TO public
     USING (TRUE);
+
+ALTER TABLE public.services ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "only_admin" ON public.services
+  FOR ALL TO authenticated
+    USING (is_admin(auth.uid()))
+    WITH CHECK (is_admin(auth.uid()));
+
+CREATE POLICY "services_view" ON public.services
+  FOR SELECT TO public
+    USING (TRUE);
+
+ALTER TABLE public.voitures_transmission ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "transmission_view" ON public.voitures_transmission
+  FOR SELECT TO public
+    USING (TRUE);
+
+CREATE POLICY "transmission_modify" ON public.voitures_transmission
+  FOR ALL TO authenticated
+    USING (TRUE)
+    WITH CHECK (TRUE);
 
