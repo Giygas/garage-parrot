@@ -1,6 +1,14 @@
--- Giving all users the possibilitiy of inserting objects, just because for some reason is not working with authenticated users
-CREATE POLICY "authenticated_insert" ON storage.objects AS PERMISSIVE
+CREATE POLICY "storage_insert" ON storage.objects AS PERMISSIVE
   FOR INSERT TO authenticated
+    WITH CHECK (TRUE);
+
+CREATE POLICY "storage_delete" ON storage.objects
+  FOR DELETE TO authenticated
+    USING (TRUE);
+
+CREATE POLICY "storage_update" ON storage.objects
+  FOR UPDATE TO authenticated
+    USING (TRUE)
     WITH CHECK (TRUE);
 
 CREATE POLICY "public_view" ON storage.objects AS PERMISSIVE
