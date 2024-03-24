@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
+		"local-staging": "supabase db reset && vite build --mode staging && npm run loadImages",
 		"postbuild": "node src/lib/uploadImages.js",
 		"loadImages": "node src/lib/uploadImages.js",
 		"preview": "vite preview",

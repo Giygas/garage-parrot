@@ -9,7 +9,7 @@ BEGIN
     FROM
       profiles
     WHERE
-      profiles.role_type = 0) THEN
+      profiles.role_type = 1) THEN
     RETURN TRUE;
   ELSE
     RETURN FALSE;
