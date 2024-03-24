@@ -1,9 +1,10 @@
-import { db } from '$lib/db/client';
 import type { userData } from '$lib/types';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions = {
-	contact: async ({ request }) => {
+	contact: async ({ request, locals: { supabase } }) => {
+		const db = supabase;
+
 		const data = await request.formData();
 		const id = data.get('vehicleId');
 		const prenom = data.get('prenom')?.toString().trim();
@@ -60,7 +61,7 @@ export const actions = {
 			redirectTo: origin
 		};
 	},
-	sendRating: async ({ cookies, request }) => {
+	sendRating: async ({ cookies, request, locals: { supabase } }) => {
 		const data = await request.formData();
 
 		let name: string;
@@ -83,7 +84,7 @@ export const actions = {
 					rating: true
 				};
 			} else {
-				const { error } = await db
+				const { error } = await supabase
 					.from('temoignages')
 					.insert({ name: name, rating: rating, message: message });
 				if (!error) {

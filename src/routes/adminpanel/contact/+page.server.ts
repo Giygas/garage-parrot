@@ -1,4 +1,3 @@
-import { db } from '$lib/db/client';
 import type { DatabaseContact } from '$lib/types';
 import type { PageServerLoad, Actions } from './$types';
 
@@ -6,8 +5,8 @@ type contactTitle = {
 	voiture_title: string | null;
 } & DatabaseContact;
 
-export const load: PageServerLoad = async () => {
-	const { data, error } = await db.from('contacts').select().order('id', { ascending: true });
+export const load: PageServerLoad = async ({ locals: { supabase } }) => {
+	const { data, error } = await supabase.from('contacts').select().order('id', { ascending: true });
 
 	if (error) {
 		return {
@@ -22,7 +21,7 @@ export const load: PageServerLoad = async () => {
 
 	for (const contact of contacts) {
 		if (contact.voiture_id) {
-			const { data, error } = await db
+			const { data, error } = await supabase
 				.from('voitures')
 				.select('title')
 				.eq('id', contact.voiture_id)
@@ -51,7 +50,7 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions = {
-	traiter: async ({ request }) => {
+	traiter: async ({ request, locals: { supabase } }) => {
 		const data = await request.formData();
 
 		const id = data.get('id') as string | null;
@@ -60,7 +59,10 @@ export const actions = {
 			const parsedId = parseInt(id);
 
 			// UPDATE CONTACTS SET responded = true WHERE contacts.id = parsedId
-			const { error } = await db.from('contacts').update({ responded: true }).eq('id', parsedId);
+			const { error } = await supabase
+				.from('contacts')
+				.update({ responded: true })
+				.eq('id', parsedId);
 
 			if (error) {
 				return {

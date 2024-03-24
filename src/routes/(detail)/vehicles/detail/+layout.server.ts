@@ -1,9 +1,8 @@
-import { db } from '$lib/db/client';
-export const load = async ({ locals: { getSession }, params }) => {
-	const { error, data } = await db.from('horaires').select();
+export const load = async ({ locals: { getSession, supabase }, params }) => {
+	const { error, data } = await supabase.from('horaires').select();
 
 	const title = params.id?.split('-').join(' ') as string;
-	const { data: vehiculeData, error: vehicleError } = await db
+	const { data: vehiculeData, error: vehicleError } = await supabase
 		.from('voitures')
 		.select('id')
 		.eq('title', title)

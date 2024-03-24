@@ -1,9 +1,8 @@
-import { db } from '$lib/db/client';
 import type { ReviewType } from '$lib/types';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async () => {
-	const { data } = await db
+export const load: PageServerLoad = async ({ locals: { supabase } }) => {
+	const { data } = await supabase
 		.from('temoignages')
 		.select(`name, rating, message`)
 		.eq('approved', true)

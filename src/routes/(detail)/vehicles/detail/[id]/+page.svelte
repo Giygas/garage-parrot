@@ -3,7 +3,7 @@
 	import { afterNavigate } from '$app/navigation';
 	import Icon from '@iconify/svelte';
 	import { onDestroy, onMount } from 'svelte';
-	import type { DatabaseVoiture, userData } from '$lib/types';
+	import type { DatabaseVoiture } from '$lib/types';
 	let windowWidth: number;
 	let resizeListener: EventListener;
 

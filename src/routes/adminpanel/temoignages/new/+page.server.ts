@@ -1,8 +1,7 @@
-import { db } from '$lib/db/client';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
-	sendRating: async ({ request }) => {
+	sendRating: async ({ request, locals: { supabase } }) => {
 		const data = await request.formData();
 
 		if (data.get('name') !== '' && data.get('rating') !== null && data.get('message') !== '') {
@@ -10,7 +9,7 @@ export const actions: Actions = {
 			const rating = Number(data.get('rating'));
 			const message = data.get('message') as string;
 
-			const { error } = await db
+			const { error } = await supabase
 				.from('temoignages')
 				.insert({ approved: true, name: name, message: message, rating: rating });
 

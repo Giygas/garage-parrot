@@ -1,16 +1,15 @@
 import type { Service } from '$lib/types';
 import type { PageServerLoad, Actions } from '../$types';
-import { db } from '$lib/db/client';
 import { redirect } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ locals: { getSession } }) => {
+export const load: PageServerLoad = async ({ locals: { getSession, supabase } }) => {
 	const session = await getSession();
 
 	if (!session?.user.user_metadata.admin) {
 		redirect(303, '/adminpanel');
 	}
 
-	const { data, error } = await db.from('services').select().order('id', { ascending: true });
+	const { data, error } = await supabase.from('services').select().order('id', { ascending: true });
 
 	if (error) {
 		return {
@@ -22,10 +21,10 @@ export const load: PageServerLoad = async ({ locals: { getSession } }) => {
 };
 
 export const actions = {
-	updateService: async ({ request }) => {
+	updateService: async ({ request, locals: { supabase } }) => {
 		const data = await request.formData();
 
-		const services = await db
+		const services = await supabase
 			.from('services')
 			.select()
 			.order('id', { ascending: true })
@@ -57,7 +56,7 @@ export const actions = {
 			};
 		}
 
-		const { error } = await db
+		const { error } = await supabase
 			.from('services')
 			.update({ title: title, description: description })
 			.eq('id', id);
@@ -69,7 +68,7 @@ export const actions = {
 				services: serviceData as Service[]
 			};
 		} else {
-			const updatedServices = await db
+			const updatedServices = await supabase
 				.from('services')
 				.select()
 				.order('id', { ascending: true })
@@ -82,14 +81,14 @@ export const actions = {
 			};
 		}
 	},
-	deleteService: async ({ request }) => {
+	deleteService: async ({ request, locals: { supabase } }) => {
 		const data = await request.formData();
 		const i = data.get('serviceId') as string;
 		if (i) {
 			const parsedId = parseInt(i);
 			// DELETE FROM SERVICES WHERE services.id = parsedId
-			const { error } = await db.from('services').delete().eq('id', parsedId);
-			const services = await db
+			const { error } = await supabase.from('services').delete().eq('id', parsedId);
+			const services = await supabase
 				.from('services')
 				.select()
 				.order('id', { ascending: true })
@@ -111,7 +110,7 @@ export const actions = {
 			}
 		}
 	},
-	newService: async ({ request }) => {
+	newService: async ({ request, locals: { supabase } }) => {
 		const data = await request.formData();
 
 		let title = data.get('title') as string;
@@ -127,7 +126,7 @@ export const actions = {
 			};
 		} else {
 			//INSERT INTO SERVICES(title, description) VALUES (thisElement title, thisElement description)
-			const { error } = await db
+			const { error } = await supabase
 				.from('services')
 				.insert({ title: title, description: description });
 
