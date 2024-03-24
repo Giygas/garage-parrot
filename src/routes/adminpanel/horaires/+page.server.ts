@@ -33,12 +33,10 @@ export const actions = {
 		const days = data.entries();
 		// Parse each entry to update the database
 		for (const day of days) {
-			console.log(day);
 			const id = parseInt(day[0]);
 			const hours = day[1].toString();
 			// UPDATE HORAIRES SET (horaires.)HOURS = (this.)HOURS WHERE (horaires.)ID = (this.)ID
 			const { error } = await supabase.from('horaires').update({ hours: hours }).eq('id', id);
-			console.log(error);
 
 			if (error) {
 				return {
