@@ -61,8 +61,8 @@
 </section>
 
 <section class="container">
-	<div class="flex flex-wrap bg-primary/10 sm:rounded-lg p-8 mt-10 md:mt-24 2xl:mt-40 lg:mx-20">
-		<div class="text-primary md:text-lg lg:text-2xl">
+	<div class="flex flex-wrap bg-primary/20 sm:rounded-lg p-8 mt-10 md:mt-24 2xl:mt-40 lg:mx-20">
+		<div class="text-secondary md:text-lg lg:text-2xl">
 			La confiance est notre priorité. Nous considérons notre atelier comme un lieu de confiance
 			pour nos clients, où ils peuvent être assurés que leurs voitures seront entre de bonnes mains.
 			Nous nous engageons à fournir un service honnête, transparent et personnalisé. Votre
@@ -71,10 +71,10 @@
 	</div>
 
 	<div
-		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 2xl:mt-40 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
+		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 2xl:mt-40 lg:mx-20 sm:rounded-lg md:bg-primary/20 rounded-md"
 	>
 		<div
-			class="col-span-3 md:col-span-2 xl:col-span-3 text-black md:text-primary md:text-lg p-8 md:pe-0 lg:text-2xl {isSmallScreen
+			class="col-span-3 md:col-span-2 xl:col-span-3 text-secondary md:text-lg p-8 md:pe-0 lg:text-2xl {isSmallScreen
 				? 'text-content reparation'
 				: ''} text-right"
 		>
@@ -89,13 +89,14 @@
 					src={reparation_small}
 					class="absolute h-3/4 2xl:h-[120%] object-cover -right-10 lg:-right-20 top-0 2xl:-top-20 bottom-0 left-0 m-auto rounded-2xl"
 					alt="A group of mechanics working in the vehicle"
+					loading="lazy"
 				/>
 			</div>
 		{/if}
 	</div>
 
 	<div
-		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 2xl:mt-40 lg:mx-20 sm:rounded-lg md:bg-primary/10 rounded-md"
+		class="grid md:grid-cols-3 xl:grid-cols-4 items-center p-0 mt-10 md:mt-20 2xl:mt-40 lg:mx-20 sm:rounded-lg md:bg-primary/20 rounded-md"
 	>
 		{#if !isSmallScreen}
 			<div class=" relative h-full w-full">
@@ -103,11 +104,12 @@
 					src={vehicle_small}
 					class="absolute h-3/4 2xl:h-[120%] object-cover -left-10 lg:-left-20 top-0 2xl:-top-20 bottom-0 right-0 m-auto rounded-2xl"
 					alt="A vehicle door"
+					loading="lazy"
 				/>
 			</div>
 		{/if}
 		<div
-			class="col-span-3 md:col-span-2 xl:col-span-3 text-black md:text-primary md:text-lg p-8 md:ps-0 lg:text-2xl {isSmallScreen
+			class="col-span-3 md:col-span-2 xl:col-span-3 text-secondary md:text-lg p-8 md:ps-0 lg:text-2xl {isSmallScreen
 				? 'text-content vehicule'
 				: ''}"
 		>

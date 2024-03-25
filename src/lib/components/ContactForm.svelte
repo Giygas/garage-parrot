@@ -43,6 +43,7 @@
 						name={field.name}
 						class="input input-bordered input-sm md:input-md input-primary input-md grow w-full"
 						value={userData ? userData[fieldName] : ''}
+						aria-label={field.name}
 					/>
 				</div>
 			{/each}
@@ -53,6 +54,7 @@
 					class="textarea textarea-primary grow w-full h-40"
 					maxlength="255"
 					value={userData ? userData.message : ''}
+					aria-label="message"
 				/>
 			</div>
 			<button class="btn btn-accent mt-5 w-full lg:w-40 self-end">ENVOYER</button>

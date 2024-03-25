@@ -121,15 +121,44 @@
 						class="input input-bordered bg-neutral/50"
 						on:input={handleInput}
 						bind:value={name}
+						aria-label="name"
 					/>
 				</div>
 				<div class="flex flex-row gap-2 items-middle justify-between">
 					<label for="note" class="self-center">Votre note:</label>
 					<div class="rating rating-lg self-center" id="rating">
-						<input type="radio" name="rating" id="r1" value="1" class="mask mask-star bg-accent" />
-						<input type="radio" name="rating" id="r2" value="2" class="mask mask-star bg-accent" />
-						<input type="radio" name="rating" id="r3" value="3" class="mask mask-star bg-accent" />
-						<input type="radio" name="rating" id="r4" value="4" class="mask mask-star bg-accent" />
+						<input
+							type="radio"
+							name="rating"
+							id="r1"
+							value="1"
+							class="mask mask-star bg-accent"
+							aria-label="1star"
+						/>
+						<input
+							type="radio"
+							name="rating"
+							id="r2"
+							value="2"
+							class="mask mask-star bg-accent"
+							aria-label="2star"
+						/>
+						<input
+							type="radio"
+							name="rating"
+							id="r3"
+							value="3"
+							class="mask mask-star bg-accent"
+							aria-label="3star"
+						/>
+						<input
+							type="radio"
+							name="rating"
+							id="r4"
+							value="4"
+							class="mask mask-star bg-accent"
+							aria-label="4star"
+						/>
 						<input
 							type="radio"
 							name="rating"
@@ -137,6 +166,7 @@
 							value="5"
 							class="mask mask-star bg-accent"
 							checked
+							aria-label="5star"
 						/>
 					</div>
 				</div>
@@ -149,6 +179,7 @@
 					class="textarea textarea-bordered bg-neutral/50"
 					bind:value={message}
 					on:input={handleInput}
+					aria-label="message"
 				/>
 				<div class="modal-action flex flex-row gap-5">
 					<button class="btn" on:click|preventDefault={closeModal}>FERMER</button>

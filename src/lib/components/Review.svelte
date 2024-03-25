@@ -13,17 +13,17 @@
 		.map((star: string, index: number) => ({ star, key: index }));
 </script>
 
-<div class=" p-6 bg-primary/80 rounded-lg snap-center text-mont min-w-[20em] md:min-w-[23rem]">
+<div class=" p-6 bg-primary rounded-lg snap-center text-mont min-w-[20em] md:min-w-[23rem]">
 	<div class="flex flex-row justify-between text-xl">
 		<div class="uppercase text-lg text-base-100 font-semibold">{rv.name}</div>
 		<div class="text-accent flex flex-row self-baseline gap-0">
-			{#each stars as star (star)}
+			{#each stars as star, i (star)}
 				{#if star.star === 'filled'}
 					<svg
 						height="25px"
 						width="25px"
 						version="1.1"
-						id="Capa_1"
+						id="Capa_{i}"
 						xmlns="http://www.w3.org/2000/svg"
 						xmlns:xlink="http://www.w3.org/1999/xlink"
 						viewBox="-3.77 -3.77 61.41 61.41"
@@ -49,7 +49,7 @@
 						height="25px"
 						width="25px"
 						version="1.1"
-						id="Capa_1"
+						id="Capa_{i}"
 						xmlns="http://www.w3.org/2000/svg"
 						xmlns:xlink="http://www.w3.org/1999/xlink"
 						viewBox="-3.77 -3.77 61.41 61.41"

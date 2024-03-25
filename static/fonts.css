@@ -1,7 +1,7 @@
 @font-face {
 	font-family: Montserrat;
 	src: url('fonts/montserrat.woff2') format('woff2');
-	font-display: auto;
+	font-display: swap;
 	font-style: normal;
 	font-weight: 100 200 300 400 500 600 700 800 900; /* specify the range of weights available */
 }
@@ -9,6 +9,7 @@
 @font-face {
 	font-family: 'Barlow';
 	src: url('fonts/barlow-light.woff') format('woff');
+	font-display: swap;
 	font-weight: 300;
 	font-style: normal;
 }
@@ -16,6 +17,7 @@
 @font-face {
 	font-family: 'Barlow';
 	src: url('fonts/barlow-regular.woff') format('woff');
+	font-display: swap;
 	font-weight: 400;
 	font-style: normal;
 }
@@ -23,6 +25,7 @@
 @font-face {
 	font-family: 'Barlow';
 	src: url('fonts/barlow-medium.woff') format('woff');
+	font-display: swap;
 	font-weight: 500;
 	font-style: normal;
 }
@@ -30,6 +33,7 @@
 @font-face {
 	font-family: 'Barlow';
 	src: url('fonts/barlow-semibold.woff') format('woff');
+	font-display: swap;
 	font-weight: 600;
 	font-style: normal;
 }
@@ -37,6 +41,7 @@
 @font-face {
 	font-family: 'Barlow';
 	src: url('fonts/barlow-bold.woff') format('woff');
+	font-display: swap;
 	font-weight: 700;
 	font-style: normal;
 }
