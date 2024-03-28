@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { DatabaseVoiture } from '$lib/types';
-	import VehicleCard from '$lib/components/VehicleCard.svelte';
 	import type { PageData } from './$types';
+	import VehicleCard from '$lib/components/VehicleCard.svelte';
 	import RangeSlider from 'svelte-range-slider-pips';
 
 	export let data: PageData;
@@ -101,7 +101,7 @@
 		<div class="flex flex-col shrink-0 w-full mt-2">
 			<h3>Année:</h3>
 			<RangeSlider
-				id="price"
+				id="year"
 				max={maxYear}
 				min={minYear}
 				range="true"
