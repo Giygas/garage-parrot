@@ -23,7 +23,9 @@
 	{:else}
 		<h2 class=" text-small-caps text-accent text-lg lg:text-3xl">Voulez-vous nous contacter?</h2>
 	{/if}
-	<h4 class="text-center md:text-lg lg:text-2xl shrink-0">Téléphone: 07 08 09 10 20</h4>
+	<span class="text-center md:text-lg lg:text-2xl shrink-0 font-montserrat"
+		>Téléphone: 07 08 09 10 20</span
+	>
 </div>
 <div
 	class="contact-background m-8 p-4 sm:m-10 md:mt-20 md:p-20 xl:w-[1000px] xl:mx-auto text-secondary text-sm md:text-lg"

@@ -73,7 +73,7 @@
 	<div class="md:hidden z-30">
 		<label class="btn btn-circle swap swap-rotate">
 			<!-- this hidden checkbox controls the state -->
-			<input class="z-50" type="checkbox" bind:checked={showMenu} />
+			<input class="z-50" type="checkbox" bind:checked={showMenu} aria-label="toggleMenu" />
 
 			<!-- hamburger icon -->
 			<svg
@@ -124,6 +124,9 @@
 {/if}
 
 <style lang="postcss">
+	img {
+		aspect-ratio: 2.05;
+	}
 	.cleanbg:active {
 		background-color: #a51d2d50;
 	}

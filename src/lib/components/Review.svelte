@@ -15,7 +15,7 @@
 
 <div class=" p-6 bg-primary rounded-lg snap-center text-mont min-w-[20em] md:min-w-[23rem]">
 	<div class="flex flex-row justify-between text-xl">
-		<div class="uppercase text-lg text-base-100 font-semibold">{rv.name}</div>
+		<div class="uppercase text-lg text-neutral font-semibold">{rv.name}</div>
 		<div class="text-accent flex flex-row self-baseline gap-0">
 			{#each stars as star, i (star)}
 				{#if star.star === 'filled'}
@@ -74,7 +74,7 @@
 			{/each}
 		</div>
 	</div>
-	<div class="uppercase flex text-justify p-2 pt-4 font-light text-base-100 text-xs md:text-sm">
+	<div class="uppercase flex text-justify p-2 pt-4 font-light text-neutral text-xs md:text-sm">
 		{rv.message}
 	</div>
 </div>
