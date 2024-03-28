@@ -6,8 +6,8 @@
 	export let data: PageData;
 
 	const reviews: any = data.revs;
-	import vehicle_small from '$lib/assets/vehicle.png';
-	import reparation_small from '$lib/assets/reparation.png';
+	import vehicle_small from '$lib/assets/vehicle.webp';
+	import reparation_small from '$lib/assets/reparation.webp';
 	import { afterNavigate, replaceState } from '$app/navigation';
 	import { page } from '$app/stores';
 
@@ -128,11 +128,11 @@
 		--background-image: none;
 
 		&.reparation {
-			--background-image: url('$lib/assets/reparation_small.png');
+			--background-image: url('$lib/assets/reparation_small.webp');
 		}
 
 		&.vehicule {
-			--background-image: url('$lib/assets/vehicle_small.png');
+			--background-image: url('$lib/assets/vehicle_small.webp');
 		}
 	}
 
