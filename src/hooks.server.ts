@@ -45,22 +45,24 @@ export const handle: Handle = async ({ event, resolve }) => {
 		redirect(302, '/');
 	}
 
+	// If a non logged in user tries to access adminpanel, redirect to login
 	if (event.url.pathname.startsWith('/adminpanel')) {
 		const activeUser = (await event.locals.supabase.auth.getUser()).data.user;
 		if (!activeUser) {
+			// Destroy the session if the user is not logged in
 			await event.locals.supabase.auth.refreshSession();
-
 			redirect(302, '/login');
 		}
 	}
 
 	const routes = event.url.pathname;
 
+	// Limit the routes that employes can use
 	if (
 		routes.startsWith('/contact') ||
 		routes.startsWith('/employes') ||
 		routes.startsWith('/horaires') ||
-		routes.startsWith('/horaires')
+		routes.startsWith('/services')
 	) {
 		const activeSession = await event.locals.getSession();
 		if (activeSession?.user.user_metadata.admin) {
