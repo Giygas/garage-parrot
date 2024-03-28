@@ -44,7 +44,7 @@
 </script>
 
 <svelte:head>
-	<title>Services - Garage Parrot</title>
+	<title>Véhicules - Garage Parrot</title>
 </svelte:head>
 
 <div class="md:hidden h-[120px]" />
