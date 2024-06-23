@@ -50,7 +50,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		const activeUser = (await event.locals.supabase.auth.getUser()).data.user;
 		if (!activeUser) {
 			// Destroy the session if the user is not logged in
-			await event.locals.supabase.auth.refreshSession();
+			await event.locals.supabase.auth.signOut();
 			redirect(302, '/login');
 		}
 	}
