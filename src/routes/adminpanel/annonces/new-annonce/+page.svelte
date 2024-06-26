@@ -26,6 +26,8 @@
 		goto('/adminpanel/annonces', { replaceState: true });
 	}
 
+	//TODO: Try to use positive numbers in the kilometrage and price (for 0 values)
+
 	const kilometrage = intProxy(form, 'kilometrage', {
 		empty: 'zero',
 		initiallyEmptyIfZero: true

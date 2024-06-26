@@ -12,6 +12,27 @@ const config = {
 		// If your environment is not supported or you settled on a specific environment, switch out the adapter.
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter(),
+		csp: {
+			mode: 'auto',
+			directives: {
+				'img-src': ['self', 'data:', 'localhost:*', '127.0.0.1:*', 'https://*.supabase.co'],
+				'script-src': ['self', 'https://*.supabase.co', 'https://apis.google.com', 'localhost'],
+				'frame-src': ['https://*.google.com'],
+				'connect-src': [
+					'self',
+					'127.0.0.1:*',
+					'https://*.google.com',
+					'*.supabase.com',
+					'*.iconify.design'
+				],
+				'object-src': ['none'],
+				'base-uri': ['self'],
+				'frame-ancestors': ['self'],
+				'worker-src': ['none'],
+				'font-src': ['self'],
+				'upgrade-insecure-requests': true
+			}
+		},
 		alias: {
 			$components: 'src/lib/components',
 			'$components/*': 'src/lib/components/*'
