@@ -7,11 +7,13 @@ export const vehicleSchema = z.object({
 	price: z
 		.number({ invalid_type_error: 'Le prix doit être un nombre' })
 		.safe('Nope')
+		//BUG: Le prix doit etre positif meme si je mets 0
 		.positive('Le prix doit être positif'),
 	kilometrage: z
 		.number({ invalid_type_error: 'Le kilométrage doit être un nombre' })
 		.nonnegative('Le kilométrage doit etre positif')
 		.lte(2000000, 'Le kilométrage doit être inférieur à 2.000.000 ')
+		//BUG: It's nullable because I'm using server side validation
 		.nullable(),
 	year: z
 		.number({ invalid_type_error: "L'année doit être un nombre" })

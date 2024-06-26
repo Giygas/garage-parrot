@@ -68,6 +68,7 @@
 
 <dialog bind:this={modal} id="temoignage" class="modal modal-bottom sm:modal-middle">
 	<div class="modal-box">
+		<!-- BUG: try to use enhance in this form -->
 		<form method="POST" action="/formSubmit?/sendRating">
 			<input type="hidden" id="url" name="url" value={$page.url.pathname} />
 			<div class="flex flex-col gap-6 p-4">

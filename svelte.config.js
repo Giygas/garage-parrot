@@ -16,7 +16,13 @@ const config = {
 			mode: 'auto',
 			directives: {
 				'img-src': ['self', 'data:', 'localhost:*', '127.0.0.1:*', 'https://*.supabase.co'],
-				'script-src': ['self', 'https://*.supabase.co', 'https://apis.google.com', 'localhost'],
+				'script-src': [
+					'self',
+					'https://*.supabase.co',
+					'https://apis.google.com',
+					'localhost',
+					'*.vercel-scripts.com'
+				],
 				'frame-src': ['https://*.google.com'],
 				'connect-src': [
 					'self',
@@ -30,6 +36,7 @@ const config = {
 				'frame-ancestors': ['self'],
 				'worker-src': ['none'],
 				'font-src': ['self'],
+				'block-all-mixed-content': true,
 				'upgrade-insecure-requests': true
 			}
 		},

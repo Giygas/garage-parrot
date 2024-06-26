@@ -110,6 +110,8 @@
 
 		input?.dispatchEvent(new Event('input'));
 	};
+
+	// TODO: try to use a loading page in this form when it's submitting
 </script>
 
 <div class="flex flex-col gap-10 items-center w-full mt-10">
