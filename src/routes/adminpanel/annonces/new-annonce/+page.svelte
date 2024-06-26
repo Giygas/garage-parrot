@@ -13,10 +13,19 @@
 	let previewOthers: (string | null)[] = [];
 	$: previewOthers;
 
-	const { form, errors, enhance, message } = superForm(data.form, {
+	const { form, errors, enhance, message, delayed } = superForm(data.form, {
 		customValidity: true,
-		validators: zodClient(vehicleSchema)
+		validators: zodClient(vehicleSchema),
+		delayMs: 500,
+		timeoutMs: 5000
 	});
+
+	// Show the loading toast if the form is delayed
+	$: if ($delayed) {
+		toast.loading('Enregistrement en cours...', { id: 'loading-toast' });
+	} else {
+		toast.dismiss('loading-toast');
+	}
 
 	// Clear the image previews and show the success toast
 	$: if ($message) {
@@ -26,15 +35,13 @@
 		goto('/adminpanel/annonces', { replaceState: true });
 	}
 
-	//TODO: Try to use positive numbers in the kilometrage and price (for 0 values)
-
 	const kilometrage = intProxy(form, 'kilometrage', {
 		empty: 'undefined',
 		initiallyEmptyIfZero: true
 	});
-	const price = numberProxy(form, 'price', { empty: 'zero', initiallyEmptyIfZero: true });
+	const price = numberProxy(form, 'price', { empty: 'undefined', initiallyEmptyIfZero: true });
 
-	const year = intProxy(form, 'year', { empty: 'zero', initiallyEmptyIfZero: true });
+	const year = intProxy(form, 'year', { empty: 'undefined', initiallyEmptyIfZero: true });
 	const transmission = intProxy(form, 'transmission', { empty: 'null' });
 	const doors = intProxy(form, 'doors', { empty: 'null' });
 	const seats = intProxy(form, 'seats', { empty: 'null' });
@@ -110,9 +117,9 @@
 
 		input?.dispatchEvent(new Event('input'));
 	};
-
-	// TODO: try to use a loading page in this form when it's submitting
 </script>
+
+<div class="" />
 
 <div class="flex flex-col gap-10 items-center w-full mt-10">
 	<h2 class="font-montserrat uppercase text-3xl text-accent self-start">Creer un Annonce</h2>

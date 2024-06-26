@@ -109,7 +109,6 @@ export const actions = {
 			fields.title = fields.title + ' ' + Date.now();
 		}
 
-		//@ts-expect-error I already checked for null in kilometrage higher up... Good ol' typescript
 		const { error: insertError } = await db.from('voitures').insert({
 			title: fields.title,
 			price: fields.price,
@@ -132,6 +131,6 @@ export const actions = {
 			return setError(form, 'Problème avec la base de données' + error);
 		}
 
-		return message(form, 'Vehicule enregistré !');
+		return message(form, 'Annonce créée avec succès');
 	}
 };
