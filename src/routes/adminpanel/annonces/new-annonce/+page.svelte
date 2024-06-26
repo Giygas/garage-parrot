@@ -346,7 +346,7 @@
 								<img src={img} alt="Others preview" class="w-60 rounded-lg" />
 								<button
 									class="absolute -top-4 -right-4"
-									on:click={() => {
+									on:click|preventDefault={() => {
 										removeFileFromOtherImages(i);
 									}}
 									><Icon
