@@ -36,6 +36,14 @@ const config = {
 				'frame-ancestors': ['self'],
 				'worker-src': ['none'],
 				'font-src': ['self'],
+				'child-src': ['self'],
+				sandbox: [
+					'allow-same-origin',
+					'allow-scripts',
+					'allow-popups',
+					'allow-forms',
+					'allow-modals'
+				],
 				'block-all-mixed-content': true,
 				'upgrade-insecure-requests': true
 			}

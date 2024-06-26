@@ -2,6 +2,19 @@ import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/publi
 import { redirect, type Handle } from '@sveltejs/kit';
 import { createServerClient } from '@supabase/ssr';
 
+// CSP security headers
+const securityHeaders = {
+	'cross-origin-opener-policy': 'same-origin-allow-popups',
+	'referrer-policy': 'strict-origin-when-cross-origin',
+	'x-content-type-options': 'nosniff',
+	'x-dns-prefetch-control': 'off',
+	'x-download-options': 'noopen',
+	'x-frame-options': 'DENY',
+	'x-xss-protection': '1; mode=block',
+	'permissions-policy':
+		'accelerometer=(), camera=(), document-domain=(), encrypted-media=(), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), geolocation=()'
+};
+
 export const handle: Handle = async ({ event, resolve }) => {
 	event.locals.supabase = createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
 		cookies: {
@@ -70,9 +83,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 	}
 
-	return resolve(event, {
+	const response = await resolve(event, {
 		filterSerializedResponseHeaders(name) {
 			return name === 'content-range';
 		}
 	});
+
+	Object.entries(securityHeaders).forEach(([name, value]) => {
+		response.headers.set(name, value);
+	});
+
+	return response;
 };
