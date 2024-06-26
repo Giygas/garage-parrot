@@ -19,12 +19,6 @@ export const actions = {
 
 		const fields = form.data;
 
-		// Server side the kilometrage because it can be 0, but is hard to do it client side with zod as validator. Same with the first image of the vehicle
-		const kilometrage = formData.get('kilometrage');
-		if (kilometrage == '') {
-			setError(form, 'kilometrage', 'Le kilométrage est obligatoire');
-		}
-
 		const imagePrincipal = formData.get('imagePrincipal');
 
 		// Validate image

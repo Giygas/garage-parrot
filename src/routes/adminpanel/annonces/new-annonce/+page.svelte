@@ -29,7 +29,7 @@
 	//TODO: Try to use positive numbers in the kilometrage and price (for 0 values)
 
 	const kilometrage = intProxy(form, 'kilometrage', {
-		empty: 'zero',
+		empty: 'undefined',
 		initiallyEmptyIfZero: true
 	});
 	const price = numberProxy(form, 'price', { empty: 'zero', initiallyEmptyIfZero: true });
