@@ -40,6 +40,19 @@ export const handle: Handle = async ({ event, resolve }) => {
 		return session;
 	};
 
+	// Check for the user in every route starting with adminpanel, if there is no user in the database
+	// redirect to the login page
+	if (event.url.pathname.startsWith('/adminpanel')) {
+		const user = await event.locals.supabase.auth.getUser();
+		// Get if the user has metadata or not, so it gets automatically logged out
+		// Doing this because otherwise the session will still be present after deleting it from the database
+		const userMetadata = user.data?.user?.user_metadata || {};
+		const activeUser = Object.keys(userMetadata).length > 0;
+		if (!activeUser) {
+			event.locals.supabase.auth.signOut();
+		}
+	}
+
 	if (event.url.pathname.endsWith('/login')) {
 		// Set the cookie for the first time the admin tries to log in
 		if (event.cookies.get('firstTime')) {
@@ -89,6 +102,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 	});
 
+	// Set the security headers
 	Object.entries(securityHeaders).forEach(([name, value]) => {
 		response.headers.set(name, value);
 	});
