@@ -1,9 +1,13 @@
 <script lang="ts">
-	import { applyAction, enhance } from '$app/forms';
-	import type { ActionData } from './$types';
+	import { enhance } from '$app/forms';
 	import toast from 'svelte-french-toast';
+	import type { ActionData } from './$types';
 
 	export let form: ActionData;
+
+	$: if (form?.success) {
+		toast.success("L'utilisateur a été créé avec succès");
+	}
 
 	let password: string;
 	$: password = '';
@@ -21,23 +25,7 @@
 		{#if form?.error}
 			<span class="text-accent text-lg block text-center"> {form.message} </span>
 		{/if}
-		<form
-			method="POST"
-			use:enhance={() => {
-				return async ({ result, update }) => {
-					if (result.type !== 'failure' && result.type !== 'error') {
-						toast.promise(applyAction(result), {
-							loading: "Création de l'utilisateur...",
-							success: 'Utilisateur créé',
-							error: "Une erreur s'est produite lors de la création de l'utilisateur"
-						});
-					} else {
-						password = '';
-					}
-					await update({ reset: true, invalidateAll: true });
-				};
-			}}
-		>
+		<form method="POST" use:enhance>
 			<div class="grid grid-cols-8 items-center gap-8 pt-10">
 				<div class="col-span-2 text-end">
 					<label for="name" class="text-xl uppercase">Nom et prénom:</label>
