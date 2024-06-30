@@ -343,7 +343,7 @@
 			{#if $errors.otherImages}
 				<div class="col-span-12 justify-self-center">
 					<span class="text-xl text-accent">
-						{$errors.otherImages._errors}
+						{$errors.otherImages._errors ? $errors.otherImages._errors : ''}
 					</span>
 				</div>
 			{/if}
