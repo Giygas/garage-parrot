@@ -29,7 +29,8 @@ const config = {
 					'127.0.0.1:*',
 					'https://*.google.com',
 					'*.supabase.com',
-					'*.iconify.design'
+					'*.iconify.design',
+					'https://*.supabase.co'
 				],
 				'object-src': ['none'],
 				'base-uri': ['self'],

@@ -85,10 +85,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	// Limit the routes that employes can use
 	if (
-		routes.startsWith('/contact') ||
-		routes.startsWith('/employes') ||
-		routes.startsWith('/horaires') ||
-		routes.startsWith('/services')
+		routes.startsWith('adminpanel/contact') ||
+		routes.startsWith('adminpanel/employes') ||
+		routes.startsWith('adminpanel/horaires') ||
+		routes.startsWith('adminpanel/services')
 	) {
 		const activeSession = await event.locals.getSession();
 		if (activeSession?.user.user_metadata.admin) {
