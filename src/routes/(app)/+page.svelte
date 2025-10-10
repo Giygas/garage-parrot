@@ -8,7 +8,7 @@
 	const reviews: any = data.revs;
 	import vehicle_small from '$lib/assets/vehicle.webp';
 	import reparation_small from '$lib/assets/reparation.webp';
-	import { afterNavigate, replaceState } from '$app/navigation';
+
 	import { page } from '$app/stores';
 
 	// Manage windows size for dynamic class generation
@@ -31,10 +31,6 @@
 		if (typeof window !== 'undefined') {
 			window.removeEventListener('resize', resizeListener);
 		}
-	});
-
-	afterNavigate(() => {
-		replaceState('', $page.url.href.split('#')[0]);
 	});
 
 	$: isSmallScreen = windowWidth < imageBreakpoint;
