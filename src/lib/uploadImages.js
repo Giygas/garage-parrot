@@ -6,8 +6,15 @@ import sharp from 'sharp';
 
 import { createClient } from '@supabase/supabase-js';
 
-// Load env variables
-dotenv.config();
+// Load env variables based on NODE_ENV or mode
+const mode = process.env.NODE_ENV || process.env.MODE || 'development';
+const envFile = mode === 'staging' ? '.env.staging' : '.env';
+dotenv.config({ path: envFile });
+
+console.log(`=== Upload Script ===`);
+console.log(`Mode: ${mode}`);
+console.log(`Env file: ${envFile}`);
+console.log(`Supabase URL: ${process.env.PUBLIC_SUPABASE_URL}`);
 
 // Initialize Supabase client
 const supabaseUrl = process.env.PUBLIC_SUPABASE_URL;
