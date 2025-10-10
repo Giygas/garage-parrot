@@ -2,7 +2,10 @@ INSERT INTO temoignages(name, rating, message, approved)
   VALUES ('Francisco', 3, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rerum ipsum sequi error saepe doloribus natus omnis iusto. Omnis, voluptatibus nihil et ut laboriosam tenetur!.', TRUE),
 ('Gustavo', 5, 'Quos, laboresit voluptates unde tempore molestiae dolore soluta quaerat est iure libero alias rerum. Quia architecto voluptates cupiditate aut autem sint tempora ad labore.', TRUE),
 ('Frank', 2, 'Super le service, mais un peu cher', TRUE),
-('Stephane', 1, 'Mon vehicule n''est jamais sorti du garage', FALSE);
+('Stephane', 1, 'Mon vehicule n''est jamais sorti du garage', FALSE),
+('Marie', 5, 'Excellent garage ! Service rapide et professionnel. Mon voiture est comme neuve après la réparation. Je recommande vivement !', TRUE),
+('Jean-Luc', 4, 'Très satisfait de l''entretien de ma voiture. L''équipe est compétente et les tarifs sont raisonnables. Je reviendrai sans hésiter.', TRUE),
+('Sophie', 5, 'Un service client exceptionnel ! Ils ont pris le temps d''expliquer les réparations nécessaires et le travail a été parfait. Merci encore !', TRUE);
 
 INSERT INTO services(title, description)
   VALUES ('Réparation de carrosserie', 'Nous sommes spécialisés dans la réparation de carrosserie pour redonner à votre voiture son aspect d''origine. Que ce soit pour des rayures, des bosses ou des dommages plus importants, notre équipe expérimentée utilise des techniques avancées et des équipements de pointe pour réparer votre carrosserie avec précision et efficacité. '),
