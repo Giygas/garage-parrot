@@ -36,7 +36,13 @@
 				<h3 class="font-bold text-lg">Creer un temoignage</h3>
 				<div class="flex flex-col gap-2">
 					<label for="name">Votre prénom</label>
-					<input name="name" id="name" type="text" class="input input-bordered bg-neutral/50" />
+					<input
+						name="name"
+						id="name"
+						type="text"
+						autocomplete="given-name"
+						class="input input-bordered bg-neutral/50"
+					/>
 				</div>
 				<div class="flex flex-row gap-2 items-middle justify-between">
 					<label for="r1" class="self-center">Votre note:</label>
