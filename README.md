@@ -12,6 +12,8 @@
 [![RLS](https://img.shields.io/badge/RLS-FF6B6B)](https://supabase.com/docs/guides/auth/row-level-security)
 [![JWT](https://img.shields.io/badge/JWT-000000)](https://jwt.io/)
 [![CSP](https://img.shields.io/badge/CSP-FF9F1C)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+[![DOMPurify](https://img.shields.io/badge/DOMPurify-5A9FD4)](https://github.com/cure53/DOMPurify)
+[![Vercel Analytics](https://img.shields.io/badge/Vercel_Analytics-000000)](https://vercel.com/analytics)
 
 > **Projet de fin de formation - Développeur Web & Web Mobile**
 
@@ -43,10 +45,12 @@ This project was developed as the final deliverable for the **Développeur Web &
 ### 🔒 Security & Best Practices
 - **Authentication**: JWT-based auth with role-based access control (Admin/Employee)
 - **Database Security**: Row Level Security (RLS) policies for fine-grained data access
-- **Content Security**: CSP headers for XSS protection and resource control
+- **Content Security**: Enhanced CSP headers for XSS protection and resource control
+- **Input Sanitization**: DOMPurify for HTML content sanitization and XSS prevention
 - **Input Validation**: Zod schemas for runtime type checking and form validation
 - **Type Safety**: Full TypeScript implementation with strict mode throughout
 - **Code Quality**: ESLint + Prettier with automated formatting and linting
+- **Permission Management**: User view permissions with role-based access functions
 
 ### 🚀 Performance & Optimization
 - **Image Processing**: Sharp.js pipeline for automated image optimization and WebP conversion
@@ -56,18 +60,20 @@ This project was developed as the final deliverable for the **Développeur Web &
 - **CDN Integration**: Supabase Storage with global content delivery
 
 ### 🧪 Testing & Quality Assurance
-- **Testing Framework**: Vitest with comprehensive test suite
+- **Testing Framework**: Vitest with comprehensive test suite and 80% coverage thresholds
 - **Component Testing**: @testing-library/svelte for UI component testing
-- **Integration Testing**: Database operations and API endpoint testing
-- **Coverage Reports**: V8 provider with HTML, text, and JSON reports
+- **Integration Testing**: Database operations and API endpoint testing with TestDatabase utility
+- **Coverage Reports**: V8 provider with HTML, text, and JSON reports (80% thresholds enforced)
 - **Type Checking**: Automated TypeScript validation with svelte-check
+- **Test Database**: Isolated test environment with automatic cleanup and seeding
 
 ### 🛠️ Development Workflow
 - **Version Control**: Git with conventional commit messages
 - **Local Development**: Docker/Colima for consistent local Supabase environment
 - **Database Migrations**: Version-controlled schema changes with Supabase
+- **Storage Policies**: Automated storage policy setup for local development
 - **Environment Management**: Separate configurations for development, staging, and production
-- **CI/CD**: Automated deployment to Vercel with build verification
+- **CI/CD**: Automated deployment to Vercel with build verification and analytics
 
 ## 🚀 Features
 
@@ -136,11 +142,14 @@ supabase init
 # Reset database with schema and seed data
 supabase db reset
 
+# Setup storage policies for local development
+pnpm run setup-storage-policies
+
 # Generate TypeScript types from database schema
 npx supabase gen types typescript --local --schema public > src/lib/db/types.ts
 ```
 
-> **📝 Note**: You'll need to create a Supabase project at [supabase.com](https://supabase.com) if you haven't already, then link your local instance to your project. The `supabase db reset` command will push all schema and seed data automatically. The type generation command ensures TypeScript has the latest database schema definitions.
+> **📝 Note**: You'll need to create a Supabase project at [supabase.com](https://supabase.com) if you haven't already, then link your local instance to your project. The `supabase db reset` command will push all schema and seed data automatically. The `setup-storage-policies` script configures local storage policies for image uploads. The type generation command ensures TypeScript has the latest database schema definitions.
 
 ### 6. Start Development Server
 ```bash
@@ -170,7 +179,10 @@ pnpm run stopdb           # Stop Supabase + Colima
 # Building & Deployment
 pnpm run build            # Build for production
 pnpm run preview          # Preview production build locally
-pnpm run local-staging    # Build for staging with database reset
+pnpm run local-staging    # Build for staging with database reset and storage policies
+
+# Database Management
+pnpm run resetdb          # Reset database with storage policies and post-build processing
 ```
 
 ### 🔍 Code Quality & Testing
@@ -184,8 +196,9 @@ pnpm run format           # Format code with Prettier
 # Testing Suite
 pnpm run test             # Run tests in watch mode
 pnpm run test:run         # Run tests once
-pnpm run test:coverage    # Generate coverage report
+pnpm run test:coverage    # Generate coverage report (80% threshold)
 pnpm run test:ui          # Run tests with UI interface
+pnpm run test:clean       # Run tests with database reset
 ```
 
 ### 🗄️ Database Management
@@ -195,6 +208,16 @@ supabase db diff          # Show schema differences
 supabase start            # Start local Supabase services
 supabase stop             # Stop local Supabase services
 supabase gen types typescript --local --schema public > src/lib/db/types.ts
+
+# Storage Policy Management
+pnpm run setup-storage-policies  # Setup local storage policies
+```
+
+### 📊 Analytics & Monitoring
+```bash
+# Vercel Analytics (automatically configured)
+# Speed Insights (automatically configured)
+# No additional setup required for production
 ```
 
 ## 🌐 Environment Configuration
@@ -211,6 +234,26 @@ PRIVATE_SUPABASE_SERVICE_KEY=your_supabase_service_role_key
 # Optional: For staging environment
 # NODE_ENV=staging
 ```
+
+### Key Dependencies
+
+#### Production Dependencies
+- **@vercel/analytics**: Automatic performance and usage analytics
+- **@vercel/speed-insights**: Core Web Vitals monitoring
+- **dompurify**: HTML content sanitization for XSS prevention
+- **svelte-french-toast**: User-friendly toast notifications
+- **@supabase/supabase-js**: Database and authentication client
+- **@sveltejs/kit**: Full-stack web framework
+- **tailwindcss**: Utility-first CSS framework
+- **zod**: Schema validation and type safety
+
+#### Development Dependencies
+- **vitest**: Testing framework with coverage reporting
+- **@testing-library/svelte**: Component testing utilities
+- **sharp**: High-performance image processing
+- **typescript**: Type-safe JavaScript development
+- **eslint**: Code quality and style enforcement
+- **prettier**: Code formatting and consistency
 
 ### Getting Supabase Credentials
 
@@ -234,11 +277,11 @@ supabase status
 garage-parrot/
 ├── src/
 │   ├── lib/
-│   │   ├── assets/          # Static assets (images, logos)
+│   │   ├── assets/          # Static assets (images, logos, vehicle photos)
 │   │   ├── components/      # Reusable Svelte components
 │   │   ├── db/             # Database clients and TypeScript types
 │   │   ├── uploadImages.js # Automated image processing script
-│   │   └── *.ts           # Utility functions and Zod schemas
+│   │   └── *.ts           # Utility functions, Zod schemas, and helpers
 │   ├── routes/
 │   │   ├── (app)/          # Main application routes with layout
 │   │   │   ├── services/   # Services page
@@ -254,20 +297,71 @@ garage-parrot/
 │   │   │   └── horaires/   # Business hours management
 │   │   ├── login/          # Authentication pages
 │   │   └── formSubmit/     # Form submission handlers
+│   ├── test/              # Test utilities and setup
+│   │   ├── integration/    # Integration tests
+│   │   ├── setup.ts       # Test configuration
+│   │   └── utils.ts       # Test utilities
 │   ├── app.html           # HTML template with meta tags
 │   ├── app.postcss        # Global styles and Tailwind imports
 │   └── hooks.server.ts    # Server-side hooks for auth and security
+├── scripts/               # Development and deployment scripts
+│   ├── setup-storage-policies.js  # Storage policy automation
+│   └── Setup-storage.md   # Storage policy documentation
 ├── supabase/
 │   ├── migrations/        # Database schema migrations
+│   │   ├── 20240125235212_initial_schema.sql
+│   │   ├── 20240127133058_contact_voitures.sql
+│   │   ├── 20240211174952_services_table.sql
+│   │   ├── 20240212180716_horaires_table.sql
+│   │   ├── 20240215174938_voitures_transmission.sql
+│   │   ├── 20240217142253_bucket.sql
+│   │   ├── 20240323235354_rls_policies.sql
+│   │   ├── 20241011144000_users_view_policies.sql
+│   │   └── 20241011145000_users_view_permissions.sql
 │   ├── seed.sql          # Initial data for development
 │   └── config.toml       # Supabase local configuration
 ├── static/               # Public static files (fonts, favicon)
+├── .nycrc.json          # Coverage configuration (80% thresholds)
+├── .eslintrc.cjs        # ESLint configuration
+├── .prettierrc          # Prettier configuration
 ├── package.json          # Dependencies and npm scripts
-├── svelte.config.js      # SvelteKit configuration
+├── svelte.config.js      # SvelteKit configuration with aliases
 ├── tailwind.config.js    # Tailwind CSS and DaisyUI configuration
 ├── vite.config.ts        # Vite build configuration
+├── vitest.config.ts      # Vitest testing configuration
 └── tsconfig.json         # TypeScript strict configuration
 ```
+
+## 📜 Scripts & Automation
+
+### Storage Policy Automation
+The project includes automated storage policy setup for local development:
+
+#### `scripts/setup-storage-policies.js`
+- **Purpose**: Automatically configures Supabase Storage policies for local development
+- **Features**: 
+  - Creates RLS policies for vehicle image uploads
+  - Sets up public access for vehicle images
+  - Configures authenticated user upload permissions
+  - Handles policy cleanup and recreation
+
+#### Usage
+```bash
+# Setup storage policies for local development
+pnpm run setup-storage-policies
+
+# Manual execution (if needed)
+node scripts/setup-storage-policies.js
+```
+
+#### Documentation
+- **`scripts/Setup-storage.md`**: Detailed documentation for storage policy configuration
+- Includes troubleshooting steps and policy explanations
+
+### Development Scripts
+- **Automated Setup**: Storage policies are automatically configured during database reset
+- **Local Development**: Streamlined workflow for image upload testing
+- **Production Ready**: Policies can be adapted for production environments
 
 ## 🗄️ Database Architecture
 
@@ -284,12 +378,15 @@ garage-parrot/
 - **`vehicles` bucket**: Optimized vehicle images with automatic resizing
 - **Image Processing**: Sharp.js pipeline for compression and format optimization
 - **CDN Integration**: Supabase Storage with global CDN distribution
+- **Storage Policies**: Automated RLS policies for secure file access
 
 ### Security Features
-- **Row Level Security (RLS)**: Fine-grained access control
-- **Authentication Flows**: Secure JWT-based sessions
+- **Row Level Security (RLS)**: Fine-grained access control with user view permissions
+- **Authentication Flows**: Secure JWT-based sessions with role-based access
 - **Data Validation**: Zod schemas for type-safe data handling
 - **File Upload Security**: Type and size restrictions with virus scanning
+- **Content Sanitization**: DOMPurify for XSS prevention in user content
+- **Enhanced CSP**: Comprehensive Content Security Policy headers
 
 ## 🚀 Deployment
 
@@ -300,13 +397,21 @@ garage-parrot/
    - **Runtime**: Node.js 22.x
    - **Build Command**: `vite build && node src/lib/uploadImages.js`
    - **Install Command**: `pnpm install`
-4. **Automatic Deployment**: Push to main branch triggers deployment
+4. **Analytics Integration**: Vercel Analytics and Speed Insights automatically configured
+5. **Automatic Deployment**: Push to main branch triggers deployment with build verification
+
+### Storage Policy Setup
+For production deployment, ensure storage policies are properly configured:
+```bash
+# The setup-storage-policies.js script handles local development
+# Production policies are managed via Supabase dashboard or migrations
+```
 
 
 ## 🧪 Testing & Quality Assurance
 
 ### 🎯 Comprehensive Test Suite
-The project implements a robust testing strategy using **Vitest** with multiple test types:
+The project implements a robust testing strategy using **Vitest** with 80% coverage thresholds and multiple test types:
 
 #### 📝 Unit Tests
 - **Component Testing**: Svelte component validation with `@testing-library/svelte`
@@ -324,28 +429,39 @@ The project implements a robust testing strategy using **Vitest** with multiple 
 
 #### ⚙️ Test Configuration
 - **Framework**: Vitest with jsdom environment for DOM testing
-- **Coverage**: V8 provider with comprehensive coverage reports (HTML, text, JSON)
-- **Test Database**: Isolated database with automatic cleanup and seeding
+- **Coverage**: V8 provider with 80% coverage thresholds enforced (`.nycrc.json`)
+- **Test Database**: Isolated database with automatic cleanup and seeding using TestDatabase utility
 - **Mocking**: Supabase client mocking for deterministic testing
+- **Test Utilities**: Custom test setup and utilities in `src/test/` directory
+
+#### 📊 Coverage Requirements
+- **Statements**: 80% minimum coverage
+- **Branches**: 80% minimum coverage  
+- **Functions**: 80% minimum coverage
+- **Lines**: 80% minimum coverage
 
 ### 🚀 Quality Assurance Pipeline
 ```bash
 # Complete quality check pipeline
 pnpm run lint             # Code style and potential issues
 pnpm run check            # TypeScript type validation
-pnpm run test:coverage    # Full test suite with coverage
+pnpm run test:coverage    # Full test suite with 80% coverage requirements
 pnpm run build            # Production build verification
+pnpm run test:clean       # Run tests with database reset for clean state
 ```
 
 ### 📋 Testing Checklist
-- ✅ **Authentication Flow**: Login, logout, role-based access
+- ✅ **Authentication Flow**: Login, logout, role-based access with user permissions
 - ✅ **CRUD Operations**: Create, read, update, delete for all entities
 - ✅ **Form Validation**: Client and server-side validation with error handling
-- ✅ **Image Processing**: Upload, optimization, and storage pipeline
+- ✅ **Image Processing**: Upload, optimization, and storage pipeline with policies
 - ✅ **Responsive Design**: Mobile, tablet, desktop compatibility
 - ✅ **Cross-Browser**: Chrome, Firefox, Safari, Edge testing
 - ✅ **Performance**: Core Web Vitals and bundle size optimization
-- ✅ **Security**: XSS protection, CSP headers, RLS policies
+- ✅ **Security**: XSS protection, enhanced CSP headers, RLS policies, DOMPurify sanitization
+- ✅ **Coverage Requirements**: 80% minimum coverage across all metrics
+- ✅ **Integration Testing**: Database operations with TestDatabase utility
+- ✅ **Component Testing**: UI components with accessibility validation
 
 ## 🔐 Security Implementation
 
@@ -356,10 +472,12 @@ pnpm run build            # Production build verification
 - **First User Setup**: Initial admin creation workflow
 
 ### Security Headers & Policies
-- **Content Security Policy**: XSS protection and resource control
+- **Content Security Policy**: Enhanced CSP headers for comprehensive XSS protection
 - **HTTPS Enforcement**: Secure communication in production
-- **Input Validation**: Server-side validation with sanitization
-- **File Upload Security**: Restricted file types and size limits
+- **Input Validation**: Server-side validation with DOMPurify sanitization
+- **File Upload Security**: Restricted file types and size limits with storage policies
+- **User Permissions**: Role-based access control with view permissions
+- **Session Security**: Secure JWT token management and refresh
 
 ## 📈 Performance Optimizations
 
@@ -394,17 +512,20 @@ pnpm run build            # Production build verification
 ### 🏆 Code Quality Standards
 - **Type Safety**: 100% TypeScript coverage with strict mode enforcement
 - **Code Quality**: Automated ESLint + Prettier with pre-commit hooks
-- **Security**: OWASP-compliant with RLS, CSP headers, and JWT authentication
+- **Security**: OWASP-compliant with RLS, enhanced CSP headers, JWT authentication, and DOMPurify
 - **Performance**: 95+ Lighthouse scores with optimized bundle sizes
-- **Testing**: Comprehensive test suite with unit, integration, and component tests
+- **Testing**: Comprehensive test suite with 80% coverage thresholds and 5 test files
+- **Analytics**: Vercel Analytics and Speed Insights integration
 
 ### 📈 Development Statistics
 - **Components**: 15+ reusable Svelte components with TypeScript props
 - **Database Schema**: 7 core tables with relationships, indexes, and constraints
-- **Security Policies**: 10+ Row Level Security policies for data protection
+- **Security Policies**: 10+ Row Level Security policies with user view permissions
 - **API Operations**: 20+ secure database operations with Zod validation
 - **Image Pipeline**: Automated Sharp.js processing with 60% size reduction
-- **Test Coverage**: Unit tests for utilities, integration tests for database operations
+- **Test Coverage**: 5 test files with unit, integration, and component testing (80% thresholds)
+- **Storage Policies**: Automated storage policy setup for local development
+- **Dependencies**: 15+ production dependencies including analytics and security libraries
 
 ### 🎯 Performance Optimizations
 - **Bundle Size**: < 100KB gzipped with code splitting
@@ -478,7 +599,8 @@ This project demonstrates mastery of the following competencies from the **Déve
 ### Current Limitations
 - **Search**: Currently supports range filtering; text search not implemented
 - **Real-time**: Basic CRUD operations; no WebSocket features
-- **Performance**: Optimized for standard use cases; no monitoring implemented
+- **Performance**: Optimized for standard use cases; Vercel Analytics provides basic monitoring
+- **Storage Policies**: Local development automation provided, production requires manual setup
 
 ## 📞 Support & Contact
 
