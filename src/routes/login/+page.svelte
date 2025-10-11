@@ -47,6 +47,7 @@
 						type="email"
 						class="input input-bordered w-full"
 						name="email"
+						id="email"
 						required
 						value={form?.email ?? ''}
 					/>
@@ -55,7 +56,13 @@
 					<label for="password" class="text-2xl uppercase">Mot de passe:</label>
 				</div>
 				<div class="col-span-6">
-					<input type="password" class="input input-bordered w-full" name="password" required />
+					<input
+						type="password"
+						class="input input-bordered w-full"
+						name="password"
+						id="password"
+						required
+					/>
 				</div>
 				<div class=" col-span-8 justify-self-end content-center">
 					<button class="btn btn-accent w-full lg:w-40" type="submit">Se connecter</button>

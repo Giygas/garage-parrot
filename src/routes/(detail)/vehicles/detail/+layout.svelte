@@ -77,13 +77,14 @@
 					<label for="name">Votre prénom</label>
 					<input
 						name="name"
+						id="name"
 						type="text"
 						class="input input-bordered bg-neutral/50"
 						bind:value={name}
 					/>
 				</div>
 				<div class="flex flex-row gap-2 items-middle justify-between">
-					<label for="note" class="self-center">Votre note:</label>
+					<label for="r1" class="self-center">Votre note:</label>
 					<div class="rating rating-lg self-center" id="rating">
 						<input type="radio" name="rating" id="r1" value="1" class="mask mask-star bg-accent" />
 						<input type="radio" name="rating" id="r2" value="2" class="mask mask-star bg-accent" />

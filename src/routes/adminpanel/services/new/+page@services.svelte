@@ -9,7 +9,12 @@
 					<label for="title" class="uppercase items-end justify-end text-lg">Titre:</label>
 				</div>
 				<div class="col-span-4">
-					<input type="text" name="title" class="input input-primary w-full text-lg bg-primary/5" />
+					<input
+						type="text"
+						name="title"
+						id="title"
+						class="input input-primary w-full text-lg bg-primary/5"
+					/>
 				</div>
 			</div>
 
@@ -20,6 +25,7 @@
 				<div class="col-span-4">
 					<textarea
 						name="description"
+						id="description"
 						class="textarea textarea-primary grow bg-primary/5 w-full h-44 text-lg"
 					/>
 				</div>

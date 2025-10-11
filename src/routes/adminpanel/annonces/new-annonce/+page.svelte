@@ -143,6 +143,7 @@
 				<input
 					type="text"
 					name="title"
+					id="title"
 					class="input h-12 input-primary w-full text-lg"
 					bind:value={$form.title}
 					aria-invalid={$errors.title ? 'true' : undefined}
@@ -157,6 +158,7 @@
 				<input
 					type="text"
 					name="kilometrage"
+					id="kilometrage"
 					class="input h-12 input-primary w-full text-lg placeholder:text-right"
 					placeholder="Km."
 					bind:value={$kilometrage}
@@ -170,6 +172,7 @@
 				<input
 					type="text"
 					name="year"
+					id="year"
 					class="input h-12 input-primary w-full text-lg"
 					bind:value={$year}
 					aria-invalid={$errors.year ? 'true' : undefined}
@@ -200,6 +203,7 @@
 				<input
 					type="text"
 					name="power"
+					id="power"
 					class="input h-12 input-primary w-full text-lg placeholder:text-right"
 					placeholder="Ch."
 					bind:value={$power}
@@ -250,6 +254,7 @@
 				<input
 					type="text"
 					name="doors"
+					id="doors"
 					class="input h-12 input-primary w-full text-lg"
 					bind:value={$doors}
 					aria-invalid={$errors.doors ? 'true' : undefined}
@@ -262,6 +267,7 @@
 				<input
 					type="text"
 					name="seats"
+					id="seats"
 					class="input h-12 input-primary w-full text-lg"
 					bind:value={$seats}
 					aria-invalid={$errors.seats ? 'true' : undefined}
@@ -276,6 +282,7 @@
 					type="text"
 					class="input h-12 input-primary w-full text-center text-xl"
 					name="price"
+					id="price"
 					bind:value={$price}
 					aria-invalid={$errors.price ? 'true' : undefined}
 				/>
@@ -292,6 +299,7 @@
 				<input
 					type="text"
 					name="options"
+					id="options"
 					class="input h-12 input-primary w-full text-lg"
 					bind:value={$form.options}
 					aria-invalid={$errors.options ? 'true' : undefined}
@@ -307,6 +315,7 @@
 					type="file"
 					class="file-input w-full file-input-secondary"
 					name="imagePrincipal"
+					id="imagePrincipal"
 					accept="image/jpeg, image/jpg, image/png, image/webp"
 					on:input={(e) => {
 						//@ts-expect-error I already checked for null

@@ -35,6 +35,7 @@
 						type="text"
 						class="input input-bordered w-full"
 						name="name"
+						id="name"
 						value={form?.name ?? ''}
 						required
 					/>
@@ -47,6 +48,7 @@
 						type="email"
 						class="input input-bordered w-full"
 						name="email"
+						id="email"
 						value={form?.email ?? ''}
 						required
 					/>
@@ -59,6 +61,7 @@
 						type="password"
 						class="input input-bordered w-full"
 						name="password"
+						id="password"
 						required
 						bind:value={password}
 					/>

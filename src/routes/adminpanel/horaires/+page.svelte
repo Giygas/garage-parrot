@@ -41,6 +41,7 @@
 									type="text"
 									value={weekday.hours}
 									name={weekday.id.toString()}
+									id={weekday.day}
 									class="input input-primary w-full text-lg bg-primary/5"
 								/>
 							</div>

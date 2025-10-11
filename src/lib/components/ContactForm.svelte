@@ -43,6 +43,7 @@
 					<input
 						type={field.type}
 						name={field.name}
+						id={field.name}
 						class="input input-bordered input-sm md:input-md input-primary input-md grow w-full"
 						value={userData ? userData[fieldName] : ''}
 						aria-label={field.name}
@@ -53,6 +54,7 @@
 				<label for="message" class="pe-2 w-32">MESSAGE:</label>
 				<textarea
 					name="message"
+					id="message"
 					class="textarea textarea-primary grow w-full h-40"
 					maxlength="255"
 					value={userData ? userData.message : ''}

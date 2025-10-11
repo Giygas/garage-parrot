@@ -117,6 +117,7 @@
 					<label for="name">Votre prénom</label>
 					<input
 						name="name"
+						id="name"
 						type="text"
 						class="input input-bordered bg-neutral/50"
 						on:input={handleInput}
@@ -125,7 +126,7 @@
 					/>
 				</div>
 				<div class="flex flex-row gap-2 items-middle justify-between">
-					<label for="note" class="self-center">Votre note:</label>
+					<label for="r1" class="self-center">Votre note:</label>
 					<div class="rating rating-lg self-center" id="rating">
 						<input
 							type="radio"
