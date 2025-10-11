@@ -8,37 +8,38 @@ export interface TestUser {
 }
 
 export interface TestVehicle {
-	id?: number;
+	id?: string;
 	title: string;
 	price: number;
 	kilometrage: number;
 	year: number;
-	description?: string;
-	image_principal?: string;
-	other_images?: string[];
-	doors?: number;
-	engine?: string;
-	transmission?: number;
-	seats?: number;
-	power?: number;
-	traction?: string;
-	options?: string[];
+	image: string;
+	doors?: number | null;
+	engine?: string | null;
+	transmission?: number | null;
+	seats?: number | null;
+	power?: number | null;
+	traction?: string | null;
+	options?: string[] | null;
+	other_images?: string[] | null;
+	created_at?: string;
+	created_by?: string | null;
 }
 
 export interface TestService {
 	id?: number;
 	title: string;
 	description: string;
-	price?: number;
-	image?: string;
 }
 
 export interface TestReview {
 	id?: number;
 	name: string;
 	rating: number;
-	comment: string;
+	message: string;
 	approved?: boolean;
+	approved_by?: string | null;
+	created_at?: string;
 }
 
 export class TestDatabase {
@@ -74,13 +75,22 @@ export class TestDatabase {
 	}
 
 	async createTestVehicle(vehicleData: Partial<TestVehicle> = {}): Promise<TestVehicle> {
+		// Generate a proper UUID v4
+		const generateUUID = () => {
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+				const r = (Math.random() * 16) | 0;
+				const v = c === 'x' ? r : (r & 0x3) | 0x8;
+				return v.toString(16);
+			});
+		};
+
 		const defaultVehicle: TestVehicle = {
+			id: generateUUID(),
 			title: 'Test Vehicle ' + Math.random().toString(36).slice(2, 11),
 			price: 15000,
 			kilometrage: 50000,
 			year: 2020,
-			description: 'Test vehicle description',
-			image_principal: 'test-image.jpg',
+			image: 'test-image.jpg',
 			other_images: ['test-image-2.jpg'],
 			doors: 5,
 			engine: 'essence',
@@ -101,9 +111,7 @@ export class TestDatabase {
 	async createTestService(serviceData: Partial<TestService> = {}): Promise<TestService> {
 		const defaultService: TestService = {
 			title: 'Test Service ' + Math.random().toString(36).slice(2, 11),
-			description: 'Test service description',
-			price: 100,
-			image: 'test-service.jpg'
+			description: 'Test service description'
 		};
 
 		const service = { ...defaultService, ...serviceData };
@@ -121,7 +129,7 @@ export class TestDatabase {
 		const defaultReview: TestReview = {
 			name: 'Test User ' + Math.random().toString(36).slice(2, 11),
 			rating: 5,
-			comment: 'Great service!',
+			message: 'Great service!',
 			approved: true
 		};
 
@@ -144,7 +152,7 @@ export class TestDatabase {
 			await this.client.from('voitures').delete().ilike('title', `${pattern}%`);
 			await this.client.from('services').delete().ilike('title', `${pattern}%`);
 			await this.client.from('temoignages').delete().ilike('name', `${pattern}%`);
-			await this.client.from('contact').delete().ilike('email', `%${pattern}%`);
+			await this.client.from('contacts').delete().ilike('email', `%${pattern}%`);
 		}
 	}
 

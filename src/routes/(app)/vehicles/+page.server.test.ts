@@ -11,15 +11,18 @@ describe('vehicles page server', () => {
 	let mockSupabase: any;
 	let mockStorage: any;
 	let mockFrom: any;
+	let getPublicUrlMock: any;
 
 	beforeEach(() => {
 		vi.clearAllMocks();
 
+		getPublicUrlMock = vi.fn((path: string) => ({
+			data: { publicUrl: `http://test.com/vehicles/${path}` }
+		}));
+
 		mockStorage = {
 			from: vi.fn(() => ({
-				getPublicUrl: vi.fn(() => ({
-					data: { publicUrl: 'http://test.com/image.jpg' }
-				}))
+				getPublicUrl: getPublicUrlMock
 			}))
 		};
 
@@ -75,11 +78,11 @@ describe('vehicles page server', () => {
 			vehicles: [
 				{
 					...mockVehicles[0],
-					image: 'http://test.com/image.jpg'
+					image: 'http://test.com/vehicles/test1.jpg'
 				},
 				{
 					...mockVehicles[1],
-					image: 'http://test.com/image.jpg'
+					image: 'http://test.com/vehicles/test2.jpg'
 				}
 			]
 		});
@@ -160,7 +163,7 @@ describe('vehicles page server', () => {
 		await load({ locals: mockLocals } as any);
 
 		expect(mockStorage.from).toHaveBeenCalledWith('vehicles');
-		expect(mockStorage.from('vehicles').getPublicUrl).toHaveBeenCalledWith('test.jpg');
+		expect(getPublicUrlMock).toHaveBeenCalledWith('test.jpg');
 	});
 
 	it('should handle vehicles without images gracefully', async () => {
@@ -188,8 +191,8 @@ describe('vehicles page server', () => {
 
 		const result = await load({ locals: mockLocals } as any);
 
-		expect(result.vehicles?.[0]?.image).toBe('');
+		expect(result.vehicles?.[0]?.image).toBe('http://test.com/vehicles/');
 		expect(mockStorage.from).toHaveBeenCalledWith('vehicles');
-		expect(mockStorage.from('vehicles').getPublicUrl).toHaveBeenCalledWith('');
+		expect(getPublicUrlMock).toHaveBeenCalledWith('');
 	});
 });

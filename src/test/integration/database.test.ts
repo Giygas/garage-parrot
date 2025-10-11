@@ -102,8 +102,7 @@ describe('Database Integration Tests', () => {
 		it('should create a new service', async () => {
 			const serviceData: Partial<TestService> = {
 				title: 'Test Integration Service',
-				description: 'This is a test service for integration testing',
-				price: 150
+				description: 'This is a test service for integration testing'
 			};
 
 			const createdService = await testDb.createTestService(serviceData);
@@ -112,7 +111,6 @@ describe('Database Integration Tests', () => {
 			expect(createdService.id).toBeDefined();
 			expect(createdService.title).toBe(serviceData.title);
 			expect(createdService.description).toBe(serviceData.description);
-			expect(createdService.price).toBe(serviceData.price);
 		});
 
 		it('should retrieve services from database', async () => {
@@ -143,7 +141,7 @@ describe('Database Integration Tests', () => {
 			const reviewData: Partial<TestReview> = {
 				name: 'Test Reviewer',
 				rating: 5,
-				comment: 'Excellent service!',
+				message: 'Excellent service!',
 				approved: true
 			};
 
@@ -153,26 +151,41 @@ describe('Database Integration Tests', () => {
 			expect(createdReview.id).toBeDefined();
 			expect(createdReview.name).toBe(reviewData.name);
 			expect(createdReview.rating).toBe(reviewData.rating);
-			expect(createdReview.comment).toBe(reviewData.comment);
+			expect(createdReview.message).toBe(reviewData.message);
 			expect(createdReview.approved).toBe(reviewData.approved);
 		});
 
 		it('should retrieve approved reviews only', async () => {
+			// Clean up all reviews for this specific test
+			const client = await testDb.getClient();
+			await client
+				.from('temoignages')
+				.delete()
+				.in('name', [
+					'Approved Reviewer',
+					'Pending Reviewer',
+					'Francisco',
+					'Gustavo',
+					'Frank',
+					'Marie',
+					'Jean-Luc',
+					'Sophie'
+				]);
+
 			await testDb.createTestReview({
 				name: 'Approved Reviewer',
 				rating: 5,
-				comment: 'Great!',
+				message: 'Great!',
 				approved: true
 			});
 
 			await testDb.createTestReview({
 				name: 'Pending Reviewer',
 				rating: 3,
-				comment: 'Okay',
+				message: 'Okay',
 				approved: false
 			});
 
-			const client = await testDb.getClient();
 			const { data, error } = await client.from('temoignages').select('*').eq('approved', true);
 
 			expect(error).toBeNull();
@@ -230,8 +243,10 @@ describe('Database Integration Tests', () => {
 				title: 'Minimal Vehicle',
 				price: 10000,
 				kilometrage: 50000,
-				year: 2020
-				// No optional fields like engine, doors, etc.
+				year: 2020,
+				engine: null,
+				doors: null,
+				seats: null
 			};
 
 			const createdVehicle = await testDb.createTestVehicle(vehicleData);
