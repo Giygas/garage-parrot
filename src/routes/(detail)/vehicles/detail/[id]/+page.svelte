@@ -46,12 +46,50 @@
 	const vehicle = data.vehicle as Vehicle;
 
 	let images: string[] = [];
+	let currentImageIndex = 0;
+	let carouselContainer: HTMLElement;
 
 	images.push(vehicle.image);
 
 	if (vehicle.other_images) {
 		for (let img of vehicle.other_images) {
 			images.push(img);
+		}
+	}
+
+	function scrollLeft() {
+		if (currentImageIndex > 0) {
+			currentImageIndex--;
+			carouselContainer.scrollTo({
+				left: currentImageIndex * carouselContainer.clientWidth,
+				behavior: 'smooth'
+			});
+		}
+	}
+
+	function scrollRight() {
+		if (currentImageIndex < images.length - 1) {
+			currentImageIndex++;
+			carouselContainer.scrollTo({
+				left: currentImageIndex * carouselContainer.clientWidth,
+				behavior: 'smooth'
+			});
+		}
+	}
+
+	function goToImage(index: number) {
+		currentImageIndex = index;
+		carouselContainer.scrollTo({
+			left: index * carouselContainer.clientWidth,
+			behavior: 'smooth'
+		});
+	}
+
+	function handleScroll() {
+		if (carouselContainer) {
+			const scrollLeft = carouselContainer.scrollLeft;
+			const itemWidth = carouselContainer.clientWidth;
+			currentImageIndex = Math.round(scrollLeft / itemWidth);
 		}
 	}
 
@@ -74,17 +112,68 @@
 </div>
 
 <div class="flex flex-col place-items-center px-10">
-	<div class="carousel carousel-center sm:rounded-box">
-		{#each images as img, i}
-			<div class="carousel-item">
-				<img
-					src={img}
-					alt="Vehicule image numero {i}"
-					class=" h-[300px] md:h-[450px] lg:h-[600px]"
-				/>
-			</div>
-		{/each}
+	<div class="relative w-full max-w-4xl">
+		{#if images.length > 1}
+			<button
+				on:click={scrollLeft}
+				class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 bg-white/80 hover:bg-white text-accent p-3 rounded-full shadow-lg transition-all duration-200 {currentImageIndex ===
+				0
+					? 'opacity-0 pointer-events-none'
+					: 'opacity-100'}"
+				aria-label="Previous image"
+			>
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path strokelinecap="round" strokelinejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+				</svg>
+			</button>
+
+			<button
+				on:click={scrollRight}
+				class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 bg-white/80 hover:bg-white text-accent p-3 rounded-full shadow-lg transition-all duration-200 {currentImageIndex ===
+				images.length - 1
+					? 'opacity-0 pointer-events-none'
+					: 'opacity-100'}"
+				aria-label="Next image"
+			>
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+				</svg>
+			</button>
+		{/if}
+
+		<div
+			bind:this={carouselContainer}
+			class="carousel carousel-center sm:rounded-box overflow-x-auto no-scrollbar snap-x snap-mandatory"
+			on:scroll={handleScroll}
+		>
+			{#each images as img, i}
+				<div class="carousel-item w-full flex-shrink-0">
+					<img
+						src={img}
+						alt="Vehicule image numero {i + 1}"
+						class="w-full h-[300px] md:h-[450px] lg:h-[600px] object-cover"
+					/>
+				</div>
+			{/each}
+		</div>
 	</div>
+
+	{#if images.length > 1}
+		<div class="flex justify-center items-center gap-2 mt-4">
+			{#each images as img, i}
+				<button
+					on:click={() => goToImage(i)}
+					class="w-2 h-2 rounded-full transition-all duration-200 {currentImageIndex === i
+						? 'bg-accent w-8'
+						: 'bg-gray-300 hover:bg-gray-400'}"
+					aria-label="Go to image {i + 1}"
+				/>
+			{/each}
+			<span class="text-sm text-gray-600 ml-2">
+				{currentImageIndex + 1} / {images.length}
+			</span>
+		</div>
+	{/if}
 
 	<!-- TITLE -->
 	<div class="flex mt-10 justify-between w-full place-items-center">
@@ -168,3 +257,14 @@
 		</div>
 	{/if}
 </div>
+
+<style lang="postcss">
+	.no-scrollbar::-webkit-scrollbar {
+		display: none;
+	}
+
+	.no-scrollbar {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+</style>
