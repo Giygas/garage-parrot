@@ -13,7 +13,7 @@
 		.map((star: string, index: number) => ({ star, key: index }));
 </script>
 
-<div class=" p-6 bg-primary rounded-lg snap-center text-mont min-w-[20em] md:min-w-[23rem]">
+<div class="p-6 bg-primary rounded-lg snap-center text-mont w-[360px] flex-shrink-0" data-review>
 	<div class="flex flex-row justify-between text-xl">
 		<div class="uppercase text-lg text-neutral font-semibold">{rv.name}</div>
 		<div class="text-accent flex flex-row self-baseline gap-0">
