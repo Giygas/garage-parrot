@@ -15,7 +15,7 @@ CREATE POLICY "public_view" ON storage.objects AS PERMISSIVE
   FOR SELECT TO public
     USING (TRUE);
 
-CREATE VIEW public.users AS
+CREATE VIEW public.users with (security_invoker = on) AS
 SELECT
   p.id,
   p.name,

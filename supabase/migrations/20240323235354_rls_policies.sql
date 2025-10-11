@@ -100,3 +100,23 @@ CREATE POLICY "transmission_modify" ON public.voitures_transmission
     USING (TRUE)
     WITH CHECK (TRUE);
 
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "profiles_create_delete" ON public.profiles
+  FOR ALL TO authenticated
+    USING (is_admin(auth.uid()))
+    WITH CHECK (is_admin(auth.uid()));
+
+CREATE POLICY "profiles_update_own" ON public.profiles
+  FOR UPDATE TO authenticated
+    USING (auth.uid() = id)
+    WITH CHECK (auth.uid() = id);
+
+CREATE POLICY "profiles_view_own" ON public.profiles
+  FOR SELECT TO authenticated
+    USING (auth.uid() = id);
+
+CREATE POLICY "profiles_view_all" ON public.profiles
+  FOR SELECT TO authenticated
+    USING (is_admin(auth.uid()));
+
