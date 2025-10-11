@@ -1,12 +1,20 @@
-import { expect, beforeAll, afterAll, beforeEach, afterEach } from 'vitest';
+import { beforeAll, afterAll, beforeEach, afterEach } from 'vitest';
 import '@testing-library/jest-dom';
 import { createClient } from '@supabase/supabase-js';
+import { config } from 'dotenv';
+import { resolve } from 'path';
+
+// Load test environment variables
+config({ path: resolve(process.cwd(), '.env.test') });
 
 // Test database configuration
 export const testDbUrl = 'postgresql://postgres:postgres@127.0.0.1:54322/postgres';
-export const testSupabaseKey = 'sb_secret_N7UND0UgjKTVK-Uodkm0Hg_xSvEMPvz';
+export const testSupabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
-export const testClient = createClient('http://127.0.0.1:54321', testSupabaseKey);
+export const testClient = createClient(
+	process.env.PUBLIC_SUPABASE_URL || 'http://127.0.0.1:54321',
+	testSupabaseKey
+);
 
 // Global test setup
 beforeAll(async () => {
@@ -26,8 +34,3 @@ beforeEach(async () => {
 afterEach(async () => {
 	// Cleanup after each test if needed
 });
-
-// Mock environment variables for tests
-process.env.PUBLIC_SUPABASE_URL = 'http://127.0.0.1:54321';
-process.env.PUBLIC_SUPABASE_ANON_KEY = 'sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH';
-process.env.SUPABASE_SERVICE_ROLE_KEY = testSupabaseKey;
