@@ -1,4 +1,13 @@
-export const load = async ({ locals: { getSession, supabase }, params }) => {
+import type { User, SupabaseClient } from '@supabase/supabase-js';
+import type { Database } from '$lib/db/types';
+
+export const load = async ({
+	locals: { getUser, supabase },
+	params
+}: {
+	locals: { getUser: () => Promise<User | null>; supabase: SupabaseClient<Database> };
+	params: { id: string };
+}) => {
 	const { error, data } = await supabase.from('horaires').select();
 
 	const title = params.id?.split('-').join(' ') as string;
@@ -16,18 +25,20 @@ export const load = async ({ locals: { getSession, supabase }, params }) => {
 	}
 	const vehicleId = vehiculeData?.id as string;
 
+	const user: User | null = await getUser();
+
 	if (error) {
 		return {
 			error: true,
 			message: error?.message,
-			session: await getSession()
+			user
 		};
 	}
 
 	const weekdays = data;
 
 	return {
-		session: await getSession(),
+		user,
 		weekdays: weekdays,
 		vehicleId
 	};

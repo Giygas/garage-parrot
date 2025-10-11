@@ -7,18 +7,20 @@ export const load: PageServerLoad = async ({ locals: { supabase } }) => {
 		.select(`name, rating, message`)
 		.eq('approved', true)
 		.order('created_at', { ascending: false })
-		.returns<ReviewType>();
+		.returns<ReviewType[]>();
 
-	let reviewData: ReviewType;
+	let reviewData: ReviewType[];
 
 	if (data) {
-		reviewData = data as ReviewType;
+		reviewData = data as ReviewType[];
 	} else {
-		reviewData = {
-			name: 'Not working',
-			rating: 5,
-			message: 'having some technical problems right now'
-		};
+		reviewData = [
+			{
+				name: 'Not working',
+				rating: 5,
+				message: 'having some technical problems right now'
+			}
+		];
 	}
 
 	return { revs: reviewData };

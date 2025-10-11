@@ -1,13 +1,23 @@
 import type { DatabaseVoiture } from '$lib/types.js';
+import type { User, SupabaseClient } from '@supabase/supabase-js';
+import type { Database } from '$lib/db/types';
 
-export const load = async ({ params, locals: { getSession, supabase } }) => {
+export const load = async ({
+	params,
+	locals: { getUser, supabase }
+}: {
+	params: { id: string };
+	locals: { getUser: () => Promise<User | null>; supabase: SupabaseClient<Database> };
+}) => {
 	const { error: horairesError, data } = await supabase.from('horaires').select();
+
+	const user: User | null = await getUser();
 
 	if (horairesError) {
 		return {
 			error: true,
 			message: horairesError?.message,
-			session: await getSession()
+			user
 		};
 	}
 
@@ -46,6 +56,6 @@ export const load = async ({ params, locals: { getSession, supabase } }) => {
 	return {
 		weekdays: weekdays,
 		vehicle: vehicleData,
-		session: await getSession()
+		user
 	};
 };

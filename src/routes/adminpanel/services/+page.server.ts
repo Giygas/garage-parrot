@@ -2,10 +2,10 @@ import type { Service } from '$lib/types';
 import type { PageServerLoad, Actions } from '../$types';
 import { redirect } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ locals: { getSession, supabase } }) => {
-	const session = await getSession();
+export const load: PageServerLoad = async ({ locals: { getUser, supabase } }) => {
+	const user = await getUser();
 
-	if (!session?.user.user_metadata.admin) {
+	if (!user?.user_metadata.admin) {
 		redirect(303, '/adminpanel');
 	}
 

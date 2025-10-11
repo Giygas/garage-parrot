@@ -8,7 +8,7 @@ import { createClient } from '@supabase/supabase-js';
 
 // Load env variables based on NODE_ENV or mode
 const mode = process.env.NODE_ENV || process.env.MODE || 'development';
-const envFile = mode === 'staging' || 'development' ? '.env.staging' : '.env';
+const envFile = mode === 'staging' || mode === 'development' ? '.env.staging' : '.env';
 dotenv.config({ path: envFile });
 
 console.log(`=== Upload Script ===`);

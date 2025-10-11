@@ -1,4 +1,4 @@
-import type { userData } from '$lib/types';
+import type { UserData } from '$lib/types';
 import type { Actions } from '@sveltejs/kit';
 
 export const actions = {
@@ -28,7 +28,7 @@ export const actions = {
 				email: email,
 				telephone: telephone,
 				message: message
-			} as userData;
+			} as UserData;
 
 			return {
 				error: true,
@@ -61,7 +61,7 @@ export const actions = {
 			redirectTo: origin
 		};
 	},
-	sendRating: async ({ cookies, request, locals: { supabase, getSession } }) => {
+	sendRating: async ({ cookies, request, locals: { supabase, getUser } }) => {
 		const data = await request.formData();
 
 		let name: string;
@@ -88,8 +88,8 @@ export const actions = {
 					.from('temoignages')
 					.insert({ name: name, rating: rating, message: message });
 				if (!error) {
-					const session = await getSession();
-					if (!session) {
+					const user = await getUser();
+					if (!user) {
 						// Set the cookie sent to prevent spamming to non logged in users
 						cookies.set('ratingSent', 'true', {
 							path: '/',

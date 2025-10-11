@@ -2,7 +2,7 @@
 	import toast, { Toaster } from 'svelte-french-toast';
 	import '../../../../app.postcss';
 	import { ContactForm, Footer, Navigation } from '$components';
-	import type { Weekday, userData } from '$lib/types';
+	import type { Weekday, UserData } from '$lib/types';
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 
 	injectSpeedInsights();
@@ -23,10 +23,8 @@
 
 	import { page } from '$app/stores';
 
-	let userData: userData | null = $page.form?.userData;
-	$: if (userData) {
-		userData = userData as userData;
-	}
+	let userData: UserData | null = null;
+	$: userData = $page.form?.userData;
 
 	let name: string;
 	let message: string;
@@ -46,7 +44,7 @@
 
 <Toaster />
 
-<Navigation session={data.session} />
+<Navigation user={data.user} />
 
 <div id="contents" class="container mx-auto">
 	<slot />

@@ -30,14 +30,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	/**
 	 * a little helper that is written for convenience so that instead
-	 * of calling `const { data: { session } } = await supabase.auth.getSession()`
-	 * you just call this `await getSession()`
+	 * of calling `const { data: { user } } = await supabase.auth.getUser()`
+	 * you just call this `await getUser()`
 	 */
-	event.locals.getSession = async () => {
+	event.locals.getUser = async () => {
 		const {
-			data: { session }
-		} = await event.locals.supabase.auth.getSession();
-		return session;
+			data: { user }
+		} = await event.locals.supabase.auth.getUser();
+		return user;
 	};
 
 	// Check for the user in every route starting with adminpanel, if there is no user in the database
@@ -60,7 +60,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		}
 
 		// If the user tries to log in while he's already logged in, redirect to the admin panel
-		if (await event.locals.getSession()) {
+		if (await event.locals.getUser()) {
 			redirect(302, '/adminpanel');
 		} else if (event.url.pathname !== '/login') {
 			redirect(302, '/login');
@@ -90,8 +90,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 		routes.startsWith('adminpanel/horaires') ||
 		routes.startsWith('adminpanel/services')
 	) {
-		const activeSession = await event.locals.getSession();
-		if (activeSession?.user.user_metadata.admin) {
+		const activeUser = await event.locals.getUser();
+		if (activeUser?.user_metadata.admin) {
 			redirect(303, '/adminpanel');
 		}
 	}

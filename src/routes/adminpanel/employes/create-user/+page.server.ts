@@ -1,19 +1,26 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types.js';
 import { adminAuthClient } from '$lib/db/adminClient.js';
-import toast from 'svelte-french-toast';
+import type { User } from '@supabase/supabase-js';
 
-export const load: PageServerLoad = async ({ locals }) => {
-	const session = await locals.getSession();
-	if (!session) {
+export const load: PageServerLoad = async ({ parent }) => {
+	const user = await parent();
+
+	if (!user) {
 		throw redirect(300, '/login');
+	} else {
+		return { user };
 	}
-
-	return { session };
 };
 
 export const actions = {
-	default: async ({ request, locals }) => {
+	default: async ({
+		request,
+		locals: { getUser }
+	}: {
+		request: Request;
+		locals: { getUser: () => Promise<User | null> };
+	}) => {
 		const formData = await request.formData();
 		const name = formData.get('name') as string;
 		const email = formData.get('email') as string;
@@ -37,8 +44,9 @@ export const actions = {
 				message: 'Le mot de passe doit avoir au moins 6 caractères'
 			});
 		}
-		const session = await locals.getSession();
-		if (session?.user.user_metadata.admin) {
+
+		const user = await getUser();
+		if (user?.user_metadata.admin) {
 			const adminAuth = adminAuthClient;
 			// use admin credentials for creating the user, so the session don't get lost
 			const { error } = await adminAuth.createUser({
