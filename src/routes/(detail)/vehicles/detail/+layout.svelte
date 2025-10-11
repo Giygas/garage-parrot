@@ -79,6 +79,7 @@
 						name="name"
 						id="name"
 						type="text"
+						autocomplete="given-name"
 						class="input input-bordered bg-neutral/50"
 						bind:value={name}
 					/>
