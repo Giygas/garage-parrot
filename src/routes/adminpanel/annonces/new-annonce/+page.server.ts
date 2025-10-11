@@ -46,8 +46,8 @@ export const actions = {
 			return fail(400, withFiles({ form }));
 		}
 
-		const session = await locals.getSession();
-		if (!session) {
+		const user = await locals.getUser();
+		if (!user) {
 			redirect(300, '/login');
 		}
 
@@ -123,7 +123,7 @@ export const actions = {
 			transmission: fields.transmission,
 			options: options,
 			other_images: arrayImages,
-			created_by: session.user.id
+			created_by: user.id
 		});
 
 		if (insertError) {

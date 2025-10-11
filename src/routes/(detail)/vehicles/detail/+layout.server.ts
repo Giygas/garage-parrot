@@ -1,4 +1,4 @@
-export const load = async ({ locals: { getSession, supabase }, params }) => {
+export const load = async ({ locals: { getUser, supabase }, params }) => {
 	const { error, data } = await supabase.from('horaires').select();
 
 	const title = params.id?.split('-').join(' ') as string;
@@ -16,18 +16,21 @@ export const load = async ({ locals: { getSession, supabase }, params }) => {
 	}
 	const vehicleId = vehiculeData?.id as string;
 
+	const user = await getUser();
+	const session = user ? await supabase.auth.getSession().then((res) => res.data.session) : null;
+
 	if (error) {
 		return {
 			error: true,
 			message: error?.message,
-			session: await getSession()
+			session
 		};
 	}
 
 	const weekdays = data;
 
 	return {
-		session: await getSession(),
+		session,
 		weekdays: weekdays,
 		vehicleId
 	};

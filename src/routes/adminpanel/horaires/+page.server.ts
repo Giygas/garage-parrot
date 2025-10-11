@@ -3,10 +3,10 @@ import type { Actions } from '@sveltejs/kit';
 
 import { redirect } from '@sveltejs/kit';
 
-export const load = async ({ locals: { getSession, supabase } }) => {
-	const session = await getSession();
+export const load = async ({ locals: { getUser, supabase } }) => {
+	const user = await getUser();
 
-	if (!session?.user.user_metadata.admin) {
+	if (!user?.user_metadata.admin) {
 		redirect(303, '/adminpanel');
 	}
 

@@ -25,15 +25,17 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 	});
 
 	const {
-		data: { session }
-	} = await supabase.auth.getSession();
+		data: { user }
+	} = await supabase.auth.getUser();
+
+	const session = user ? await supabase.auth.getSession().then((res) => res.data.session) : null;
 
 	const options = [
 		{ name: 'Annonces', link: '/adminpanel/annonces' },
 		{ name: 'Témoignages', link: '/adminpanel/temoignages' }
 	];
 
-	if (session?.user.user_metadata.admin) {
+	if (user?.user_metadata.admin) {
 		options.push(
 			{
 				name: 'Gestion des employés',

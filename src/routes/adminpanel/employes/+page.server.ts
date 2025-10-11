@@ -1,14 +1,22 @@
 import { adminAuthClient } from '$lib/db/adminClient';
 import type { DatabaseUser } from '$lib/types';
+import { redirect } from '@sveltejs/kit';
 
-export const load = async ({ locals: { supabase } }) => {
+export const load = async ({ locals: { getUser, supabase } }) => {
+	const user = await getUser();
+
+	if (!user?.user_metadata.admin) {
+		redirect(303, '/adminpanel');
+	}
+
 	const { data, error } = await supabase.from('users').select().returns<DatabaseUser[]>();
 
 	if (error) throw error;
 
 	const users: DatabaseUser[] = data;
+	const session = user ? await supabase.auth.getSession().then((res) => res.data.session) : null;
 
-	return { users };
+	return { users, session };
 };
 
 export const actions = {

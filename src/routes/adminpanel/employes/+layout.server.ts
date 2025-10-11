@@ -1,12 +1,15 @@
 import { redirect } from '@sveltejs/kit';
 
-export const load = async ({ locals: { getSession } }) => {
-	const session = await getSession();
+export const load = async ({ locals: { getUser, supabase } }) => {
+	const user = await getUser();
+	console.log(user);
 
-	if (!session?.user.user_metadata.admin) {
+	if (!user?.user_metadata.admin) {
 		redirect(303, '/adminpanel');
 	}
+
+	const session = user ? await supabase.auth.getSession().then((res) => res.data.session) : null;
 	return {
-		session: await getSession()
+		session
 	};
 };
