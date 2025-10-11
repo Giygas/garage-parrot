@@ -5,7 +5,7 @@
 	import { onDestroy, onMount } from 'svelte';
 	import type { DatabaseVoiture } from '$lib/types';
 	let windowWidth: number;
-	let resizeListener: EventListener;
+	let resizeListener: () => void;
 
 	onMount(() => {
 		if (typeof window !== 'undefined') {
@@ -52,7 +52,7 @@
 	images.push(vehicle.image);
 
 	if (vehicle.other_images) {
-		for (let img of vehicle.other_images) {
+		for (const img of vehicle.other_images) {
 			images.push(img);
 		}
 	}
@@ -171,7 +171,7 @@
 					class="w-2 h-2 rounded-full transition-all duration-200 {currentImageIndex === i
 						? 'bg-accent w-8'
 						: 'bg-gray-300 hover:bg-gray-400'}"
-					aria-label="Go to image {i + 1}"
+					aria-label="Go to image {i + 1}: {img}"
 				/>
 			{/each}
 			<span class="text-sm text-gray-600 ml-2">

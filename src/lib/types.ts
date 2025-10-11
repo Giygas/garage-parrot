@@ -21,7 +21,7 @@ export interface Service {
 	description: string;
 }
 
-export type userData = {
+export type UserData = {
 	prenom: string;
 	nom: string;
 	email: string;

@@ -1,7 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types.js';
 import { adminAuthClient } from '$lib/db/adminClient.js';
-import toast from 'svelte-french-toast';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.getSession();

@@ -5,15 +5,13 @@
 
 	export let data: PageData;
 
-	const reviews: any = data.revs;
+	const reviews = data.revs;
 	import vehicle_small from '$lib/assets/vehicle.webp';
 	import reparation_small from '$lib/assets/reparation.webp';
 
-	import { page } from '$app/stores';
-
 	// Manage windows size for dynamic class generation
 	let windowWidth: number;
-	let resizeListener: EventListener;
+	let resizeListener: () => void;
 	let imageBreakpoint: number = 768;
 
 	onMount(() => {

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import type { userData } from '$lib/types';
+	import type { UserData } from '$lib/types';
 
-	export let userData: userData | null = null;
+	export let userData: UserData | null = null;
 	export let vehicleId: string | null = null;
 
 	const fields = [

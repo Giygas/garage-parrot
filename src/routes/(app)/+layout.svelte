@@ -3,14 +3,11 @@
 	import { fade } from 'svelte/transition';
 	import '../../app.postcss';
 	import { ContactForm, Footer, Navigation } from '$components';
-	import type { Weekday, userData } from '$lib/types';
+	import type { Weekday, UserData } from '$lib/types';
 
 	export let data;
 
-	let { supabase, session } = data;
-	$: ({ supabase, session } = data);
-
-	let userData: userData | null = null;
+	let userData: UserData | null = null;
 	type Weekdays = NonNullable<Weekday[]>;
 	let weekdays = data.weekdays as Weekdays;
 

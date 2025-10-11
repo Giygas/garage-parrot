@@ -22,7 +22,7 @@
 
 	// Logo animation
 	let isScrolled = false;
-	let timeoutId: NodeJS.Timeout | null = null; //Need a debouncing function here
+	let timeoutId: ReturnType<typeof setTimeout> | null = null; //Need a debouncing function here
 	let isPageReady = false;
 
 	afterNavigate(() => {
