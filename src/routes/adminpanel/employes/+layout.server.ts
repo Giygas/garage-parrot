@@ -3,7 +3,7 @@ import type { User, SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '$lib/db/types';
 
 export const load = async ({
-	locals: { getUser }
+	locals: { getUser, supabase }
 }: {
 	locals: { getUser: () => Promise<User | null>; supabase: SupabaseClient<Database> };
 }) => {

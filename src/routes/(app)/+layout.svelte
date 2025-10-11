@@ -64,7 +64,7 @@
 
 <Toaster />
 
-<Navigation session={data.session} />
+<Navigation user={data.user} />
 
 {#if $page.form && $page.form.success === true}
 	<div

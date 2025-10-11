@@ -30,17 +30,17 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 		data: { user }
 	} = await supabase.auth.getUser();
 
-	const session = user ? await supabase.auth.getSession().then((res) => res.data.session) : null;
+	// const session = user ? await supabase.auth.getSession().then((res) => res.data.session) : null;
 
 	const { weekdays } = data;
 	if (!weekdays) {
 		return {
 			supabase,
-			session,
+			user,
 			error: true,
 			message: 'Problem loading hours'
 		};
 	}
 
-	return { supabase, session, weekdays };
+	return { supabase, user, weekdays };
 };

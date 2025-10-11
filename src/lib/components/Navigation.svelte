@@ -4,20 +4,21 @@
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';
 
+	import { fade } from 'svelte/transition';
+	import type { User } from '@supabase/supabase-js';
+
 	const nav = [
 		{ title: 'Accueil', path: '/' },
 		{ title: 'Services', path: '/services' },
 		{ title: "Vehicles d'ocassion", path: '/vehicles' }
 	];
 
-	export let session: Session | null = null;
-	if (session) {
+	export let user: User | null = null;
+	if (user) {
 		nav.push({ title: 'Admin Panel', path: '/adminpanel' });
 	}
 
 	//Menu logic
-	import { fade } from 'svelte/transition';
-	import type { Session } from '@supabase/supabase-js';
 	let showMenu: boolean = false;
 
 	// Logo animation

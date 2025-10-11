@@ -12,7 +12,7 @@ export const load = async ({
 }) => {
 	const user = await parent();
 
-	const { data, error } = await supabase.rpc('get_all_users');
+	const { data, error } = await supabase.rpc('get_users_for_current_user');
 
 	if (error) throw error;
 

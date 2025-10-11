@@ -1,19 +1,26 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types.js';
 import { adminAuthClient } from '$lib/db/adminClient.js';
+import type { User } from '@supabase/supabase-js';
 
-export const load: PageServerLoad = async ({ locals: { getUser, supabase } }) => {
-	const user = await getUser();
+export const load: PageServerLoad = async ({ locals: { supabase }, parent }) => {
+	const user = await parent();
+
 	if (!user) {
 		throw redirect(300, '/login');
+	} else {
+		return { user };
 	}
-
-	const session = await supabase.auth.getSession().then((res) => res.data.session);
-	return { session };
 };
 
 export const actions = {
-	default: async ({ request, locals: { getUser } }) => {
+	default: async ({
+		request,
+		locals: { getUser }
+	}: {
+		request: Request;
+		locals: { getUser: () => Promise<User | null> };
+	}) => {
 		const formData = await request.formData();
 		const name = formData.get('name') as string;
 		const email = formData.get('email') as string;
@@ -37,6 +44,7 @@ export const actions = {
 				message: 'Le mot de passe doit avoir au moins 6 caractères'
 			});
 		}
+
 		const user = await getUser();
 		if (user?.user_metadata.admin) {
 			const adminAuth = adminAuthClient;

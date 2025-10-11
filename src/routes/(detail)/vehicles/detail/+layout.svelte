@@ -44,7 +44,7 @@
 
 <Toaster />
 
-<Navigation session={data.session} />
+<Navigation user={data.user} />
 
 <div id="contents" class="container mx-auto">
 	<slot />
