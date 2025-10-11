@@ -6,6 +6,7 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"local-staging": "supabase db reset && pnpm setup-storage-policies && vite build --mode staging && NODE_ENV=staging pnpm postbuild",
+		"resetdb": "supabase db reset && pnpm setup-storage-policies && NODE_ENV=staging pnpm postbuild",
 		"postbuild": "node src/lib/uploadImages.js",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -17,6 +18,7 @@
 		"setup-storage-policies": "node scripts/setup-storage-policies.js",
 		"test": "vitest",
 		"test:run": "vitest run",
+		"test:clean": "vitest run && pnpm resetdb",
 		"test:coverage": "vitest run --coverage",
 		"test:ui": "vitest --ui"
 	},
