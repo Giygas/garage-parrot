@@ -1,15 +1,20 @@
 import { redirect } from '@sveltejs/kit';
+import type { User, SupabaseClient } from '@supabase/supabase-js';
+import type { Database } from '$lib/db/types';
 
-export const load = async ({ locals: { getUser, supabase } }) => {
+export const load = async ({
+	locals: { getUser, supabase }
+}: {
+	locals: { getUser: () => Promise<User | null>; supabase: SupabaseClient<Database> };
+}) => {
 	const user = await getUser();
+
+	console.log('user in layout server ');
 	console.log(user);
 
 	if (!user?.user_metadata.admin) {
 		redirect(303, '/adminpanel');
+	} else {
+		return user;
 	}
-
-	const session = user ? await supabase.auth.getSession().then((res) => res.data.session) : null;
-	return {
-		session
-	};
 };
