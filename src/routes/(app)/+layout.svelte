@@ -10,7 +10,7 @@
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
 
-	let userData: userData | null;
+	let userData: userData | null = null;
 	type Weekdays = NonNullable<Weekday[]>;
 	let weekdays = data.weekdays as Weekdays;
 
@@ -119,6 +119,7 @@
 						name="name"
 						id="name"
 						type="text"
+						autocomplete="given-name"
 						class="input input-bordered bg-neutral/50"
 						on:input={handleInput}
 						bind:value={name}

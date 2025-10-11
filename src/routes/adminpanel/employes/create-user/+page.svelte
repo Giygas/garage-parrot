@@ -36,6 +36,7 @@
 						class="input input-bordered w-full"
 						name="name"
 						id="name"
+						autocomplete="name"
 						value={form?.name ?? ''}
 						required
 					/>
