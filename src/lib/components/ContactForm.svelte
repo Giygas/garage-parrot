@@ -6,10 +6,10 @@
 	export let vehicleId: string | null = null;
 
 	const fields = [
-		{ name: 'prenom', label: 'PRENOM:', type: 'text' },
-		{ name: 'nom', label: 'NOM:', type: 'text' },
-		{ name: 'email', label: 'EMAIL:', type: 'email' },
-		{ name: 'telephone', label: 'TEL:', type: 'tel' }
+		{ name: 'prenom', label: 'PRENOM:', type: 'text', autocomplete: 'given-name' },
+		{ name: 'nom', label: 'NOM:', type: 'text', autocomplete: 'family-name' },
+		{ name: 'email', label: 'EMAIL:', type: 'email', autocomplete: 'email' },
+		{ name: 'telephone', label: 'TEL:', type: 'tel', autocomplete: 'tel' }
 	];
 </script>
 
@@ -44,6 +44,7 @@
 						type={field.type}
 						name={field.name}
 						id={field.name}
+						autocomplete={field.autocomplete}
 						class="input input-bordered input-sm md:input-md input-primary input-md grow w-full"
 						value={userData ? userData[fieldName] : ''}
 						aria-label={field.name}
@@ -55,6 +56,7 @@
 				<textarea
 					name="message"
 					id="message"
+					autocomplete="off"
 					class="textarea textarea-primary grow w-full h-40"
 					maxlength="255"
 					value={userData ? userData.message : ''}
