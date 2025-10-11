@@ -16,7 +16,7 @@ export const load = async ({
 
 	if (error) throw error;
 
-	const usersData: DatabaseUser[] = data as DatabaseUser[];
+	const usersData: DatabaseUser[] = data as unknown as DatabaseUser[];
 
 	return { user, usersData };
 };

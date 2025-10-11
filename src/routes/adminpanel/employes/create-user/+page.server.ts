@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types.js';
 import { adminAuthClient } from '$lib/db/adminClient.js';
 import type { User } from '@supabase/supabase-js';
 
-export const load: PageServerLoad = async ({ locals: { supabase }, parent }) => {
+export const load: PageServerLoad = async ({ parent }) => {
 	const user = await parent();
 
 	if (!user) {

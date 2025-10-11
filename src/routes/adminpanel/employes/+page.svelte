@@ -31,7 +31,9 @@
 		</thead>
 		<tbody>
 			{#each users as user}
-				{@const date = new Date(user.created_at).toLocaleDateString('fr-FR')}
+				{@const date = user.created_at
+					? new Date(user.created_at).toLocaleDateString('fr-FR')
+					: 'N/A'}
 				<!-- I have no idea why I have to do this instead of user.last_sing_in_at  -->
 				{@const lastLogin = Object.values(user)[3]}
 				{@const dateLast = lastLogin ? new Date(lastLogin).toLocaleString('fr-FR') : 'Jamais'}

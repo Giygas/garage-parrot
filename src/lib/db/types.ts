@@ -277,6 +277,17 @@ export type Database = {
 				};
 				Returns: boolean;
 			};
+			get_users_for_current_user: {
+				Args: Record<string, never>;
+				Returns: Array<{
+					id: string;
+					name: string | null;
+					email: string | null;
+					last_sign_in_at: string | null;
+					created_at: string | null;
+					deleted_at: string | null;
+				}>;
+			};
 		};
 		Enums: {
 			[_ in never]: never;
