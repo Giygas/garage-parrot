@@ -9,6 +9,13 @@
 	let canScrollRight = false;
 	let hasOverflow = false;
 	let reviewWidth = 0;
+	let isDown = false;
+	let startX = 0;
+	let startScrollLeft = 0;
+	let velocity = 0;
+	let animationFrame: number;
+	let lastX = 0;
+	let lastTime = 0;
 
 	function checkScrollButtons() {
 		if (container) {
@@ -40,13 +47,114 @@
 		}
 	}
 
+	function handleMouseDown(e: MouseEvent) {
+		isDown = true;
+		container.style.cursor = 'grabbing';
+		container.style.userSelect = 'none';
+		startX = e.pageX - container.offsetLeft;
+		startScrollLeft = container.scrollLeft;
+		lastX = startX;
+		lastTime = Date.now();
+		velocity = 0;
+
+		// Cancel any ongoing momentum animation
+		if (animationFrame) {
+			cancelAnimationFrame(animationFrame);
+		}
+	}
+
+	function handleMouseLeave() {
+		if (isDown) {
+			applyMomentum();
+		}
+		isDown = false;
+		container.style.cursor = 'grab';
+		container.style.userSelect = 'auto';
+	}
+
+	function handleMouseUp() {
+		if (isDown) {
+			applyMomentum();
+		}
+		isDown = false;
+		container.style.cursor = 'grab';
+		container.style.userSelect = 'auto';
+	}
+
+	function handleMouseMove(e: MouseEvent) {
+		if (!isDown) return;
+		e.preventDefault();
+
+		const currentTime = Date.now();
+		const x = e.pageX - container.offsetLeft;
+		const deltaTime = currentTime - lastTime;
+
+		// Calculate velocity
+		if (deltaTime > 0) {
+			velocity = (x - lastX) / deltaTime;
+		}
+
+		// Apply scroll - calculate total movement from start
+		const totalMovement = (x - startX) * 1.5;
+		container.scrollLeft = startScrollLeft - totalMovement;
+
+		lastX = x;
+		lastTime = currentTime;
+	}
+
+	function applyMomentum() {
+		if (Math.abs(velocity) < 0.1) return; // Don't apply if velocity is too low
+
+		const friction = 0.95;
+		const minVelocity = 0.5;
+
+		function animate() {
+			velocity *= friction;
+
+			if (Math.abs(velocity) < minVelocity) {
+				// Snap to nearest review
+				snapToNearestReview();
+				return;
+			}
+
+			container.scrollLeft -= velocity * 16; // 16ms ~ 60fps
+			animationFrame = requestAnimationFrame(animate);
+		}
+
+		animate();
+	}
+
+	function snapToNearestReview() {
+		if (reviewWidth === 0) return;
+
+		const currentScroll = container.scrollLeft;
+		const reviewIndex = Math.round(currentScroll / reviewWidth);
+		const targetScroll = reviewIndex * reviewWidth;
+
+		container.scrollTo({
+			left: targetScroll,
+			behavior: 'smooth'
+		});
+	}
+
 	onMount(() => {
 		checkScrollButtons();
 		container.addEventListener('scroll', checkScrollButtons);
 		window.addEventListener('resize', checkScrollButtons);
+
+		// Mouse drag events
+		container.addEventListener('mousedown', handleMouseDown);
+		container.addEventListener('mouseleave', handleMouseLeave);
+		container.addEventListener('mouseup', handleMouseUp);
+		container.addEventListener('mousemove', handleMouseMove);
+
 		return () => {
 			container.removeEventListener('scroll', checkScrollButtons);
 			window.removeEventListener('resize', checkScrollButtons);
+			container.removeEventListener('mousedown', handleMouseDown);
+			container.removeEventListener('mouseleave', handleMouseLeave);
+			container.removeEventListener('mouseup', handleMouseUp);
+			container.removeEventListener('mousemove', handleMouseMove);
 		};
 	});
 </script>
@@ -80,7 +188,7 @@
 
 	<div
 		bind:this={container}
-		class="w-full flex flex-row overflow-x-auto no-scrollbar snap-x snap-mandatory justify-start gap-8 px-5 lg:px-7 py-5"
+		class="w-full flex flex-row overflow-x-auto no-scrollbar snap-x snap-mandatory justify-start gap-8 px-5 lg:px-7 py-5 cursor-grab select-none"
 		on:scroll={(e) => e.stopPropagation()}
 	>
 		{#each reviews as rv}
