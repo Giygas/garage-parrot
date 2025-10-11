@@ -3,12 +3,60 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<link rel="canonical" href="https://garage-parrot.vercel.app/" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta
 			name="description"
-			content="Bienvenue chez Garage V. Parrot - Réparations, Entretien & Vente de véhicules d'occasion. Confiez votre voiture à des mains expertes."
+			content="Garage V. Parrot - Expert en réparations automobiles, entretien et vente de véhicules d'occasion à Toulouse. Service professionnel et garantie qualité."
 		/>
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://garage-parrot.vercel.app/" />
+		<meta property="og:title" content="Garage V. Parrot - Réparations & Vente de Véhicules" />
+		<meta
+			property="og:description"
+			content="Expert en réparations automobiles, entretien et vente de véhicules d'occasion à Toulouse. Service professionnel et garantie qualité."
+		/>
+		<meta property="og:image" content="https://garage-parrot.vercel.app/logo.png" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://garage-parrot.vercel.app/" />
+		<meta property="twitter:title" content="Garage V. Parrot - Réparations & Vente de Véhicules" />
+		<meta
+			property="twitter:description"
+			content="Expert en réparations automobiles, entretien et vente de véhicules d'occasion à Toulouse. Service professionnel et garantie qualité."
+		/>
+		<meta property="twitter:image" content="https://garage-parrot.vercel.app/logo.png" />
+
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "LocalBusiness",
+				"name": "Garage V. Parrot",
+				"description": "Expert en réparations automobiles, entretien et vente de véhicules d'occasion",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "4 Chem. de Nicol",
+					"addressLocality": "Toulouse",
+					"postalCode": "31200",
+					"addressCountry": "FR"
+				},
+				"geo": {
+					"@type": "GeoCoordinates",
+					"latitude": "43.62546465422367",
+					"longitude": "1.4721163766063876"
+				},
+				"telephone": "+33-5-61-23-45-67",
+				"openingHours": "Mo-Fr 08:00-18:00",
+				"image": "https://garage-parrot.vercel.app/logo.png",
+				"url": "https://garage-parrot.vercel.app/",
+				"priceRange": "$$"
+			}
+		</script>
 
 		%sveltekit.head%
 		<link rel="stylesheet" href="/fonts.css" />

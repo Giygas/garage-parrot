@@ -1,0 +1,73 @@
+{
+  "timestamp": "2025-10-11T22:42:11.799Z",
+  "bundleAnalysis": {
+    "totalSize": 1265162,
+    "totalSizeKB": 1236,
+    "totalSizeMB": 1.21,
+    "largestFiles": [
+      {
+        "file": "_app/immutable/chunks/CHYf2EEL.js",
+        "size": 153764,
+        "sizeKB": 150
+      },
+      {
+        "file": "fonts/montserrat.woff2",
+        "size": 124420,
+        "sizeKB": 122
+      },
+      {
+        "file": "_app/immutable/nodes/13.B-WUN4W0.js",
+        "size": 113342,
+        "sizeKB": 111
+      },
+      {
+        "file": "_app/immutable/assets/reparation.Bi79-y-e.webp",
+        "size": 76010,
+        "sizeKB": 74
+      },
+      {
+        "file": "_app/immutable/assets/logo.BRNxxQJE.png",
+        "size": 75570,
+        "sizeKB": 74
+      },
+      {
+        "file": "_app/immutable/assets/app.DeOZNHkN.css",
+        "size": 74404,
+        "sizeKB": 73
+      },
+      {
+        "file": "_app/immutable/nodes/9.DESBb-mb.js",
+        "size": 36210,
+        "sizeKB": 35
+      },
+      {
+        "file": "_app/immutable/assets/vehicle.D3ZRWgZf.webp",
+        "size": 35990,
+        "sizeKB": 35
+      },
+      {
+        "file": "_app/immutable/nodes/2.Dm0Mv0TW.js",
+        "size": 35406,
+        "sizeKB": 35
+      },
+      {
+        "file": "fonts/barlow-semibold.woff",
+        "size": 34988,
+        "sizeKB": 34
+      }
+    ]
+  },
+  "performanceBudgets": {
+    "passed": false,
+    "violations": [
+      "Total bundle size 1236KB exceeds budget 500KB",
+      "JS size 331KB exceeds budget 300KB"
+    ]
+  },
+  "recommendations": [
+    "Consider code splitting to reduce initial bundle size",
+    "Large JavaScript files detected - consider dynamic imports",
+    "Consider optimizing images with WebP format",
+    "Consider CSS code splitting or critical CSS extraction"
+  ]
+}

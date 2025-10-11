@@ -20,7 +20,8 @@
 		"test:run": "vitest run",
 		"test:clean": "vitest run && pnpm resetdb",
 		"test:coverage": "vitest run --coverage",
-		"test:ui": "vitest --ui"
+		"test:ui": "vitest --ui",
+
 	},
 	"devDependencies": {
 		"@iconify/svelte": "^3.1.6",

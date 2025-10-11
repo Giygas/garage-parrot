@@ -14,6 +14,7 @@
 [![CSP](https://img.shields.io/badge/CSP-FF9F1C)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
 [![DOMPurify](https://img.shields.io/badge/DOMPurify-5A9FD4)](https://github.com/cure53/DOMPurify)
 [![Vercel Analytics](https://img.shields.io/badge/Vercel_Analytics-000000)](https://vercel.com/analytics)
+[![Bundle Size](https://img.shields.io/badge/Bundle_Size-387KB-green)](./performance-report.md)
 
 > **Projet de fin de formation - Développeur Web & Web Mobile**
 
@@ -479,19 +480,29 @@ pnpm run test:clean       # Run tests with database reset for clean state
 - **User Permissions**: Role-based access control with view permissions
 - **Session Security**: Secure JWT token management and refresh
 
-## 📈 Performance Optimizations
+## 📈 Performance Metrics
 
-### Frontend Performance
+### Bundle Analysis (October 2025)
+- **Total Bundle Size**: 1.21MB (386KB gzipped)
+- **Code Splitting**: 89 optimized chunks
+- **Image Optimization**: WebP format with 60% size reduction
+- **Compression**: 49% size reduction with gzip
+
+### Performance Optimizations
+
+#### Frontend Performance
 - **Code Splitting**: Automatic route-based bundle splitting
 - **Lazy Loading**: Images and components loaded on demand
 - **Image Optimization**: Sharp.js processing with WebP conversion
 - **Caching Strategy**: Proper cache headers for static assets
 
-### Backend Performance
+#### Backend Performance
 - **Database Optimization**: Indexed queries and efficient joins
 - **API Response Optimization**: Selective field retrieval
 - **Storage CDN**: Global content delivery network
 - **Connection Pooling**: Efficient database connection management
+
+> 📊 **Detailed Performance Report**: [View complete analysis](./performance-report.md)
 
 ## 🎨 UI/UX Features
 
