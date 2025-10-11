@@ -6,7 +6,7 @@
 	import toast from 'svelte-french-toast';
 
 	export let data: PageData;
-	$: users = data.users as DatabaseUser[];
+	$: users = data.usersData as DatabaseUser[];
 
 	export let form: ActionData;
 

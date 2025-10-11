@@ -3,14 +3,11 @@ import type { User, SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '$lib/db/types';
 
 export const load = async ({
-	locals: { getUser, supabase }
+	locals: { getUser }
 }: {
 	locals: { getUser: () => Promise<User | null>; supabase: SupabaseClient<Database> };
 }) => {
 	const user = await getUser();
-
-	console.log('user in layout server ');
-	console.log(user);
 
 	if (!user?.user_metadata.admin) {
 		redirect(303, '/adminpanel');

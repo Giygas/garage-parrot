@@ -1,31 +1,24 @@
 import { adminAuthClient } from '$lib/db/adminClient';
 import type { DatabaseUser } from '$lib/types';
-import { redirect } from '@sveltejs/kit';
-import type { User, SupabaseClient } from '@supabase/supabase-js';
+import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '$lib/db/types';
 
 export const load = async ({
-	locals: { getUser, supabase },
-	parent
+	parent,
+	locals: { supabase }
 }: {
-	locals: { getUser: () => Promise<User | null>; supabase: SupabaseClient<Database> };
 	parent: () => Promise<any>;
+	locals: { supabase: SupabaseClient<Database> };
 }) => {
 	const user = await parent();
 
-	console.log('user in page.server');
-	console.log(user);
-
-	const { data, error } = await supabase.from('users').select();
-	console.log(data);
-	console.log(error);
+	const { data, error } = await supabase.rpc('get_all_users');
 
 	if (error) throw error;
 
-	const users: DatabaseUser[] = data as DatabaseUser[];
-	const session = user ? await supabase.auth.getUser().then((res) => res.data.user) : null;
+	const usersData: DatabaseUser[] = data as DatabaseUser[];
 
-	return { users, session };
+	return { user, usersData };
 };
 
 export const actions = {

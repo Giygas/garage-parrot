@@ -37,10 +37,10 @@ export type DatabaseVoiture = Database['public']['Tables']['voitures']['Row'];
 // export type DatabaseUser = Database['public']['Views']['users']['Row'];
 
 export type DatabaseUser = {
-	created_at: string;
+	created_at: string | null;
 	deleted_at: string | null;
-	email: string;
-	id: string;
-	last_sing_in_at: string | null;
-	name: string;
+	email: string | null;
+	id: string | null;
+	last_sign_in_at: string | null;
+	name: string | null;
 };
