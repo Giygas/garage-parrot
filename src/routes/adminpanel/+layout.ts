@@ -56,5 +56,11 @@ export const load: LayoutLoad = async ({ fetch, data, depends }) => {
 		);
 	}
 
+	// Add settings option for all users at the bottom
+	options.push({
+		name: 'Réglages',
+		link: '/adminpanel'
+	});
+
 	return { supabase, session, options };
 };
