@@ -15,6 +15,7 @@
 [![DOMPurify](https://img.shields.io/badge/DOMPurify-5A9FD4)](https://github.com/cure53/DOMPurify)
 [![Vercel Analytics](https://img.shields.io/badge/Vercel_Analytics-000000)](https://vercel.com/analytics)
 [![Bundle Size](https://img.shields.io/badge/Bundle_Size-387KB-green)](./performance-report.md)
+[![Live Site](https://img.shields.io/badge/Live_Site-garage--parrot.giygas.dev-00C7B7)](https://garage-parrot.giygas.dev)
 
 > **Projet de fin de formation - Développeur Web & Web Mobile**
 
@@ -23,6 +24,8 @@ A comprehensive automotive service website built with modern web technologies. T
 > **🎓 Formation Project**: This was my first major full-stack application, developed as the final project for my Développeur Web & Web Mobile formation. While I recognize areas for improvement, the challenges encountered became invaluable learning opportunities in authentication, database design, and production deployment.
 
 ## 🎯 Project Overview
+
+**🚀 Live Demo**: [garage-parrot.giygas.dev](https://garage-parrot.giygas.dev)
 
 **Garage V. Parrot** is a professional-grade web application that demonstrates proficiency in full-stack development, featuring:
 
@@ -180,6 +183,8 @@ pnpm run dev
 5. Complete the setup wizard
 
 > **🔐 Admin Access**: To access the admin panel at any time, simply add `/login` to the end of any page URL (e.g., `http://localhost:5173/login`)
+>
+> **🌐 Live Site**: For the production version, visit [garage-parrot.giygas.dev](https://garage-parrot.giygas.dev) and add `/login` to access the admin panel
 
 Your application is now running! 🎉
 
@@ -434,6 +439,7 @@ node scripts/setup-storage-policies.js
    - **Install Command**: `pnpm install`
 4. **Analytics Integration**: Vercel Analytics and Speed Insights automatically configured
 5. **Automatic Deployment**: Push to main branch triggers deployment with build verification
+6. **Live Site**: [garage-parrot.giygas.dev](https://garage-parrot.giygas.dev)
 
 ### Storage Policy Setup
 
